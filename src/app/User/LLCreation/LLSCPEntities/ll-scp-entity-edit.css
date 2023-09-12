@@ -1,0 +1,16 @@
+/*::ng-deep .customModal{ !*>*!
+  !*  mat-dialog-container {*!
+  !*      min-width:45%;*!
+!*    }*!
+  }
+
+
+@media screen and (max-width: 768px) {
+    ::ng-deep .customModal{ !*>*!
+        !*  mat-dialog-container {*!
+        !*      min-width:80%;*!
+      !*    }*!
+        }
+
+}*/
+

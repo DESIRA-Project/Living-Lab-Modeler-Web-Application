@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand navbar-light logoDiv" *ngIf="pageData !== null"
+     [ngStyle]="backgroundTransparent ? {'filter': 'none', 'background-image': 'none'} : {}" >
+
+  <!--<a class="navbar-brand" href="{{pageData.llm.link}}">
+      <img class="logoImg" src="{{pageData.logo}}">
+  </a>-->
+
+  <span *ngIf="toggleableSideMenu" class="d-sm-none material-symbols-sharp menu-symbol" (click)="onClickMenu.emit(true)">
+    menu
+  </span>
+
+  <a routerLink="/">
+    <img src="assets/logo.png" class="logo">
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+          aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavigation()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="" id="navbarNav" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item" *ngFor="let item of pageData.items">
+        <a class="nav-link" href="{{item.link}}"
+           *ngIf="item.link !== undefined &&
+                           item.group === 1 &&
+                           item.showOnlyOnAuthenticatedUser === false; else authOnlyBlock"
+           [ngStyle]="{'color': item.name === currentPageName ? '#07C19A' : '' }"
+           [ngClass]=" { 'active' : item.name === currentPageName }">{{item.name}}
+        </a>
+
+        <ng-template #authOnlyBlock>
+          <a class="nav-link" href="{{item.link}}"
+             *ngIf="item.link !== undefined &&
+                    item.group === 1 &&
+                    item.showOnlyOnAuthenticatedUser === true && isUserAuthenticated && authenticationObjectIndex !== -1 "
+             [ngStyle]="{'color': item.name === currentPageName ? '#07C19A' : '' }"
+             style="cursor:'pointer'"
+             [ngClass]=" { 'active' : item.name === currentPageName }">{{item.name}}
+          </a>
+
+        </ng-template>
+
+      </li>
+    </ul>
+
+    <ul class="navbar-nav"  *ngFor="let item of pageData.items" style="margin-right:0.5%;">
+      <li class="nav-item" >
+                <span *ngIf="item.group === 2">
+
+                  <!-- Sign in  button-->
+                <a class="sign-in-button" [ngClass]="whiteSignInButton ? 'sign-in-button-white' : 'sign-in-button-orange'" *ngIf="!hideSignInButton && !isUserAuthenticated && authenticationObjectIndex !== -1 && item.modalClass === undefined; else modalLinkBlock"
+                   [routerLink]="pageData.items[authenticationObjectIndex].link">{{pageData.items[authenticationObjectIndex].name}}</a>
+
+                <ng-template #modalLinkBlock>
+                    <a class="nav-link" (click)="openModal(item.modalClass,item.redirectionLinkOnAuthorized)"
+                       *ngIf="item.link === undefined && item.modalClass !== undefined && ( item.showOnlyOnUnauthenticatedUser === true && !isUserAuthenticated ); else authenticatedUserBlock"
+                       [ngStyle]="{'color': item.name === currentPageName ? '#07C19A' : '' }"
+                       style="cursor:'pointer'"
+                       [ngClass]=" { 'active' : item.name === currentPageName }">{{item.name}}
+                    </a>
+
+                    <ng-template #authenticatedUserBlock>
+                      <div class="d-flex align-items-center">
+                          <a routerLink="/" *ngIf="isUserAuthenticated" [matTooltip]="'Dashboard'" style="text-decoration: none">
+                            <span class="material-symbols-sharp d-flex align-items-center" style="color: var(--orange)">space_dashboard</span>
+                          </a>
+                          <span class="mr-3"></span>
+                          <a class="nav-link" *ngIf="item.modalClass === undefined">
+                              <user-menu-dropdown [setUserProfileObject]="pageData.items[profileObjectIndex].authenticated" [parent]="parent"></user-menu-dropdown>
+                          </a>
+                      </div>
+
+                    </ng-template>
+
+                </ng-template>
+            </span>
+
+      </li>
+    </ul>
+
+
+  </div>
+</nav>
+
+<span *ngIf="modalIsOpen">
+    <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onModalClose()" [modalData]="modalComponent" [modalTitle]="'Suggest a new Digital Tool for Gnomee'" [closeButtonTextAttribute]="'Cancel'" [modalParent]="this"></dynamic-modal>
+</span>

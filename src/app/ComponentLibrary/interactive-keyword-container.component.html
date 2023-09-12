@@ -1,0 +1,53 @@
+<div class="container p-2" *ngIf="ready">
+
+    <div class="row">
+        <label class="col attributeName">
+            {{_data.data.repr}}
+        </label>
+    </div>
+    <div class="row justify-content-around">
+        <div class="col container">
+
+            <div class="">
+                <div class="row justify-content-start">
+
+                    <div class="col-4">
+                        <input *ngIf="!isReadOnly" type="text" class="form-control" placeholder="" aria-label=""
+                            aria-describedby="basic-addon1" [(ngModel)]="currentValue" (input)="inputUpdated()"
+                            (keyup.enter)="addNewKeywordIfPossible()">
+
+                        <ul class="list-group" *ngIf="fetchedResultsReady"
+                            style="cursor:pointer;z-index: 9999;position: absolute;">
+                            <li class="list-group-item" *ngFor="let r of fetchedResults; let i = index "
+                                (click)="selectElement(i)">{{r}}</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-8" *ngIf="errorAlert !== null">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="height:70%;">
+                            {{errorAlert.msg}}
+                            <button type="button" class="close" data-dismiss="errorAlert" aria-label="Close"
+                                (click)="closeErrorAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row" *ngIf="selectedKeywords.length > 0" style="z-index: -1;">
+        <div class="col">
+            <span *ngFor="let r of selectedKeywords; let i = index" class="badge rounded-pill bg-primary">{{r}}
+
+                <i class="cil-x-circle" (click)="removeSelectedKeyword(i)" style="cursor: pointer;"
+                    *ngIf="!isReadOnly"></i>
+
+            </span>
+        </div>
+    </div>
+</div>

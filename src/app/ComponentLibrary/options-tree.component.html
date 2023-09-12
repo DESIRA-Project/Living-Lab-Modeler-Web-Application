@@ -1,0 +1,83 @@
+<div class="card" *ngIf="!_toggleable; else mobileBlock">
+
+  <div class="card-header  gnomeeFilter"> 
+    
+    <span class="categoryTitle" placement="right" ngbTooltip="{{description}}">
+    
+    {{name}} </span> </div>
+
+  <div class="card-body">
+    <div *ngIf="nodes !== null && labelMap !== null">
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" style="font-family:'Oswald' !important" > 
+        {{isReadOnly}}
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding >
+
+          <div class="container">
+            <div class="row" style="font-size:1rem;">
+
+              <div class="col-0">
+                <mat-icon class="mat-icon-rtl-mirror" *ngIf="hasChildren(node)" (click)="log(node);"  style="cursor:pointer;">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </div>
+
+              <div class="col" *ngIf="finishedLoading">
+                <input type="checkbox" value="{{node.item}}" id="checkbox1" (click)="todoLeafItemSelectionToggle(node)"
+                  class="form-check-input" [ngModel]="checklistSelection.isSelected(node)" style="cursor:pointer;"  [disabled]='isReadOnly' >
+                <label for="checkbox1" class="form-check-label"  style="cursor:pointer;"> {{node.item}} </label>
+              </div>
+
+            </div>
+          </div>
+        </mat-tree-node>
+
+      </mat-tree>
+    </div>
+  </div>
+</div>
+
+<ng-template #mobileBlock>
+  <div class="card" >
+    <div class="card-text">
+
+      <button class="btn btn-link" type="button"  attr.data-target="#collapse_{{_id}}"
+      attr.aria-expanded="{{isToggled()}}"
+       attr.aria-controls="#collapse_{{_id}}" style="font-size:3vw;">
+        <span (click)="toggleTree()">{{name}}</span>
+      </button>
+
+    </div>
+
+    <div id="collapse_{{_id}}" [ngClass]="{'show': isToggled(),'collapse':!isToggled()}">
+
+    <div class="card-body">
+      <div *ngIf="nodes !== null && labelMap !== null">
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" style="font-family:'Oswald' !important">
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding matTreeNodePaddingIndent="30">
+  
+            <div class="container">
+              <div class="row" style="font-size:1rem;">
+  
+                <div class="col-0">
+                  <mat-icon class="mat-icon-rtl-mirror" *ngIf="hasChildren(node)" (click)="log(node);"   style="cursor:pointer;">
+                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                  </mat-icon>
+                </div>
+  
+                <div class="col">
+                  <input type="checkbox" value="{{node.item}}" id="checkbox1" (click)="todoLeafItemSelectionToggle(node)"
+                    class="form-check-input" [ngModel]="checklistSelection.isSelected(node)"   style="cursor:pointer;">
+                  <label for="checkbox1" class="form-check-label nodeName"   style="cursor:pointer;"> {{node.item}} </label>
+                </div>
+  
+              </div>
+            </div>
+          </mat-tree-node>
+  
+        </mat-tree>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,45 @@
+<div class="container" style="max-width: none">
+  <div class="row">
+
+    <!-- Description -->
+    <div class="col-lg-8 living-lab-description">
+      <div *ngIf="!livingLab.description" class="no-content-found">
+        There are no information yet.
+      </div>
+
+<!--      <div *ngIf="livingLab.description" class="row mb-2 description-text" [innerHTML]="livingLab.description">
+      </div>-->
+
+      <div *ngIf="livingLab.description" class="row mb-2 description-text">
+        <angular-editor
+         [(ngModel)]="livingLab.description" [config]="{editable:false, enableToolbar: false,
+          showToolbar: false}"
+
+        ></angular-editor>
+        <!--        {{ livingLab.description }}-->
+              </div>
+
+
+      <div *ngIf="livingLab.domains && livingLab.domains.length > 0" class="row mb-1">
+        <b class="mr-2">Domains:</b> <span class="mr-1" *ngFor="let domain of livingLab.domains; let i = index"> {{ domain.name + (i === livingLab.domains.length - 1 ? "" : ", ") }} </span>
+      </div>
+      <div *ngIf="livingLab.subdomains && livingLab.subdomains.length > 0 " class="row mb-1">
+        <b class="mr-2">Subdomains:</b> <span class="mr-1" *ngFor="let subdomain of livingLab.subdomains; let i = index"> {{ subdomain.name + (i === livingLab.subdomains.length - 1 ? "" : ", ") }} </span>
+      </div>
+      <div class="row mb-1">
+        <b *ngIf="livingLab.applicationScenarios && livingLab.applicationScenarios.length > 0" class="mr-2">Application Scenarios:</b> <span class="mr-1" *ngFor="let applicationScenario of livingLab.applicationScenarios; let i = index"> {{ applicationScenario.name + (i === livingLab.applicationScenarios.length - 1 ? "" : ", ") }} </span>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div *ngIf="livingLab.location" class="col-lg-4 mb-2">
+      <mat-card class="living-lab-location-card">
+        <div id="leaflet-map" class="living-lab-map"></div>
+        <div class="living-lab-location-text">
+          <div class="living-lab-location-text-title">Location</div>
+          <div class="living-lab-location-text-title-subtitle" [title]="livingLab.location?.text"> {{ livingLab.location?.text }} </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

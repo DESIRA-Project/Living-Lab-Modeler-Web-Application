@@ -1,0 +1,48 @@
+<div>
+  <div class="main-stakeholders">
+    <div class="main-stakeholders-title">Main Stakeholders</div>
+
+    <div *ngIf="mainStakeholders.length === 0" class="no-content-found">
+      There are no main stakeholders yet.
+    </div>
+
+    <div *ngIf="mainStakeholders.length !== 0" class="main-stakeholders-grid">
+      <mat-card *ngFor="let stakeholder of mainStakeholders" class="main-stakeholder-card">
+        <div class="main-stakeholder-name" [title]="stakeholder.name">
+          <span class="dots-after-2-lines">{{stakeholder.name}}</span>
+          <!-- Link -->
+          <a *ngIf="stakeholder.link" [title]="stakeholder.link" [href]="stakeholder.link" target="_blank" class="stakeholder-link ml-2">
+            <span class="material-symbols-sharp d-flex align-items-center" style="font-size: 20px; bottom: -1px; position: relative">open_in_new</span>
+          </a>
+        </div>
+        <div class="main-stakeholder-text" [title]="stakeholder.description">
+          {{stakeholder.description}}
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="contributors">
+    <div class="contributors-title">Contributors</div>
+
+    <div *ngIf="contributors.length === 0" class="no-content-found">
+      There are no contributors yet.
+    </div>
+
+    <div *ngIf="contributors.length !== 0" class="contributors-grid">
+      <mat-card *ngFor="let contributor of contributors" class="contributor-card">
+        <div class="contributor-name" [title]="contributor.name">
+          <span class="dots-after-2-lines">{{contributor.name}}</span>
+          <!-- Link -->
+          <a *ngIf="contributor.link" [title]="contributor.link" [href]="contributor.link" target="_blank" class="contributor-link ml-2">
+            <span class="material-symbols-sharp d-flex align-items-center" style="font-size: 20px; bottom: -2px; position: relative">open_in_new</span>
+          </a>
+        </div>
+        <div class="contributor-text" [title]="contributor.description">
+          {{contributor.description}}
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+</div>

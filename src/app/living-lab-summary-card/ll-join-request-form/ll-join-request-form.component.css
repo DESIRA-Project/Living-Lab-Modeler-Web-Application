@@ -1,0 +1,13 @@
+:host ::ng-deep .mat-form-field-appearance-standard.mat-form-field-disabled .mat-form-field-underline {
+  background-image: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42) !important;
+}
+
+:host ::ng-deep .mat-form-field {
+  line-height: 1.225 !important;
+}
+
+:host ::ng-deep .mat-dialog-container {
+  padding-top: 1.34375em !important;
+  padding-bottom: 1.34375em !important;
+}

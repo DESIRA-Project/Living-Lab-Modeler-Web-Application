@@ -1,0 +1,58 @@
+[
+    {
+        "id": "1",
+        "name": "3D Printing",
+        "description": "Placeholder description of 3d printing",
+        "iconUrl": "http://localhost:8080/assets/DTs\\roSTvND.png?t=1674659552836",
+        "originalIconName": "tech.png"
+    },
+    {
+        "id": "2",
+        "name": "Augmented Reality / Virtual Reality",
+        "description": "Placeholder description of augmented reality virtual reality",
+        "iconUrl": "http://localhost:8080/assets/DTs\\UkhqhVb.png?t=1674659552836",
+        "originalIconName": "tech.png"
+    },
+    {
+        "id": "3",
+        "name": "Autonomous Systems And Robotics",
+        "description": "Placeholder description for autonomous systems and robotics",
+        "iconUrl": "http://localhost:8080/assets/DTs\\xDzErPT.png?t=1674659552836",
+        "originalIconName": "tech.png"
+    },
+    {
+        "id": "4",
+        "name": "Cloud/edge Computing",
+        "description": "Placeholder description for cloud edge computing",
+        "iconUrl": "http://localhost:8080/assets/DTs\\NeJTcAV.png?t=1674659552836",
+        "originalIconName": "tech.png"
+    },
+    {
+        "id": "5",
+        "name": "Data Analytics",
+        "description": "Placeholder description for data analytics",
+        "iconUrl": "http://localhost:8080/assets/DTs\\nIDqkor.png?t=1674659552836",
+        "originalIconName": "tech.png"
+    },
+    {
+        "id": "6",
+        "name": "Other",
+        "description": "Placeholder description for other",
+        "iconUrl": "http://localhost:8080/assets/DTs\\sPafbIC.png?t=1674659552836",
+        "originalIconName": "tech.png"
+    },
+    {
+        "id": "7",
+        "name": "Social Media And Social Networks",
+        "description": "Placeholder description for social media and social networks",
+        "iconUrl": "http://localhost:8080/assets/DTs\\qniBInT.png?t=1674659552836",
+        "originalIconName": "tech.png"
+    },
+    {
+        "id": "8",
+        "name": "Web-based Technology",
+        "description": "Placeholder description for web-based technology",
+        "iconUrl": "http://localhost:8080/assets/DTs\\oWQkZsN.png?t=1674659552836",
+        "originalIconName": "tech.png"
+    }
+]

@@ -1,0 +1,119 @@
+<div class="d-flex flex-column align-items-center" *ngIf="ready">
+
+  <!--<div class="ll-creation-section-title">{{title}}</div>-->
+
+  <!--<div class="mb-3"></div>-->
+
+    <button mat-fab class="d-flex justify-content-center align-items-center my-1"
+            (click)="addNewStakeholder()"
+            matTooltip="Add stakeholder" matTooltipPosition="right"
+            style="background-color: var(--blue-400)">
+      <span class="material-symbols-sharp">
+        add
+      </span>
+    </button>
+
+
+  <!-- Margin for symmetry -->
+  <div *ngIf="mainStakeholders.length > 0 || contributors.length > 0" class="mt-2"></div>
+
+  <!-- Main stakeholders -->
+  <div class="main-stakeholders w-100" *ngIf="ready && this.mainStakeholders.length > 0">
+
+    <!-- Title -->
+    <div class="main-stakeholders-title">Main Stakeholders</div>
+
+    <div class="main-stakeholders-grid">
+
+      <!-- Card -->
+      <mat-card *ngFor="let stakeholder of mainStakeholders" class="main-stakeholder-card">
+
+        <!-- Name -->
+        <div class="main-stakeholder-name" [title]="stakeholder.name">
+          <span class="dots-after-2-lines">
+            {{stakeholder.name}}
+          </span>
+        </div>
+
+        <!-- Description -->
+        <div class="main-stakeholder-text" *ngIf="!stakeholder.usesGlobalDescription" [title]="stakeholder.description">
+          {{stakeholder.description}}
+        </div>
+
+        <div class="main-stakeholder-text" *ngIf="stakeholder.usesGlobalDescription" [title]="stakeholder.stakeholderDescription">
+          {{stakeholder.stakeholderDescription}}
+        </div>
+
+        <!-- Actions -->
+        <div class="card-buttons-right">
+          <button mat-button style="color: var(--blue-400)"
+                  (click)="selectedExistingStakeholders.indexOf(stakeholder) > -1 ?
+                   editExistingStakeholder(stakeholder) : editUserDefinedStakeholder(stakeholder)">
+            EDIT
+          </button>
+          <button mat-button style="color: var(--red-400)"
+                  (click)="selectedExistingStakeholders.indexOf(stakeholder) > -1 ?
+                   removeExistingStakeholder(stakeholder) : removeUserDefinedStakeholder(stakeholder)">
+            REMOVE
+          </button>
+        </div>
+
+      </mat-card>
+
+    </div>
+  </div>
+
+
+
+  <div class="contributors w-100" *ngIf="ready && this.contributors.length > 0">
+
+    <!-- Contributors title -->
+    <div class="contributors-title">Contributors</div>
+
+    <div class="contributors-grid">
+
+      <!-- Card -->
+      <div *ngFor="let contributor of contributors" class="contributor-card">
+
+        <!-- Name -->
+        <div class="contributor-name" [title]="contributor.name">
+          {{contributor.name}}
+        </div>
+
+        <!-- Description -->
+        <div class="contributor-text" *ngIf="!contributor.usesGlobalDescription" [title]="contributor.description">
+          {{contributor.description}}
+        </div>
+
+        <div class="contributor-text" *ngIf="contributor.usesGlobalDescription" [title]="contributor.stakeholderDescription">
+          {{contributor.stakeholderDescription}}
+        </div>
+
+        <!-- Actions -->
+        <div class="card-buttons-right">
+          <button mat-button style="color: var(--blue-400)"
+                  (click)="selectedExistingStakeholders.indexOf(contributor) > -1 ?
+                   editExistingStakeholder(contributor) : editUserDefinedStakeholder(contributor)">
+            EDIT
+          </button>
+          <button mat-button style="color: var(--red-400)"
+                  (click)="selectedExistingStakeholders.indexOf(contributor) > -1 ?
+                   removeExistingStakeholder(contributor) : removeUserDefinedStakeholder(contributor)">
+            REMOVE
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Margin for symmetry -->
+  <div *ngIf="mainStakeholders.length > 0 || contributors.length > 0" class="mb-n3"></div>
+
+  <div class="container" *ngIf="!ready">
+    <div class="row justify-content-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+
+

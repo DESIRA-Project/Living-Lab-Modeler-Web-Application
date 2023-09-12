@@ -1,0 +1,46 @@
+<div *ngIf="ready">
+
+    <div  class="title">
+        {{livingLabSummary.name}}
+    </div>
+
+    <div class="info">
+        Created on {{ livingLabSummary.created | date: 'yyyy-MM-dd'}}
+    </div>
+
+    <div class="info">
+        The Living Lab is <b style="">{{ livingLabSummary.status}}.</b>
+    </div>
+
+
+    <div *ngIf="livingLabSummary.members">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;overflow: auto;">
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td mat-cell *matCellDef="let element" class="table-cell"> {{element.firstName}} {{element.lastName}} </td>
+                </ng-container>
+              
+                <!-- Role Column -->
+                <ng-container matColumnDef="role">
+                  <th mat-header-cell *matHeaderCellDef> Role </th>
+                  <td mat-cell *matCellDef="let element" class="table-cell"> {{ element.isOwner ? 'Living Lab Owner' : element.userRole  }} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+            
+    </div>
+
+  
+  </div>
+  
+  <div *ngIf="!ready">
+    <div class="justify-content-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+  

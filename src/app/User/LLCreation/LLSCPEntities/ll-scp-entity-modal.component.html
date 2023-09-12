@@ -1,0 +1,72 @@
+<h3 mat-dialog-title style="text-align: center" class="mb-1">
+    {{getTitle()}}
+</h3>
+<mat-dialog-content style="text-align: center">
+    <div>
+        <mat-form-field appearance="standard" style="width: 100%">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="name" (input)="searchForEntityLabel()" [matAutocomplete]="auto">
+            <button type="button" mat-button *ngIf="name" matSuffix mat-icon-button aria-label="Clear"
+                (click)="clearEntityName(); $event.stopPropagation()">
+                <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-error *ngIf="nameExists">
+            {{errorMessage}}
+        </mat-error>
+
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectEntity($event.option.value)">
+            <mat-option *ngFor="let entity of scpEntities" [value]="entity.name">
+                <div class="d-flex">
+                    <span> {{entity.name}} </span>
+                </div>
+            </mat-option>
+        </mat-autocomplete>
+    </div>
+
+    <div>
+        <mat-form-field appearance="standard" style="width: 100%"
+            *ngIf="!showGlobalDescriptionOption(); else showGlobalEntityLabelDescriptionBlock">
+
+            <mat-label>Description</mat-label>
+            <textarea cdkTextareaAutosize matInput [(ngModel)]="description"></textarea>
+            <button type="button" mat-button *ngIf="description" matSuffix mat-icon-button aria-label="Clear"
+                (click)="clearEntityDescription(); $event.stopPropagation()">
+                <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+            </button>
+        </mat-form-field>
+
+    </div>
+
+    <div class="row justify-content-center mb-2 mt-5" *ngIf="showGroups">
+        <mat-chip-list #groupListBubbles *ngIf="groups.length > 0">
+            <mat-chip style="color:white;" *ngFor="let o of groups; let i = index" (click)="selectGroup(i)"
+                [style.background-color]="selectedGroupIdIndex === i ? o.color : 'grey'">
+                {{o.value}}
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+</mat-dialog-content>
+
+<div class="row justify-content-center">
+    <button mat-button (click)="save()" [ngStyle]="{ 'color' : !canSave() ? 'grey' : 'blue' }"
+        [disabled]="!canSave()">{{getActionButtonTitle() | uppercase}}</button>
+    <button mat-button (click)="close()" style="color: grey">CANCEL</button>
+</div>
+
+<ng-template #showGlobalEntityLabelDescriptionBlock>
+    <div >
+        <mat-form-field appearance="standard" style="width: 100%">
+            <mat-label>Description</mat-label>
+
+            <textarea cdkTextareaAutosize matInput (input)="descriptionUpdate($event)" [ngModel]="description" >{{description}}</textarea>
+            <button type="button" mat-button *ngIf="description.length > 0" matSuffix
+                mat-icon-button aria-label="Clear" (click)="clearEntityDescription(); $event.stopPropagation()">
+                <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+            </button>
+            <mat-hint *ngIf="useGlobalEntityLabelDescription">*The text is filled with the entity's default description, please fill free to adjust..</mat-hint>
+
+        </mat-form-field>
+    </div>
+</ng-template>

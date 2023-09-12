@@ -1,0 +1,33 @@
+.btn:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0;
+}
+
+.dropdown-menu {
+  --approximate-icon-width: 44px;
+}
+
+.dropdown-item:active {
+  background-color: transparent;
+}
+
+.dropdown-menu::before {
+  border-bottom: 9px solid rgba(0, 0, 0, 0.2);
+  border-left: 9px solid rgba(0, 0, 0, 0);
+  border-right: 9px solid rgba(0, 0, 0, 0);
+  content: "";
+  display: inline-block;
+  right: calc(var(--approximate-icon-width) / 2);
+  position: absolute;
+  top: -8px;
+}
+.dropdown-menu::after {
+  border-bottom: 8px solid #FFFFFF;
+  border-left: 9px solid rgba(0, 0, 0, 0);
+  border-right: 9px solid rgba(0, 0, 0, 0);
+  content: "";
+  display: inline-block;
+  right: calc(var(--approximate-icon-width) / 2);
+  position: absolute;
+  top: -7px;
+}

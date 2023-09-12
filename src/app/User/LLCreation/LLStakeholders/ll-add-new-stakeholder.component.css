@@ -1,0 +1,4 @@
+:host ::ng-deep .mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline {
+  background-image: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}

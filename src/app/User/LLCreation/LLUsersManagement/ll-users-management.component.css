@@ -1,0 +1,20 @@
+
+:host ::ng-deep .mat-tab-body-content{
+  overflow: unset !important;
+}
+
+:host ::ng-deep .mat-tab-header {
+  border-bottom: none !important;
+}
+
+:host ::ng-deep .mat-dialog-container {
+  padding-bottom: calc(24px / 2);
+}
+
+:host ::ng-deep .mat-tab-label {
+  height: 48px !important;
+}
+
+.buttons-row {
+  padding-top: 12px;
+}

@@ -1,0 +1,37 @@
+.kbtMobile{
+    display:none;
+}
+
+.toolCard{
+    font-size:100px;
+}
+
+@media screen and (max-width: 768px) {
+    .kbtDesktop{
+        display:none;
+    }
+
+    .kbtMobile{
+        display:unset;
+    }
+
+    .toolCard{
+        font-size:15px;
+    }
+
+    .toolSpacing{
+        padding-bottom:3%;
+    }
+
+    .toolNameWrapper {
+        position: relative;
+        width: 170px;
+        overflow: auto;
+        overflow-y: hidden;
+    }
+
+    .toolName {
+        white-space: nowrap;
+        display:inline-block;
+    }
+}

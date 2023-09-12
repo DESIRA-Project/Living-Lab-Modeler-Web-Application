@@ -1,0 +1,68 @@
+<div *ngIf="userCanAccessPage(); else unadequatePermissionsBlock"
+     [ngClass]="{'card p-2 shadow-lg' : renderInCard}"
+     style="padding-bottom: 0 !important;"
+>
+  <div [ngClass]="{'card-header' : renderInCard}" *ngIf="renderInCard && title !== null">{{title}}</div>
+  <div [ngClass]="{'card-body' : renderInCard}">
+    <div class="container">
+
+      <div class="row" *ngIf="alert !== null">
+        <div class="col">
+          <div  class="alert alert-success alert-dismissible fade show" role="alert">
+            {{alert.msg}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="errorAlert !== null">
+        <div class="col">
+          <div  class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{errorAlert.msg}}
+            <button type="button" class="close" data-dismiss="errorAlert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row d-flex justify-content-center">
+
+
+        <div *ngIf="!ready">
+          <div class="spinner-border" role="status" style="margin-left:45%;margin-top:20%;">
+          </div>
+        </div>
+
+
+
+        <div *ngIf="ready" style="margin: 20px">
+          <button mat-button
+                  class="save-button"
+                  style="min-width: 100px; padding-inline: 0 !important; border-radius: 10px"
+                  (click)="organizeLivingLab()"
+          >
+            <!--Organize a Living Lab-->
+            <div class="d-flex flex-column justify-content-center">
+              <div class="image-wrapper">
+                <div class="image"></div>
+              </div>
+              <div style="margin: 10px; margin-top: 0;">Organize a New Living Lab</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<ng-template #unadequatePermissionsBlock>
+  <div class="card-header" *ngIf="title !== null">{{title}}</div>
+  <div class="card-body">
+    User does not have adequate permissions to view this page
+  </div>
+</ng-template>

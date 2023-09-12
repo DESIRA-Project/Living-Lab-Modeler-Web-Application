@@ -1,0 +1,10 @@
+<div *ngIf="_data !== null">
+
+    <div class="form-group">
+        <label for="{{_data.type}}">{{_data.value}}</label>
+        <input type="email" class="form-control" id="{{_data.type}}" [(ngModel)]="_content"  placeholder="name@example.com" [attr.required]="_data.required">
+        <div class="invalid-feedback" *ngIf="_data.required === true">
+            Please provide your {{_data.type}}
+         </div>
+      </div>
+</div>

@@ -1,0 +1,10 @@
+.gnomee-button{
+
+    background-color: #089C89 !important; 
+    border-color: #089C89; 
+    background-image: linear-gradient(to right, #089C89 , #07C19A)   !important;
+}
+
+.gnomee-button-in-toolbar-gap{
+    margin: 0 10px;
+}

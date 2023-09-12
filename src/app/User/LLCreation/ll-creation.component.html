@@ -1,0 +1,192 @@
+<style xmlns="http://www.w3.org/1999/html">
+  .material-symbols-sharp {
+    font-variation-settings:
+      'FILL' 1,
+      'wght' 300,
+      'GRAD' 0,
+      'opsz' 24
+  }
+</style>
+
+<div class="spinner-background" *ngIf="!ready">
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+
+<!--<div *ngIf="!renderInCard" class="d-flex justify-content-center my-3">{{ title }}</div>-->
+
+<div class="mb-3"></div>
+
+<!-- Card -->
+<div [ngClass]="{'card pt-2 px-2 pb-0 shadow-lg' : renderInCard}" *ngIf="ready">
+
+  <!-- Card header -->
+  <div class="d-flex align-items-center justify-content-sm-between justify-content-center mb-3 mb-sm-0"
+    *ngIf="title !== null" [ngClass]="{'card-header' : renderInCard}">
+
+    <!-- Card title -->
+    <div *ngIf="renderInCard" class="mb-1 text-center">
+      <span class="mr-2">{{title}}</span>
+      <span class="open-in-new-icon" *ngIf=" livingLabId !== undefined && livingLabId !== -1"
+            (click)="openLivingLabViewPage()" style="cursor: pointer;"
+            matTooltip="Visit the Living Lab's view page."
+            matTooltipPosition="above">
+        <span class="material-symbols-outlined" style="font-size: 22px; font-weight: 300">open_in_new</span>
+      </span>
+    </div>
+
+<div class="text-center">
+    <div *ngIf="!renderInCard" class="mb-1 text-center d-flex align-items-center justify-content-center view-link-div">
+      <span class="mr-2 mini-llm-title">{{title}}</span>
+      <span class="open-in-new-icon" *ngIf=" livingLabId !== undefined && livingLabId !== -1"
+        (click)="openLivingLabViewPage()" style="cursor: pointer;"
+            matTooltip="Visit the Living Lab's view page."
+            matTooltipPosition="above">
+        <span class="material-symbols-outlined" style="font-size: 22px; font-weight: 300">open_in_new</span>
+      </span>
+      <span class="d-block d-xl-none mb-1"></span>
+    </div>
+
+    <div class="d-flex align-items-center" *ngIf="ready">
+
+      <!-- Toggle public -->
+      <mat-slide-toggle class="toggle-public" [(ngModel)]="isPublic" (ngModelChange)="switchIsPublic()">
+        <span [ngStyle]="isPublic ? {'color': 'var(--blue-400)'} : {}">Public</span>
+      </mat-slide-toggle>
+
+      <div class="mr-4"></div>
+
+      <!-- Toggle published -->
+      <mat-slide-toggle class="toggle-published" [(ngModel)]="isPublished" (ngModelChange)="setPublishedConfirmation()"
+        [disabled]="!canPublish()"
+        matTooltip="The Living Lab's name, description, focal question, location and related SDGs are mandatory before publishing"
+        [matTooltipDisabled]="canPublish()" matTooltipPosition="above">
+        <span [ngStyle]="isPublished ? {'color': 'var(--blue-400)'} : {}">Published</span>
+      </mat-slide-toggle>
+
+      <div class="mr-4"></div>
+
+      <!-- Save button -->
+
+      <button mat-button class="save-button submit-button-save" style="min-width: 100px" (click)="saveLivingLab()" [disabled]="!canSave()">
+        {{ submitButtonText }}
+      </button>
+
+    </div>
+
+    </div>
+
+  </div>
+  <!--  {{currentView}}
+  {{currentView === 0}} -->
+
+  <mat-tab-group [tabIndex]="currentView" mat-align-tabs="start" (selectedTabChange)="selectView($event.index)"
+    #llmTabGroup [animationDuration]="'0ms'" *ngIf="currentView !== -1">
+
+    <mat-tab *ngFor="let menu of menus[0]; let i = index">
+
+      <ng-template mat-tab-label>
+        <span class="tab-title d-flex flex-column align-items-center justify-content-center"
+          [ngClass]="{'tab-title-active': currentView === i}">
+          <span style="font-size: 18px" class="material-symbols-sharp">{{menu.matIcon}}</span>
+          <!--<span class="mr-2"></span>-->
+          <span> {{ menu.name }} </span>
+        </span>
+      </ng-template>
+
+      <ng-template matTabContent>
+<!-- *ngIf="childComponent !== null && i === currentView" -->
+        <div #dyn  *ngIf="dataFetched && !onRender && childComponent !== null && i === currentView; else dataNotReadyBlock"
+              class="p-0 p-sm-3">
+          <dynamic-content-section [item]="childComponent"
+                                   [parent]="this"
+
+                                   [userToken]="getUserToken()"
+                                   style="width:100%; height: 100%">
+
+          </dynamic-content-section>
+
+        </div>
+
+        <ng-template #dataNotReadyBlock>
+          <div class="container">
+          <div class="row justify-content-center data-not-ready-spinner">
+            <mat-spinner [diameter]="renderInCard ? '100' : '70'"></mat-spinner>
+        </div>
+        </div>
+
+        </ng-template>
+
+      </ng-template>
+
+    </mat-tab>
+
+  </mat-tab-group>
+
+  <!--<div >
+      <div class="container">
+
+          <div *ngIf="!smallScreen; else SmallScreenBlock">
+
+              <mat-horizontal-stepper [linear]="false" #stepper (selectionChange)="switchView($event)">
+
+                  <mat-step *ngFor="let menu of menus[0];let i = index" matTooltip="{{menu.tooltip}}"  state="{{menu.id}}" label="{{menu.name}}"
+                  completed="false">
+
+                  <div class="row justify-content-center" #dyn *ngIf="childComponent !== null && i === currentView">
+                          <dynamic-content-section [item]="childComponent" [parent]="this" [userToken]="getUserToken()"  style="width:100%"></dynamic-content-section>
+                      </div>
+
+                      &lt;!&ndash;<span  matTooltip="The Living Lab's name, description, focal question, location and related SDGs are mandatory."
+                      [matTooltipDisabled]="canSave()">
+                      <button  type="button" class="btn btn-primary" (click)="saveLivingLab()" [disabled]="!canSave()">Save Draft</button>
+                      </span>&ndash;&gt;
+                  </mat-step>
+
+                  <ng-template *ngFor="let menu of menus[0];let i = index" matStepperIcon="{{menu.id}}">
+                      <span style="font-size: 17px" class="row material-symbols-sharp d-flex justify-content-center align-items-center">{{menu.matIcon}}</span>
+                  </ng-template>
+
+
+              </mat-horizontal-stepper>
+
+          </div>
+
+
+          <ng-template #SmallScreenBlock>
+              <mat-vertical-stepper [linear]="false" #stepper (selectionChange)="switchView($event)">
+
+                  <mat-step *ngFor="let menu of menus[0];let i = index" matTooltip="{{menu.tooltip}}"  state="{{menu.id}}" label="{{menu.name}}"
+                  completed="false">
+
+                  <div class="row justify-content-center" #dyn *ngIf="childComponent !== null && i === currentView">
+                          <dynamic-content-section [item]="childComponent" [parent]="this" [userToken]="getUserToken()"  style="width:100%"></dynamic-content-section>
+                      </div>
+                      &lt;!&ndash;<span matTooltip="The Living Lab's name, description, focal question, location and related SDGs are mandatory."
+                      [matTooltipDisabled]="canSave()"
+                      >
+                      <button type="button" class="btn btn-primary" (click)="saveLivingLab()" [disabled]="!canSave()"
+                      aria-label="Button that displays a tooltip that can be programmatically disabled"
+                      >Save Draft</button>
+                  </span>&ndash;&gt;
+                  </mat-step>
+
+                  <ng-template *ngFor="let menu of menus[0];let i = index" matStepperIcon="{{menu.id}}" >
+                      <span style="font-size: 17px" class="row material-symbols-sharp d-flex justify-content-center align-items-center">{{menu.matIcon}}</span>
+                  </ng-template>
+
+              </mat-vertical-stepper>
+
+
+          </ng-template>
+      </div>
+
+      <div class="container" *ngIf="!ready">
+          <div class="row justify-content-center">
+              <mat-spinner></mat-spinner>
+          </div>
+      </div>
+
+  </div>-->
+</div>

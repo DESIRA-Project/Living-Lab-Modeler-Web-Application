@@ -1,0 +1,25 @@
+::ng-deep .customModal{ /*>*/
+    /*  mat-dialog-container {*/
+          min-width:35%;
+  /*    }*/
+    }
+
+
+  @media screen and (max-width: 768px) {
+      ::ng-deep .customModal{ /*>*/
+          /*  mat-dialog-container {*/
+                min-width:80%;
+        /*    }*/
+          }
+
+  }
+
+
+:host ::ng-deep .mat-checkbox-layout {
+  white-space: normal;
+}
+
+
+:host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: var(--blue-400);
+}

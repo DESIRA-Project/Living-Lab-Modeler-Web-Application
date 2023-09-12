@@ -1,0 +1,8 @@
+.dropdown-option:hover{
+    background-color: #F3F5FA;
+}
+
+.dropdown-option-selected{
+    background-color: #F3F5FA;
+    font-size:3vh;
+}

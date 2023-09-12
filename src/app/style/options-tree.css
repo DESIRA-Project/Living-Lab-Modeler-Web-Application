@@ -1,0 +1,20 @@
+
+.mat-tree-node {
+    min-height: 1.8em !important;
+    height: 1.8em;
+/*    cursor: pointer;*/
+  }
+
+  @media screen and (max-width: 768px) {
+    .mat-tree-node {
+      min-height: 2em !important;
+      height: 2em;
+    }
+
+    .nodeName{
+      font-size:3vw;
+       width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    }
+  }

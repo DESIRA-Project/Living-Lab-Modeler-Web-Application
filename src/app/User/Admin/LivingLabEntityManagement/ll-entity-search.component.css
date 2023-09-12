@@ -1,0 +1,18 @@
+:host ::ng-deep .mat-form-field {
+  margin-inline: 5px;
+}
+
+
+@media screen and (max-width: 992px) {
+  .buttonLabel{
+    font-size:0.7rem;
+  }
+
+  .textFont{
+    font-size:0.8rem;
+  }
+
+  .buttonVerticalGap{
+    margin-top:1rem;
+  }
+}

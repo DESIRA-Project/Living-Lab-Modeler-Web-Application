@@ -1,0 +1,80 @@
+
+.viewIcon{
+    color:#244DE4;
+    cursor: pointer;
+}
+
+.editIcon{
+    color:#CB7A4F;
+    cursor: pointer;
+}
+
+.acceptIcon{
+  color:#4FCB5C;
+  cursor: pointer;
+}
+
+.visitURLIcon{
+    color:#4FCB5C;
+    cursor: pointer;
+}
+
+.rejectIcon{
+  color:#A7192C;
+  cursor: pointer;
+}
+
+.responsiveTable{
+    width:100%;
+}
+
+.tableColumn{
+    width:120px;
+}
+
+.tableColumnEnum{
+    width:1px;
+}
+
+.statusRejected{
+    color:red;
+}
+
+.statusDeleted{
+    color:red;
+}
+
+
+.statusAccepted{
+    color:#4FCB5C;
+}
+
+.statusPending{
+    color:orange;
+}
+
+@media screen and (max-width: 768px) {
+    .responsiveTable{
+/*        width:100px;*/
+        overflow-x:scroll;
+    }
+
+    .tableColName{
+        font-size: 2vh;
+    }
+    .tableColValue{
+        font-size: 1.5vh;
+    }
+
+    .buttonGroupMarginTopMobile{
+        margin-top:0.6rem;
+    }
+
+    .termSearchLabel{
+        font-size:2.2vh;
+    }
+
+    .termSearchFont{
+        font-size:2vh;
+    }
+}

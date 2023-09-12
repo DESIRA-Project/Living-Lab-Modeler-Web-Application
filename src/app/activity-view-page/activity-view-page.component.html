@@ -1,0 +1,311 @@
+<navbar [toggleableSideMenu]="false"></navbar>
+<div style="background-color: var(--background-color)">
+
+  <main>
+    <breadcrumb [currentPage]="'activity'" [hasGapBottom]="true" [setController]="this"
+                style="padding-top: calc(0.5 * var(--base-layout-vertical-padding)); padding-inline: calc(5%)"
+    ></breadcrumb>
+  </main>
+</div>
+
+<div class="main container" *ngIf="ready" style="max-width: none">
+
+  <!--&lt;!&ndash; Back to living lab button&ndash;&gt;
+  <div class="back-to-living-lab-row">
+
+    &lt;!&ndash; Button contents&ndash;&gt;
+    <a [routerLink]="['/living-lab', livingLabId]" [queryParams]=" {tabNo: 3} " [fragment]="'tabs'"
+      style="text-decoration: none; color: inherit">
+      &lt;!&ndash;<button mat-button (click)="returnToLivingLab(false, 'tabs', 3)">&ndash;&gt;
+      <button mat-button>
+
+        &lt;!&ndash; Left arrow &ndash;&gt;
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+        </svg>
+
+        &lt;!&ndash; Text &ndash;&gt;
+        <span class="back-to-living-lab-text">BACK TO LIVING LAB</span>
+
+      </button>
+    </a>
+  </div>-->
+
+
+
+  <!-- Main screen -->
+  <div class="row activity-main-info">
+
+    <!-- Main image -->
+    <div class="col-lg-6 mb-lg-0 mb-4">
+      <img class="main-image" [src]="activity?.mainPhotoUrl ? activity?.mainPhotoUrl : environment.env.activity_default_photo" alt="Activity main image">
+    </div>
+
+    <!-- Main info-->
+    <div class="col-lg-6">
+
+      <!-- Title -->
+      <div class="title row">
+        {{ activity?.title }}
+      </div>
+
+      <!-- Living lab title -->
+      <div class="info-field row">
+        <div class="info-field-icon">
+          <span class="material-symbols-sharp">lightbulb</span>
+        </div>
+        <div class="info-field-title"> LIVING LAB </div>
+        <!--<a href="javascript:void(0);" (click)="returnToLivingLab(true, '')" class="info-field-text" style="color: var(&#45;&#45;blue)"> {{ activity?.livingLabName }} </a>-->
+        <a target="_blank" [routerLink]="'/living-lab/' + activity?.livingLabId" class="info-field-text"> {{
+          activity?.livingLabName }} </a>
+      </div>
+
+      <!-- Activity type -->
+      <div class="info-field row">
+        <div class="info-field-icon">
+          <span class="material-symbols-sharp">sell</span>
+        </div>
+        <div class="info-field-title"> ACTIVITY TYPE </div>
+        <div class="info-field-text"> {{activity?.activityType?.name }} </div>
+      </div>
+
+      <!-- Location -->
+      <div class="info-field row">
+        <div class="info-field-icon">
+          <span class="material-symbols-sharp">location_on</span>
+        </div>
+        <div class="info-field-title"> LOCATION </div>
+        <div class="info-field-text"> {{activity?.location?.text }} </div>
+      </div>
+
+      <!-- Venue -->
+      <div class="info-field row" *ngIf="activity?.venue">
+        <div class="info-field-icon">
+          <span class="material-symbols-sharp">apartment</span>
+        </div>
+        <div class="info-field-title"> VENUE </div>
+        <div class="info-field-text"> {{activity?.venue }} </div>
+      </div>
+
+      <!-- Date -->
+      <div class="info-field row">
+        <div class="info-field-icon">
+          <span class="material-symbols-sharp">calendar_today</span>
+        </div>
+        <div class="info-field-title"> DATE </div>
+        <div class="info-field-text">
+          {{ activity?.dateFrom | date }}
+          <span *ngIf="activity?.dateTo"> - {{ activity?.dateTo | date }} </span>
+        </div>
+      </div>
+
+      <!-- Timezone -->
+      <div class="info-field row">
+        <div class="info-field-icon">
+          <span class="material-symbols-sharp">schedule</span>
+        </div>
+        <div class="info-field-title"> START TIME </div>
+        <div class="info-field-text"> {{activity?.startTime | date:'shortTime' }} {{ activity?.timezone?.utcName }}
+        </div>
+      </div>
+
+      <!-- Activity format -->
+      <div class="info-field row" *ngIf="activity?.activityFormat">
+        <div class="info-field-icon">
+          <span class="material-symbols-sharp">sms</span>
+        </div>
+        <div class="info-field-title"> ACTIVITY FORMAT </div>
+        <div class="info-field-text"> {{activity?.activityFormat?.name }} </div>
+      </div>
+
+      <!-- Language -->
+      <div class="info-field row">
+        <div class="info-field-icon">
+          <span class="material-symbols-sharp">translate</span>
+        </div>
+        <div class="info-field-title"> LANGUAGE </div>
+        <div class="info-field-text"> {{activity?.language?.name }} </div>
+      </div>
+
+      <!-- Agenda -->
+      <div class="info-field row" *ngIf="activity?.agendaUrl">
+        <div class="info-field-icon">
+          <span class="material-symbols-sharp">library_books</span>
+        </div>
+        <div class="info-field-title"> AGENDA </div>
+        <a [href]="activity?.agendaUrl" class="info-field-text"> {{ activity?.agendaFilename }} </a>
+      </div>
+
+      <!-- Link -->
+      <div class="info-field row" *ngIf="activity?.link">
+        <div class="info-field-icon">
+          <span class="material-symbols-sharp">link</span>
+        </div>
+        <div class="info-field-title"> LINK </div>
+        <a [href]="activity?.link" [title]="activity?.link" [target]="'_blank'" class="info-field-text activity-link">
+          {{activity?.link}} </a>
+      </div>
+
+      <!-- Material -->
+      <div class="info-field row">
+        <div class="info-field-icon">
+          <span class="material-symbols-sharp">description</span>
+        </div>
+
+        <div class="info-field-title"> MATERIAL </div>
+
+        <div class="info-field-text d-flex flex-column">
+
+          <div *ngIf="activity?.files?.length === 0" class="no-content-found">
+            <i>There are no files.</i>
+          </div>
+
+          <div *ngFor="let file of activity?.files; let i = index">
+
+            <div class="d-flex align-items-center mb-1">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dot"
+                   viewBox="0 0 16 16">
+                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+              </svg>
+
+              <a [href]="file.assetResourceName" [matTooltip]="file.description" matTooltipPosition="left">
+                {{ file.title }}
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- Objective -->
+  <div class="row">
+    <div class="col section">
+      <div class="section-title">OBJECTIVE</div>
+      <div class="section-content" [innerHTML]="activity?.objective | safeClickableLinks"></div>
+    </div>
+  </div>
+
+
+
+  <!-- Outcome -->
+  <div class="row">
+    <div class="col section">
+
+      <div class="section-title">OUTCOME</div>
+
+      <div *ngIf="activity?.outcome" class="section-content" [innerHTML]="activity?.outcome | safeClickableLinks"></div>
+
+      <!-- Display message if no outcome exists -->
+      <div *ngIf="!activity?.outcome" class="section-content no-content-found">
+        <i>There is not a registered outcome for this activity yet.</i>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- Participants and files row -->
+  <div class="row">
+
+    <!-- Participants -->
+    <div class="col section">
+
+      <div class="section-title">PARTICIPANTS</div>
+
+      <!-- Display message if no participants exist -->
+      <div *ngIf="activity?.activityParticipants?.length === 0" class="section-content no-content-found">
+        <i>There are no participants.</i>
+      </div>
+
+      <div *ngIf="activity?.activityParticipants?.length !== 0" class="section-content d-flex flex-column">
+
+        <div class="participants row mx-0">
+
+          <div *ngFor="let participant of visibleParticipants; let i = index" class="participant">
+
+            <!-- Participant icon-->
+            <div class="d-flex justify-content-center mr-3">
+              <span class="material-symbols-sharp">assignment_ind</span>
+            </div>
+
+            <!-- Participant details -->
+            <div class="d-flex flex-column">
+
+              <!-- Participant name-->
+              <div class="participant-name">
+                {{ participant.firstname + " " + participant.lastname }}
+              </div>
+
+              <!-- Participant organization and position -->
+              <div class="participant-details">
+                Organization: {{ participant.organization }}
+                <br>
+                Position: {{ participant.position }}
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex">
+          <div *ngIf="numVisibleParticipants < numParticipants" class="see-more-button">
+            <a href="javascript:void(0);" (click)="seeMoreParticipants()">View more</a>
+          </div>
+
+          <div *ngIf="numVisibleParticipants > visibleParticipantsStep &&  numVisibleParticipants <= numParticipants"
+               class="see-more-button">
+            <a href="javascript:void(0);" (click)="seeLessParticipants()">View less</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Photos -->
+  <div class="row">
+    <div class="col section">
+
+      <div class="section-title">PHOTOS</div>
+
+      <!-- Display message if no photos exist -->
+      <div *ngIf="activity?.photosUrls?.length === 0" class="section-content no-content-found">
+        <i>There are no photos.</i>
+      </div>
+
+      <div *ngIf="activity?.photosUrls?.length !== 0" class="section-content d-flex flex-column">
+        <div class="d-flex flex-row flex-wrap">
+          <a *ngFor="let photoUrl of visiblePhotos" [href]="photoUrl" target="_blank">
+            <img [src]="photoUrl" class="activity-photo">
+          </a>
+        </div>
+
+        <div class="d-flex">
+          <div *ngIf="numVisiblePhotos < numPhotos" class="see-more-button">
+            <a href="javascript:void(0);" (click)="seeMorePhotos()">View more</a>
+          </div>
+
+          <div *ngIf="numVisiblePhotos > visiblePhotosStep &&  numVisiblePhotos <= numPhotos" class="see-more-button">
+            <a href="javascript:void(0);" (click)="seeLessPhotos()">View less</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<app-footer></app-footer>

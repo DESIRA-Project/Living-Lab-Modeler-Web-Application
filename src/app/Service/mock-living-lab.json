@@ -1,0 +1,148 @@
+{
+  "id" : 1,
+  "name" : "Sustainable Water Management",
+  "focalQuestion": "How to better manage water resources for the benefit of both, farming purposes and the everyday needs of the citizens?",
+  "description" : "There are several challenges in managing water resources. According to the current Trikala municipal Business Plan for the period 2014-2019, 0.6% of the municipality surface is covered by water. During the summer months the danger of drought is imminent. In addition, there is an organic degradation of water flows due to nearby farms, processing units and livestock waste and urban wastewater.\n\nThus, in the agricultural region of Trikala, the good management of water resources has been prioritised not only for farming purposes, but also for citizens and their everyday needs. In this context, connectivity and digitalisation of water management can be an opportunity for a better development.",
+  "domains": [
+    {
+      "id": 2,
+      "name": "Agriculture"
+    }
+  ],
+  "subdomains": [
+    {
+      "id": 2,
+      "name": "Crops"
+    }
+  ],
+  "applicationScenarios": [
+    {
+      "id": 14,
+      "name": "Fertilization and Fertigation"
+    },
+    {
+      "id": 4,
+      "name": "Harvesting"
+    }
+  ],
+  "iconUrl":"GGLSwiV.jpg",
+  "ownerId": 4,
+  "location": {
+    "latitude": 39.55634769031712,
+    "longitude": 21.766684266972227,
+    "text": "Trikala, Greece"
+  },
+  "digitalTechnologies": [
+    {
+      "id": 3,
+      "name": "Autonomous systems and robotics",
+      "iconUrl": "NxgpeDr.png"
+    },
+    {
+      "id": 6,
+      "name": "Other",
+      "iconUrl": "sbRcxjh.png"
+    }
+  ],
+  "sdgs": [
+    {
+      "id": "2",
+      "name": "Zero Hunger",
+      "iconUrl": "wYXvrPa.png",
+      "link": "https://sdgs.un.org/goals/goal2"
+    },
+    {
+      "id": "6",
+      "name": "Clean Water and Sanitation",
+      "iconUrl": "aBIQCeG.png",
+      "link": "https://sdgs.un.org/goals/goal6"
+    },
+    {
+      "id": "13",
+      "name": "Climate Action",
+      "iconUrl": "MGnqiDg.png",
+      "link": "https://sdgs.un.org/goals/goal13"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "ATHENA RC",
+      "role": "Main Stakeholder",
+      "description": "A partner organization in DESIRA H2020 project also having the leading role in Sustainable Water Management Living Lab"
+    },
+    {
+      "name": "e-Trikala",
+      "role": "Main Stakeholder",
+      "description": "A development agency operating from 2004 in the City of Trikala"
+    },
+    {
+      "name": "GiSeMi HUB",
+      "role": "Main Stakeholder",
+      "description": "A joint initiative of the Municipality of Trikala and e-Trikala SA, which aims to highlight new innovative business ideas, which provide solutions to the challenges and problems faced by modern cities."
+    },
+    {
+      "name": "Stakeholder 4",
+      "role": "Main Stakeholder",
+      "description": "Nam varius nisi tortor, finibus rhoncus est cursus finibus. Nullam in tristique lorem. Ut volutpat lorem ante, vitae luctus nulla consectetur non. Vivamus vel urna hendrerit, ornare justo at, sollicitudin magna."
+    },
+    {
+      "name": "Contributor 1",
+      "role": "Contributor",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam malesuada enim consequat, volutpat enim bibendum, porta metus. Ut ut vehicula enim. Nunc consequat quam id lorem volutpat ultricies. "
+    },
+    {
+      "name": "Contributor 2",
+      "role": "Contributor",
+      "description": "Morbi quis sapien imperdiet dui interdum rhoncus at eu massa. Integer dapibus finibus dolor a aliquam. Integer rutrum lacus id enim cursus hendrerit."
+    },
+    {
+      "name": "Contributor 3",
+      "role": "Contributor",
+      "description": "In imperdiet orci non magna convallis pretium. Ut diam tortor, interdum quis mauris sed, bibendum bibendum lacus. Proin semper justo non blandit placerat. Phasellus malesuada turpis vel elit iaculis, a vehicula massa malesuada. Morbi non velit arcu."
+    },
+    {
+      "name": "Contributor 4",
+      "role": "Contributor",
+      "description": "Donec sollicitudin ante elit, ac vulputate purus porttitor eget. Etiam consectetur justo id nibh dignissim condimentum. Aliquam erat volutpat. Nulla placerat felis vel dui dictum placerat. Praesent ante enim, vehicula at orci sed, sollicitudin imperdiet sapien. Mauris varius sagittis varius."
+    }
+  ],
+  "scpEntities" : [ {
+    "id" : 1,
+    "name" : "E-Trikala SA",
+    "group" : "Socio",
+    "groupId": 1,
+    "description": "E-Trikala SA Sed hendrerit rhoncus eros. Nunc ac ipsum dui. Cras vitae lectus ac libero egestas laoreet sit amet eget enim. Cras imperdiet ac nunc ut mollis. Nulla congue, arcu quis hendrerit auctor, tortor libero venenatis urna, vel mollis quam neque vitae lacus. Praesent quis odio sit amet enim vulputate maximus. Quisque facilisis lacus a elementum egestas. Sed porta porttitor purus, ut dignissim libero pellentesque vel. Curabitur rutrum lacus eu justo gravida, et pharetra leo tincidunt. Quisque dignissim arcu nec tempus varius. Curabitur rhoncus porttitor tincidunt. Aenean tempus tempor quam ut vehicula. Ut non fringilla est."
+  }, {
+    "id" : 2,
+    "name" : "GiSeMi HUB",
+    "group" : "Socio",
+    "groupId": 1,
+    "description": "GiSeMi HUB Sed elementum felis risus, non laoreet quam pretium vitae. Morbi lacus arcu, pellentesque quis dui nec, vulputate porta sapien. Curabitur vitae lorem congue, laoreet lectus eu, consequat nulla. Cras hendrerit scelerisque maximus. Sed in urna nunc. Donec vitae sapien non dolor euismod luctus. Sed sodales ante porta tellus semper, ut interdum mauris ultrices. Nunc sapien ipsum, sodales quis tempor in, eleifend ornare turpis. Etiam sit amet semper mi."
+  }, {
+    "id" : 3,
+    "name" : "Irrigation Network",
+    "group" : "Cyber",
+    "groupId": 2,
+    "description": "Irrigation Network Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum sollicitudin accumsan tempor. Pellentesque ultricies pretium nunc, ornare viverra mauris aliquam congue. Vestibulum imperdiet posuere turpis nec imperdiet. Donec posuere at nulla at porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo ligula, pharetra nec interdum vel, ultrices in elit. Vivamus tristique ornare dapibus. Pellentesque venenatis, urna ac fermentum imperdiet, ante ante iaculis dui, non eleifend lacus eros vitae diam. Mauris vestibulum mattis dolor, ut auctor nisl feugiat vitae. Maecenas quis dui in nibh semper ultricies. Sed tempus turpis ut lobortis tincidunt. Morbi non feugiat quam. Fusce posuere ultrices lectus et ultricies. Vestibulum feugiat ac lacus ut faucibus. Etiam eget est in lectus convallis venenatis."
+  }, {
+    "id" : 4,
+    "name" : "Smart Water Metering System",
+    "group" : "Physical",
+    "groupId": 3,
+    "description": "Smart Water Metering System Pellentesque pretium nisi dui, quis elementum metus tincidunt non. Pellentesque condimentum dolor quis risus iaculis, vitae semper mauris luctus. Quisque in condimentum magna. Aenean vel tempus nibh, ut commodo neque. Fusce dictum arcu sit amet convallis interdum. Aenean venenatis ullamcorper tellus sit amet porttitor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras molestie mollis lorem, eu sagittis nunc elementum a. Aliquam nisl odio, fringilla vel semper sed, congue ut libero."
+  } ],
+  "scpEntityConnections" : [ {
+    "source" : 1,
+    "destination" : 2
+  }, {
+    "source" : 1,
+    "destination" : 3
+  }, {
+    "source" : 2,
+    "destination" : 3
+  }, {
+    "source" : 4,
+    "destination" : 1
+  } ],
+  "activities": []
+}

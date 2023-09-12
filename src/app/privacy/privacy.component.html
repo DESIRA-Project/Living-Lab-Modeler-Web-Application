@@ -1,0 +1,225 @@
+<div style="position: relative">
+  <div>
+
+    <header class="sticky-top">
+      <div>
+        <navbar [currentPage]="'Privacy'"></navbar>
+      </div>
+    </header>
+
+    <div style="background-color: var(--background-color)">
+
+      <main>
+
+        <breadcrumb [currentPage]="'privacy'" [hasGapBottom]="true" [setController]="this"
+          style="padding-inline: var(--base-layout-vertical-padding)"></breadcrumb>
+
+        <div class="sticky-hide-sidebar-border-top"></div>
+
+        <div class="layout">
+          <div class="main-content">
+
+            <div  [ngClass]="{'card p-2 shadow-lg' : renderInCard}">
+
+
+
+
+                  <div class="" [ngClass]="{'card-body' : renderInCard}">
+                    <h4 class="contentTitle" style="padding-top: 0.8rem;
+                    padding-bottom: 0.3rem;"> Privacy Statement </h4>
+                    <!--
+                        <p *ngIf="!renderInCard" style="margin-bottom:30px;"></p>
+                  -->
+                    <br>
+                    <div class="content">
+                        This Privacy Statement explains, amongst other things, what information the 
+                        {{toolData.introToolName}} collects about the end- user on this website and the use
+                        of them. {{toolData.toolName}} has been created within the context of Digitisation: Economic and
+                        Social Impacts in Rural Areas (DESIRA) project aiming to improve the capacity of
+                        society and political bodies to respond to the challenges that digitalisation
+                        generates in agriculture, forestry and rural areas.
+                    </div>
+                    <br>
+                    <div class="content">
+                        Creators of {{toolData.toolName}} respect the main principles for data protection i.e. Personal data
+                        should be: obtained and processed fairly and lawfully; held and used only for
+                        specified purposes; adequate, relevant and not excessive; accurate and kept up to
+                        date; kept only for as long as is necessary; processed according to the law; held
+                        securely; held within the European Economic Area.
+                    </div>
+                    <br>
+
+
+                    <h4 class="contentHeader">Data Controller details: </h4>
+                    <br>
+
+
+
+                    <div class="content">
+                        Αthena-Research and Innovation Center in Information, Communication and Knowledge
+                        Technologies -Athena RC (“{{toolData.toolName}} creators”, “we” or “us”) is the Data Controller of
+                        end-users’ personal data. For any information related to this privacy statement, the
+                        end-users are invited to fill in the Contact Us form.
+                    </div>
+                    <br>
+
+
+                    <h4 class="contentHeader">Purpose and legal basis of processing the personal data: </h4>
+                    <br>
+
+
+                    <div class="content">
+                        {{toolData.toolName}} collects personal information for providing the end-user with a customized
+                        service requested. The legal basis for personal data processing is Art. 6(1)(b) of
+                        GDPR – processing for pre-contractual and contractual purposes. {{toolData.toolName}} may further
+                        process anonymous information for statistical and research/scientific purposes.
+                        Regarding the latter, creators of {{toolData.toolName}} can make publicly available statistics and
+                        anonymous results at a level of a region or a country for scientific purposes. {{toolData.toolName}}
+                        will never disclose information (location, name, email, results etc.) about a
+                        particular request that may make the person or their location identifiable.
+                    </div>
+                    <br>
+
+                    <h4 class="contentHeader">Information {{toolData.toolName}} collects: </h4>
+                    <br>
+
+                    <div class="content">
+                        a. Log file information, including IP addresses, but it does not link IP addresses
+                        to anything that can identify the end-user as a person.
+                    </div>
+                    <br>
+                    <div class="content">
+                        b. Personal data: Any personal data relating to the end-user gathered by the {{toolData.toolName}} in
+                        the registration process or during the use of the service will be recorded and only
+                        be used in accordance with this statement. If the end-user wishes to explore the
+                        tool as an authenticated user, {{toolData.toolName}} gathers the following personal data that is
+                        necessary for the purposes of authentication: username, first name, last name, email
+                        address; this information is collected from third parties according to the following
+                        section.
+                    </div>
+                    <br>
+                    <div class="content">
+                        In case where the end-user wishes to explore {{toolData.toolName}} as a guest, no personal data is
+                        being processed.
+                    </div>
+                    <br>
+
+
+                    <h4 class="contentHeader">Information collected from third parties: </h4>
+                    <br>
+                    <div class="content">
+                        If the end-users wish to explore the tool as authenticated users, LLM receives information about them from third parties. More specifically, the end-users are invited to login to LLM via “OpenAIRE Login”, which is a service provided by Athena Research Center (ARC). For more information about this service the end-users are invited to review <a target="_blank" href="https://www.openaire.eu/privacy-policy">OpenAIRE's Login Privacy Notice</a>. In addition, users can use the Google Login service for entering LLM as authenticated users.
+                    </div>
+                    <br>
+
+
+
+
+
+
+                    <h4 class="contentHeader">Recipients of end-users’ personal data: </h4>
+                    <br>
+
+                    <div class="content">
+                        {{toolData.toolName}} creators will not transfer end-user’s personal data to any third parties unless
+                        they have the end-user’s consent to do so or it is otherwise requested by judicial
+                        authorities under the legislation. {{toolData.toolName}} creators will not use the information
+                        provided to sell the end-user anything or to ask for money. {{toolData.toolName}} creators confirm
+                        that access to personal data is restricted to those personnel to whom it is
+                        necessary for the performance of their role. All staff who are authorized to access
+                        personal data are under an obligation to comply with this policy and any other
+                        relevant guidelines or legislation.
+                    </div>
+                    <br>
+
+                    <h4 class="contentHeader">How {{toolData.toolName}} uses cookies: </h4>
+                    <br>
+                    <div class="content">
+                        Cookies are small pieces of data that are stored by a browser on a computer’s hard
+                        drive, mobile phone or any other device used to access the internet. {{toolData.toolName}} uses only
+                        cookies that are absolutely necessary for the operation of the website. 
+                    </div>
+                    <br>
+                    <div class="content">
+                        In addition, with your consent {{toolData.toolName}} may collect analytical/ performance Cookies. 
+                        These cookies allow to count the number of visitors and to improve website experience. 
+                        They collect aggregated information (i.e. country, browser type, time and duration of website visit, etc.). 
+                        With respect to analytical/ performance Cookies, {{toolData.tooName}} uses Google Analytics (Google Ireland Limited) 
+                        that enable it to optimize website experience based on the specific user characteristics. For more information on the terms of personal data processing please review <a target="_blank" href="https://policies.google.com/privacy">Google’s privacy policy</a>.
+                    </div>
+                    <br>
+                    <div class="content">
+                        You may change your cookie settings at any time to accept or refuse these analytics technologies.
+                    </div>
+                    <br>
+                    <h4 class="contentHeader">Data retention period: </h4>
+                    <br>
+
+                    <div class="content">
+                        {{toolData.toolName}} retains personal information for as long as the end-user wishes to have an
+                        account with {{toolData.toolName}}.
+                    </div>
+                    <br>
+
+                    <h4 class="contentHeader">Rights of Data Subjects: </h4>
+                    <br>
+
+                    <div class="content">
+                        Pursuant to the current legal framework on the protection of personal data, the
+                        end-users have the following rights in relation to the personal data processed by
+                        {{toolData.toolName}} creators:
+                    </div>
+                    <br>
+
+                    <div class="content">
+                        <ul>
+                            <li> The right to access, correct or update their personal data at any time.
+
+                            <li> The right to object the use of their personal data. </li>
+
+                            <li> The right to restrict the use of their personal data. </li>
+
+                            <li> The right to withdraw the consent at any time without any detriment. Such
+                                right produces effects only for the future. </li>
+
+                            <li> The end-users are entitled to ask the erasure of their personal data. </li>
+
+                            <li> The end-users have the right to data portability, according to which they
+                                can ask to receive their personal data so that they can transfer them to
+                                another organization. </li>
+
+                            <li> In case where the end-users are dissatisfied with how {{toolData.toolName}} creators process
+                                their personal data, they are entitled to submit a complaint before the
+                                Hellenic Data Protection Authority (DPA) (<a href="https://www.dpa.gr">www.dpa.gr</a>). </li>
+                        </ul>
+                    </div>
+
+                    <br>
+                    <h4 class="contentHeader">Updates to the Privacy Statement </h4>
+
+
+                    <div class="content">
+                        Any changes we may make to this Privacy Statement will be posted on this website. We
+                        encourage the end- users to periodically review this website to stay informed about
+                        how {{toolData.toolName}} creators process their personal data.
+                    </div>
+                    <br>
+
+
+
+                </div>
+
+                </div>
+
+          </div>
+        </div>
+        <div class="sticky-hide-sidebar-border-bottom d-none d-lg-flex"></div>
+
+      </main>
+    </div>
+  </div>
+
+
+  <cookie-banner></cookie-banner>
+  <app-footer></app-footer>
+</div>

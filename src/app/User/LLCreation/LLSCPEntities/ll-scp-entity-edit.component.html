@@ -1,0 +1,147 @@
+<h3 mat-dialog-title style="text-align: center" class="mb-1">
+    {{getTitle()}}
+</h3>
+
+<mat-dialog-content style="text-align: center" *ngIf="!onEditMode();else EditModeBlock">
+
+    <div>
+        <mat-form-field floatLabel="never">
+            <mat-label>Add</mat-label>
+            <mat-select required (selectionChange)="uiModeChanged($event)">
+                <!--<mat-option value="none"></mat-option>-->
+                <mat-option value="existing">Existing SCP Entity</mat-option>
+                <mat-option value="new">New SCP Entity</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="isOnAddNewSCPEntityMode(); else AddExistingSCPEntityBlock">
+        <div>
+            <mat-form-field appearance="standard" style="width: 80%">
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="name" (input)="checkIfNameExists()">
+            </mat-form-field>
+
+            <mat-error *ngIf="nameExists">
+                {{errorMessage}}
+            </mat-error>
+        </div>
+
+        <div>
+            <mat-form-field appearance="standard" style="width: 80%">
+                <mat-label>Description</mat-label>
+                <textarea cdkTextareaAutosize matInput [(ngModel)]="description"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div class="row justify-content-center mb-2" *ngIf="showGroups">
+            <mat-chip-list #groupListBubbles *ngIf="groups.length > 0">
+                <mat-chip style="color:white;" *ngFor="let o of groups; let i = index" (click)="selectGroup(i)"
+                    [style.background-color]="selectedGroupIdIndex === i ? o.color : 'grey'">
+                    {{o.value}}
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+    </div>
+
+    <ng-template #AddExistingSCPEntityBlock>
+        <mat-dialog-content *ngIf="isOnAddExistingSCPEntityMode()">
+            <div>
+                <div>
+                    <mat-form-field style="width: 80%">
+                        <mat-label>Name</mat-label>
+                        <input matInput [formControl]="entityControl" [matAutocomplete]="auto"
+                            (click)="showAllOptionsOnFocus()">
+                    </mat-form-field>
+
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let entity of scpEntities" [value]="entity.name">
+                          <div class="d-flex">
+                              <span> {{entity.name}} </span>
+                              <!-- <mat-chip-list #groupListBubbles>
+                                  <mat-chip style="color:white;margin-top:10px;margin-left:10px;"
+                                  [style.background-color]="getExistingEntityBubbleColor(entity)">
+                                      {{entity.groupName}}
+                                  </mat-chip>
+                              </mat-chip-list> -->
+                          </div>
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="standard" style="width: 80%">
+                        <mat-label>Description</mat-label>
+                        <textarea cdkTextareaAutosize matInput [(ngModel)]="description"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="row justify-content-center mb-2">
+                    <!--<mat-chip-list #groupListBubbles *ngIf="groups.length > 0 && !isCurrentEntityEmpty()">
+                        <mat-chip style="color:white;" *ngFor="let o of groups; let i = index"
+                            [style.background-color]="getBubbleColorForExistingEntity(i)">
+                            {{o.value}}
+                        </mat-chip>
+                    </mat-chip-list>-->
+
+                    <mat-chip-list #groupListBubbles *ngIf="groups.length > 0">
+                        <mat-chip style="color:white;" *ngFor="let o of groups; let i = index" (click)="selectGroup(i)"
+                        [style.background-color]="selectedGroupIdIndex === i ? o.color : 'grey'">
+                        {{o.value}}
+                    </mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
+        </mat-dialog-content>
+    </ng-template>
+
+    <div class="row justify-content-center" *ngIf="isOnMode()">
+        <button mat-button (click)="save()" [ngStyle]="{ 'color' : !canSave() ? 'grey' : 'blue' }"
+            [disabled]="!canSave()">{{getActionButtonTitle() | uppercase}}</button>
+        <button mat-button (click)="close()" style="color: grey">CANCEL</button>
+    </div>
+
+</mat-dialog-content>
+
+<ng-template #EditModeBlock>
+    <mat-dialog-content style="text-align: center" *ngIf="onEditNewEntityMode() || onEditExistingEntityMode()">
+        <div>
+            <div>
+                <mat-form-field appearance="standard" style="width: 80%">
+                    <mat-label>Name</mat-label>
+                    <!-- (input)="checkIfNameExists()" -->
+                    <input matInput [(ngModel)]="name" [disabled]="isGlobalEntity()" (input)="checkIfNameExists()">
+                </mat-form-field>
+
+                <mat-error *ngIf="nameExists">
+                    {{errorMessage}}
+                </mat-error>
+            </div>
+
+            <div>
+                <mat-form-field appearance="standard" style="width: 80%">
+                    <mat-label>Description</mat-label>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="description"></textarea>
+                </mat-form-field>
+            </div>
+
+            <div class="container mb-2" *ngIf="showGroups">
+                <div class="row justify-content-center">
+                    <mat-chip-list #groupListBubbles *ngIf="groups.length > 0">
+                        <mat-chip style="color:white;" *ngFor="let o of groups; let i = index" (click)="selectGroup(i)"
+                            [style.background-color]="selectedGroupIdIndex === i ? o.color : 'grey'">
+                            {{o.value}}
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <button mat-button (click)="save()" [ngStyle]="{ 'color' : !canSaveEdited() ? 'grey' : 'blue' }"
+                        [disabled]="!canSaveEdited()">{{getActionButtonTitle() | uppercase  }}</button>
+                    <button mat-button (click)="close()" style="color: grey">CANCEL</button>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+</ng-template>

@@ -1,0 +1,54 @@
+
+<span *ngIf="ready">
+
+    <ol [ngClass]="{'kbt-breadcrumb-no-bottom-gap': gapBottom, 'kbt-breadcrumb' : !gapBottom }"
+    *ngIf="controller === null && pageData !== null && currentPageName !== null && pageData.paths[currentPageName] !== undefined; else hasControllerBlock">
+    <li class="breadcrumb-item" *ngFor="let component of pageData.paths[currentPageName]">
+        <span *ngIf="pageData.items[component].link !== ''; else noLinkBlock">
+            <a  href="{{pageData.items[component].link}}">{{pageData.items[component].name}}</a>
+        </span>
+        <ng-template #noLinkBlock>
+            <span>{{pageData.items[component].name}}</span>
+        </ng-template>
+    </li>
+
+    <li class="breadcrumb-item active"> <span tabindex="0">{{pageData.items[currentPageName].name}}</span>   </li>
+</ol>
+
+<ng-template #hasControllerBlock>
+
+    <ol [ngClass]="{'kbt-breadcrumb-no-bottom-gap': gapBottom, 'kbt-breadcrumb' : !gapBottom }"
+    *ngIf="controller != null && pageData !== null && currentPageName !== null && pageData.paths[currentPageName] !== undefined && path.length === 0; else fullPathDescriptionBlock">
+
+    <li class="breadcrumb-item" *ngFor="let component of pageData.paths[currentPageName]">
+        <span *ngIf="pageData.items[component].link !== ''; else noLinkBlock">
+            <a class="breadcrumb-text" href="{{pageData.items[component].link}}">{{pageData.items[component].name}}</a>
+        </span>
+        <ng-template #noLinkBlock>
+            <span class="breadcrumb-text">{{pageData.items[component].name}}</span>
+        </ng-template>
+    </li>
+
+    <li class="breadcrumb-item active"> <span  class="breadcrumb-text" tabindex="0">{{controllerLabel}}</span>   </li>
+</ol>
+
+<ng-template #fullPathDescriptionBlock>
+
+    <ol [ngClass]="{'kbt-breadcrumb-no-bottom-gap': gapBottom, 'kbt-breadcrumb' : !gapBottom }"
+    *ngIf="controller != null && pageData !== null && currentPageName !== null && pageData.paths[currentPageName] !== undefined && path.length !== 0">
+    <li class="breadcrumb-item" *ngFor="let component of path; let i = index"
+        [ngClass]="{'active': i === path.length - 1}"
+    >
+        <span *ngIf="component.name !== '' && labelIsLink(component); else noLinkBlock">
+            <a class="breadcrumb-text" href="{{getLabelLink(component)}}">{{component.name}}</a>
+        </span>
+        <ng-template #noLinkBlock>
+            <span class="breadcrumb-text" [attr.tabindex]="i === path.length -1 ? '0' : null">            {{component.name}}            </span>
+        </ng-template>
+    </li>
+</ol>
+
+</ng-template>
+
+</ng-template>
+</span>

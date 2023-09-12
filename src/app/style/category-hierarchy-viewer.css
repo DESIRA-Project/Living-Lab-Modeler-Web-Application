@@ -1,0 +1,14 @@
+.category-leaf{
+    color:green;
+}
+
+@media screen and (max-width: 768px) {
+
+    .gapBetween{
+        margin-top:10%;
+        margin-bottom: 10%;
+        margin-left:10%;
+    }
+
+
+}

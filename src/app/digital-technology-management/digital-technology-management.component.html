@@ -1,0 +1,39 @@
+<div class="container" style="max-width: none; margin-inline: -12px" *ngIf="ready">
+
+  <div class="row justify-content-center" *ngIf="ready">
+
+    <!--<button mat-raised-button class="col-0"  aria-label="Add a new SCP Entity" color="primary" (click)="addNewEntity();"> Add Entity</button>-->
+
+    <button mat-fab class="d-flex align-items-center justify-content-center" matTooltip="Add New Digital Technology"
+      matTooltipPosition="right" style="background-color: var(--blue-400); margin: 1rem 0" (click)="add()">
+      <span class="material-symbols-sharp">add</span>
+    </button>
+
+  </div>
+
+
+  <div class="row justify-content-center" *ngFor="let row of digitalTechnologiesPerRow">
+    <div class="col-md-6 col-xl-3 mw-0" style=" padding: 0 12px 24px;"
+      *ngFor="let digitalTechnology of row">
+      <mat-card class="mat-card-height">
+
+        <div class="row justify-content-center" style="margin-bottom: 10px">
+          <img style="height: 50px; width: 50px" useCache="false" [src]="digitalTechnology.iconUrl"
+            alt="Digital Technology Img">
+        </div>
+
+        <div style="width: 100%; text-align: center" class="mat-card-content">
+          <mat-card-title class="dt-title">{{digitalTechnology.name}}</mat-card-title>
+          <mat-card-subtitle class="dt-description">{{digitalTechnology.description}}</mat-card-subtitle>
+        </div>
+
+        <div class="row justify-content-center">
+          <mat-card-actions>
+            <button mat-button class="buttonLabel" (click)="edit(digitalTechnology.id)" style="color: blue">EDIT</button>
+            <button mat-button class="buttonLabel" (click)="deleteOne(digitalTechnology.id)" style="color: red">DELETE</button>
+          </mat-card-actions>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

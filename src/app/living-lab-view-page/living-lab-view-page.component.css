@@ -1,0 +1,112 @@
+.main {
+  background-color: var(--background-color);
+  padding-top: calc(var(--base-layout-vertical-padding));
+  padding-bottom: 40px;
+  padding-inline: 5%;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 2.125rem;
+  margin-bottom: 20px;
+  line-height: normal;
+}
+
+.focal-question {
+  font-weight: lighter;
+  font-style: italic;
+  font-size: 1.125rem;
+  margin-bottom: 30px;
+  line-height: normal;
+}
+
+.living-lab-main-image {
+  /*max-height: 450px;*/
+  margin-bottom: 25px;
+}
+
+.badges {
+  display: inline-block;
+  vertical-align: top;
+  text-align: right;
+}
+
+.sdgs, .digital-technologies {
+  margin-bottom: 20px;
+}
+
+.sdgs-title, .digital-technologies-title {
+  margin-bottom: 0.6875rem;
+  font-size: 0.875rem;
+  color: var(--smart-gray);
+  letter-spacing: 2px;
+}
+
+.sdgs-grid, .digital-technologies-grid {
+  padding-right: 20px;
+  border-right: solid 1px lightgray;
+}
+
+.sdg, .digital-technology {
+  margin-left: 30px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.digital-technology {
+  height: 50px;
+  width: 50px;
+}
+
+.sdg {
+  height: 60px;
+  width: 60px;
+}
+
+.emptyContainer{
+  height: 80vh;
+/*  background-color: var(--background-color);*/
+  overflow: auto;
+}
+
+.emptyContent{
+  position: fixed;
+  top: 50%;
+  left: 53%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 768px) {
+  .sdg, .digital-technology {
+    height: 40px;
+    width: 40px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+}
+
+.tab-title {
+  color: hsl(0, 0%, 35%);
+  letter-spacing: 1px;
+  font-size: 0.875rem;
+}
+
+.mat-tab-group {
+  font-family: inherit;
+}
+
+.tab-content {
+  margin-top: 20px;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+:host ::ng-deep .mat-tab-label {
+  height: 3rem !important;
+}
+
+:host ::ng-deep.mat-tab-label-active{
+  opacity: 1.0 !important;
+}

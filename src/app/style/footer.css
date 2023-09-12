@@ -1,0 +1,149 @@
+/*.kbtFooter  > *{
+    font-family: 'Oswald';
+}
+*/
+/*:host ::ng-deep footer * {
+    font-family: "Oswald" !important;
+  }*/
+
+
+/*footer.sticky{
+    position: -webkit-sticky;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 10000;
+}*/
+
+
+footer.mobileSizeFooter{
+    display:none;
+}
+
+footer.kbtFooter{
+    padding-left:0px;
+    background-color:white;
+    font-family: "Oswald" !important;
+}
+
+*.smallTopSpace{
+    padding-top:5px;
+}
+
+*.smallLeftSpace{
+    padding-left:25px;
+}
+
+*.smallRightSpace{
+    padding-left:8%;
+}
+
+*.imgLink{
+    cursor:pointer;
+}
+
+*.noLeftSpace{
+    padding-left:0px;
+}
+
+@media screen and (max-width: 768px) {
+    footer.normalSizeFooter{
+        display:none;
+    }
+
+    div.fundingText{
+        font-size:2vw;
+    }
+
+    div.invisibleOnMobile{
+        display:none;
+    }
+
+    div.textStyle{
+        font-size:2vw;
+    }
+
+    footer.textStyle{
+        font-size:3vw;
+    }
+
+    div.textInTheCenter{
+        text-align: center;
+    }
+
+    footer.mobileSizeFooter{
+        display:block;
+    }
+
+    div.noWrap{
+        white-space: nowrap;
+    }
+
+    div.euLogo{
+        margin-left:4%;
+        padding-bottom:1%;
+    }
+
+    div.athenaLogo{
+        text-align: center;
+    }
+
+    div.desiraLogo{
+        text-align: center;
+    }
+
+
+    img.eu{
+        width: min(75vw, 45px);
+        height: min(50vw, 25px);
+    }
+
+    img.athenaLogo{
+        width: min(75vw, 105px);
+        height: min(50vw, 25px);
+    }
+
+    img.desiraLogo{
+        width: min(75vw, 105px);
+        height: min(50vw, 25px);
+    }
+
+}
+
+* {
+  font-size: 10px;
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 50px;
+  padding: calc(var(--base-layout-vertical-padding) / 2) calc(var(--base-layout-horizontal-padding));
+
+  background-color: white;
+  border-top: 1px solid var(--light-gray);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .funding-text {
+    max-width: 200px !important;
+    text-align: center;
+  }
+}
+
+.funding-text {
+  max-width: 330px;
+}
+
+.link {
+  margin-inline: 10px;
+}
+
+.separating-line {
+  border-bottom: 1px solid var(--light-gray);
+  width: 100vw;
+  margin: calc(var(--base-layout-vertical-padding) / 2) 0;
+}

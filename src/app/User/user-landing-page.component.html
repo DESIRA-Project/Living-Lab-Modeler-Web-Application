@@ -1,0 +1,60 @@
+<div style="position: relative">
+
+  <!-- Navbar -->
+  <header class="sticky-top">
+    <div>
+      <navbar [currentPage]="'home'" [toggleableSideMenu]="true" (onClickMenu)="drawer?.toggle()" [setParent]="this"></navbar>
+    </div>
+  </header>
+
+  <mat-drawer-container autosize>
+
+    <!-- Drawer for side menu in mobile view -->
+    <mat-drawer *ngIf="window.innerWidth < bootstrapBreakpoints.sm" #drawer mode="over" style="background-color: var(--background-color)">
+      <ng-container *ngTemplateOutlet="sideActions"></ng-container>
+    </mat-drawer>
+
+    <!-- Body -->
+    <div style="background-color: var(--background-color)">
+
+      <main>
+
+        <!-- Breadcrumb -->
+        <breadcrumb [currentPage]="'home'" [hasGapBottom]="true" [setController]="this" style="padding-inline: var(--base-layout-vertical-padding)"></breadcrumb>
+
+        <div *ngIf="window.innerWidth >= bootstrapBreakpoints.sm" class="sticky-hide-sidebar-border-top"></div>
+
+        <div class="layout">
+
+          <!-- Side actions -->
+          <div *ngIf="window.innerWidth >= bootstrapBreakpoints.sm" class="side-actions">
+            <ng-container *ngTemplateOutlet="sideActions"></ng-container>
+          </div>
+
+          <!-- Main content -->
+          <div class="main-content">
+            <user-function-content [setView]="getCurrentUserView()" [setParent]="this" [setToken]="getToken()"></user-function-content>
+          </div>
+
+        </div>
+
+        <div *ngIf="window.innerWidth >= bootstrapBreakpoints.sm" class="sticky-hide-sidebar-border-bottom d-none d-lg-flex"></div>
+
+      </main>
+    </div>
+
+  </mat-drawer-container>
+
+  <!-- Cookie banner & Footer -->
+  <cookie-banner></cookie-banner>
+  <app-footer></app-footer>
+
+</div>
+
+
+<!-- Side actions -->
+<ng-template #sideActions>
+  <div *ngIf="tokenFetched" class="side-actions-content">
+    <user-function-list (clickedOnItem)="drawer?.close()" [setView]="getCurrentUserView()" [setParent]="this"></user-function-list>
+  </div>
+</ng-template>

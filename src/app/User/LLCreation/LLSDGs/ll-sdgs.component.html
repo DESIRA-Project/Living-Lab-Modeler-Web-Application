@@ -1,0 +1,58 @@
+<div class="d-flex flex-column align-items-center">
+
+  <div class="d-flex flex-wrap justify-content-center" *ngIf="ready">
+
+    <ng-container *ngFor="let row of sdgsPerRow">
+
+      <ng-container *ngFor="let sdg of row">
+
+        <mat-card (click)="selectEntity(sdg.id)" matRipple
+          [matRippleDisabled]="selectedEntityIds[sdg.id] !== undefined && selectedEntityIds[sdg.id] !== false"
+          matRippleColor="var(--light-gray)" [ngStyle]="{'background-color': selectedEntityIds[sdg.id] === undefined ||
+                  selectedEntityIds[sdg.id] === false ? 'white' : 'var(--light-gray)' }" [ngClass]="selectedEntityIds[sdg.id] === undefined ||
+                  selectedEntityIds[sdg.id] === false ? 'selectable-card-clicked' : ''"
+          class="selectable-card cursor-pointer">
+
+
+          <img *ngIf="sdg.iconUrl && sdg.iconUrl !== 'undefined'" style="height: 50px; width: 50px" useCache="false" [src]="sdg.iconUrl" alt="SDG Img">
+          <button mat-icon-button *ngIf="selectedEntityIds[sdg.id] !== undefined && selectedEntityIds[sdg.id] !== false"
+            style="
+            position: absolute;
+            top: calc(30px / 2);
+            right: calc(30px / 2);
+          " [matMenuTriggerFor]="menu" (click)="$event.stopPropagation();" matBadgeSize="small">
+            <span style="font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 200, 'opsz' 48;"
+              class="material-symbols-sharp d-flex align-items-center justify-content-center">more_vert</span>
+          </button>
+
+          <mat-menu #menu="matMenu" yPosition="above">
+            <!-- Edit button -->
+            <button *ngIf="true" mat-menu-item class="blue-text mw-0 d-flex align-items-center"
+              (click)="$event.stopPropagation(); openSDGImpactModal(sdg.id); menu.close.emit()">
+              <span class="material-symbols-sharp mr-3">edit</span> Edit
+            </button>
+            <button *ngIf="true" mat-menu-item class="blue-text mw-0 d-flex align-items-center"
+            (click)="$event.stopPropagation(); selectEntity(sdg.id); menu.close.emit()">
+            <span class="material-symbols-sharp mr-3">delete</span> Unselect
+          </button>
+          </mat-menu>
+
+          <mat-card-title><span [title]="sdg.name"
+              class="dots-after-3-lines text-center">{{sdg.name}}</span></mat-card-title>
+          <mat-card-subtitle><span [title]="sdg.description"
+              class="dots-after-4-lines text-center">{{sdg.description}}</span></mat-card-subtitle>
+
+
+        </mat-card>
+
+      </ng-container>
+
+    </ng-container>
+
+  </div>
+
+  <div *ngIf="!ready">
+    <mat-spinner></mat-spinner>
+  </div>
+
+</div>

@@ -1,0 +1,12 @@
+
+<div *ngIf="viewLoaded && activeComponent !== null">
+    <dynamic-content-section [item]="activeComponent"
+                             [onFinish]="getParentCB()"
+                             [parent]="null"
+                             [userToken]="getToken()" ></dynamic-content-section>
+</div>
+
+<div *ngIf="!viewLoaded || activeComponent === null">
+  <div class="spinner-border" role="status" style="margin-left:45%;margin-top:20%;">
+  </div>
+</div>

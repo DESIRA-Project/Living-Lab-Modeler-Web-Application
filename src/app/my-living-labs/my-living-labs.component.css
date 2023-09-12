@@ -1,0 +1,36 @@
+.layout {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card-body{
+  margin-top: calc(1.5 * var(--base-layout-horizontal-padding));
+  margin-bottom: 0;
+}
+
+.living-lab-card {
+  margin-inline: calc(1.5 * var(--base-layout-horizontal-padding));
+  margin-bottom: calc(3 * var(--base-layout-horizontal-padding));
+}
+
+:host ::ng-deep .card {
+  margin-bottom: calc(1.5 * var(--base-layout-vertical-padding)) !important;
+}
+
+:host ::ng-deep .card:last-of-type {
+  margin-bottom: calc(0.5 * var(--base-layout-vertical-padding)) !important;
+}
+
+.no-content-found {
+  padding-bottom: calc(1.5 * var(--base-layout-horizontal-padding));
+}
+
+.filters {
+  margin-top: -1.25rem;
+  margin-bottom: calc(1.5 * var(--base-layout-horizontal-padding));
+}
+
+:host ::ng-deep .mat-chip-selected {
+  background-color: var(--blue);
+}

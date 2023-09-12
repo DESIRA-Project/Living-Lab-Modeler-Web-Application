@@ -1,0 +1,36 @@
+.titleGap{
+    height:50px;
+}
+
+.main-content{
+    max-height: 300px;
+}
+
+.gapBetweenButtons{
+    margin-left:1rem;
+}
+
+@media screen and (max-width: 768px) {
+
+    .main-content{
+        max-height: 20rem;
+    }
+
+    .titleGap{
+        height:3rem;
+    }
+
+    .table-cell{
+        font-size:0.7rem;
+    }
+
+    .table-column{
+        font-size:0.8rem;
+    }
+
+    .buttonLabel{
+/*        width: 100px!important;
+        min-width: unset!important;*/
+        font-size:0.7rem;
+    }
+}

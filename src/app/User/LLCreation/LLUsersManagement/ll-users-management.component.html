@@ -1,0 +1,27 @@
+<div *ngIf="ready">
+
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Living Lab Members">
+      <ll-members [handle]="data" [dialogRef]="dialogRef"></ll-members>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+      <span [matBadge]="data.numPendingRequests > 0 ? data.numPendingRequests : undefined"
+            class="pr-3"
+            matBadgePosition="above after"
+            matBadgeSize="small">
+        Pending Join Requests
+      </span>
+      </ng-template>
+      <app-ll-join-requests [livingLabId]="data.ll.id" [dialogRef]="dialogRef"></app-ll-join-requests>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>
+
+<div *ngIf="!ready">
+  <div class="justify-content-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+.scp-general-description {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  line-height: normal;
+  font-weight: 100;
+}
+
+.scp-graph-card {
+  border-radius: 10px;
+  margin: 3px;
+  /*padding: 2%;*/
+  margin-bottom: 15px;
+}
+
+.scp-graph {
+  margin: 0;
+}
+
+@media screen and (max-width: 576px) {
+  .scp-graph {
+  }
+}
+
+.scp-text {
+  font-size: 1rem;
+  line-height: normal;
+  font-weight: lighter;
+  padding-left: 5%;
+  min-height: 256px;
+}
+
+.scp-graph-hint {
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+  margin-left: 5px;
+}

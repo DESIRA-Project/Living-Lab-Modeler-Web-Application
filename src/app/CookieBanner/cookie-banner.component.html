@@ -1,0 +1,222 @@
+
+<div class="container p-2 cookie-message cookie-banner" *ngIf="initialized && !usingCookies() && isModalClosed && !anotherModalIsOpen()">
+  <div class="row justify-content-center" *ngIf="data !== null">
+    <div class="col-8 d-flex align-items-center">
+      <small>{{data.notice_text}}</small>
+    </div>
+
+    <div class="container col-sm">
+      <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-0 p-1">
+          <button mat-button class="green-button" (click)="acceptAllCookies()"><span class="cookie-button-font">Accept all</span></button>
+        </div>
+
+        <div class="col-0 p-1">
+          <button mat-button class="red-button" (click)="rejectAllCookies()"><span class="cookie-button-font">Reject all</span></button>
+        </div>
+
+        <div class="col-0 p-1">
+          <button mat-button class="gray-button" (click)="openCookiesModal()"><span class="cookie-button-font">Cookie Settings</span></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div>
+
+
+
+  <!-- Cookie modal -->
+  <ng-template *ngIf="data !== null" id="cookieModal" #cookieBannerContent>
+
+    <div *ngIf="!ready">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div class="p-3" style="max-height: 85vh" *ngIf="ready">
+
+      <!-- Header -->
+      <div style="position: relative;">
+
+        <!-- Logo -->
+        <img src="assets/logo.png" class="logo" style="margin-left: 0;">
+
+        <!-- Space -->
+        <div class="mb-3"></div>
+
+        <!-- Close button -->
+        <span (click)="closeModal()"
+              class="material-symbols-sharp close-button"
+              style="position: absolute; top: 0; right: 0;">
+        close
+      </span>
+
+      </div>
+
+      <!-- Content -->
+      <div style="overflow-y: auto; scrollbar-gutter: stable both-edges; scrollbar-width: thin; max-height: calc(85vh - var(--logo-height) - 4rem - 50px); margin-right: -1rem;">
+
+        <div class="pr-3">
+
+          <h2 class="mb-1">
+            {{data.cookie_modal.title}}
+          </h2>
+          <div *ngFor="let p of sentences">
+            <p [innerHTML]="p" class="content mb-1"></p>
+          </div>
+
+          <!-- Space -->
+          <div class="mb-3"></div>
+
+          <!-- Allow all button -->
+          <button mat-button class="blue-button" (click)="acceptAllCookies()">Allow All</button>
+
+          <!-- Cookie Settings -->
+
+          <!-- Space -->
+          <div class="mb-3"></div>
+
+          <h2>Cookie Settings</h2>
+
+          <mat-accordion>
+
+            <mat-expansion-panel *ngFor="let c of data.cookie_modal.cookie_settings.cookie_categories; let i = index"
+                                 class="mb-1">
+
+              <mat-expansion-panel-header>
+
+                <mat-panel-title class="my-2">
+                  {{c.name}}
+                </mat-panel-title>
+
+                <mat-panel-description>
+
+                  <div class="blue-text text-uppercase my-2" style="font-size: 12px; font-weight: 600" *ngIf="c.always_enabled === true; else defaultDisabledBlock">
+                    Always Enabled
+                  </div>
+
+                  <ng-template #defaultDisabledBlock>
+
+                    <mat-slide-toggle class="toggle my-2" (click)="$event.stopPropagation();" [(ngModel)]="cookieCategoryInability[i]">
+                    </mat-slide-toggle>
+
+                  </ng-template>
+
+                </mat-panel-description>
+
+              </mat-expansion-panel-header>
+
+              <small style="color: var(--smart-gray)">{{c.description}}</small>
+
+            </mat-expansion-panel>
+
+          </mat-accordion>
+
+        </div>
+
+      </div>
+
+      <!-- Space -->
+      <div class="mb-3"></div>
+
+      <!-- Save settings button -->
+      <div class="d-flex justify-content-end align-items-center" style="max-height: 50px">
+
+        <button mat-button class="blue-button" (click)="saveCookieSettings()">Save Settings</button>
+      </div>
+
+    </div>
+
+  </ng-template>
+
+  <!--<ng-template class="modal fade" *ngIf="data !== null" let-modal id="cookieModal" #cookieBannerContent tabindex="-1"
+               role="dialog" aria-labelledby="filterModalTitle" aria-hidden="true">
+    <div class="modal-dialog-scrollable" role="document">
+      <div class="modal-content" >
+        <div class="modal-header">
+          <img src="../../assets/logo.png">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" *ngIf="sentences.length > 0">
+          <div> <h5 class="modal-title" id="cookieModalTitle">{{data.cookie_modal.title}}</h5>
+          </div>
+          <div *ngFor="let p of sentences">
+            <div [innerHTML]="p" class="content"></div>
+            <br>
+          </div>
+
+          <button type="button" class="btn btn-success btn-sm cookie-button" (click)="acceptAllCookies()">Allow All</button>
+          <br>
+          <br>
+          <br>
+
+          <div>
+            <h5>Cookie Settings</h5>
+            <div class="container"
+                 *ngFor="let c of data.cookie_modal.cookie_settings.cookie_categories; let i = index"
+            >
+              <div class="row cookie-category clickable cookie-table p-3"
+                   (click)="toggleCookieCategory(i)"
+                   [ngClass]="{'selected-row':cookieCategoryToggleState[i] === true}"
+              >
+
+                <div class="col-0" *ngIf="cookieCategoryToggleState[i] === false; else toggleCookieCategoryBlock">
+                  <i class="fas fa-plus"></i>
+                </div>
+
+                <ng-template #toggleCookieCategoryBlock>
+                  <div class="col-0">
+                    <i class="fas fa-minus"></i>
+                  </div>
+                </ng-template>
+
+                <div class="col-7 cookie-name">
+                  {{c.name}}
+                </div>
+
+                <div class="col-4 always-enabled" *ngIf="c.always_enabled === true; else defaultDisabledBlock">
+                  Always Enabled
+                </div>
+
+                <ng-template #defaultDisabledBlock>
+                  <div class="col-4" style="height:0px;">
+                    <label class="c-switch gnomeeSwitch c-switch-pill c-switch-sm">
+                      <input type="checkbox" class="c-switch-input " (click)="switchCookieState(i)" [checked]="cookieCategoryInability[i] === true">
+                      <span class="c-switch-slider  "></span>
+                    </label>
+                  </div>
+                </ng-template>
+
+              </div>
+
+              <div class="row collapse cookie-table cookie-description" [ngClass]="{'show selected-row-content':cookieCategoryToggleState[i] === true}"
+                   id="collapseCookieCategory{{i}}" >
+                <div class="container">
+                  <div class="row">
+                    <div class="col ">{{c.description}}</div>
+                  </div>
+
+                  &lt;!&ndash;                               <div class="row">
+                                                     <button type="col button" (click)="switchMode(1)" class="btn btn-link">Cookie Details</button>
+                                                 </div> &ndash;&gt;
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-success btn-sm cookie-button" data-dismiss="modal" (click)="saveCookieSettings()">Save Settings</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>-->
+
+
+
+</div>

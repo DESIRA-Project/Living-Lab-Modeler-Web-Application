@@ -1,0 +1,10 @@
+
+  @media screen and (max-width: 768px) {
+
+    .nodeName{
+      font-size:3vw;
+/*       width: 200px;
+    overflow: hidden;
+    white-space: nowrap;*/
+    }
+  }

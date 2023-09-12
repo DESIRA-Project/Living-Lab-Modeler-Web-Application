@@ -1,0 +1,37 @@
+.no-content-found {
+    padding-bottom: calc(1.5 * var(--base-layout-horizontal-padding));
+  }
+
+  @media screen and (max-width: 768px) {
+    ::ng-deep .membershipModal{
+              width:80%;
+       }
+
+       .chip-label {
+        font-size:0.8rem;
+      }
+
+      .paddingTop{
+        padding-top:2rem;
+      }
+      .searchPadding{
+        padding-top:1rem;
+      }
+
+      .searchLabel{
+        font-size:0.8rem;
+      }
+
+      .buttonLabel{
+        font-size:0.8rem;
+      }
+
+      .mat-chip-list-wrapper{
+        justify-content: center;
+      }
+
+      .filterList{
+        max-width:90%;
+      }
+
+    }

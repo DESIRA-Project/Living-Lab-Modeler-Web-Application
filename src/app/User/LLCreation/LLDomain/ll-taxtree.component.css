@@ -1,0 +1,13 @@
+:host ::ng-deep .mat-button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+:host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: var(--blue-400);
+}
+
+
+:host ::ng-deep .mat-tree {
+  background-color: transparent;
+}

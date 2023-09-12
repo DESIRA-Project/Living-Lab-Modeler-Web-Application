@@ -1,0 +1,49 @@
+.no-pending-requests {
+  padding-top: 24px;
+  margin-bottom: -12px
+}
+
+:host ::ng-deep .mat-paginator-range-label {
+  margin-left: 0 !important;
+}
+
+:host ::ng-deep .custom-tooltip {
+  user-select: text !important;
+  pointer-events: auto !important;
+}
+
+.backdrop-class {
+  background-color: unset;
+}
+
+
+@media screen and (max-width: 768px) {
+
+     .scrollable-table {
+      overflow:auto;
+    }
+
+    .invinsible-on-small{
+      visibility: hidden;
+    }
+
+    .table-cell{
+      font-size:0.8rem;
+    }
+
+    .table-column-name{
+      padding:0.8rem;
+      white-space: nowrap;
+    }
+
+
+/*    .table-column-mat-form-field{
+      width:10rem;
+    }
+
+    .table-column-mat-form-field-new-member-field{
+      width:8rem;
+    }
+
+  */
+}

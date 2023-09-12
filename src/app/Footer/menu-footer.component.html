@@ -1,0 +1,77 @@
+<footer *ngIf="pageData != null" class="wrapper flex-column flex-sm-row">
+
+  <!-- EU -->
+  <div class="d-flex align-items-center justify-content-center flex-column flex-xl-row">
+
+    <!-- Flag -->
+    <div>
+      <img src="{{pageData.eu.file}}" width="{{pageData.eu.w}}" height="auto" />
+    </div>
+
+    <span class="d-none d-xl-block mr-2"></span>
+
+    <span class="d-block d-xl-none mb-2"></span>
+
+    <!-- Funding text -->
+    <div class="funding-text">
+      <span>{{ pageData.text.funding }}</span>
+    </div>
+  </div>
+
+  <!-- Separating line only in sm screen -->
+  <div class="d-flex d-sm-none separating-line"></div>
+
+  <!-- Links -->
+  <div class="d-flex justify-content-center align-items-center flex-column flex-xl-row">
+
+    <div class="link">
+      <a href="{{pageData.text.privacy.link}}">{{pageData.text.privacy.text}}</a>
+    </div>
+
+    <span class="d-block d-xl-none mb-1"></span>
+
+    <div class="link">
+      <a href="{{pageData.text['terms-of-use'].link}}">{{pageData.text['terms-of-use'].text}}</a>
+    </div>
+
+    <span class="d-block d-xl-none mb-1"></span>
+
+    <div class="link">
+      <a href="{{pageData.text.about.link}}">{{pageData.text.about.text}}</a>
+    </div>
+
+    <span class="d-block d-xl-none mb-1"></span>
+
+    <div class="link">
+      <a href="{{pageData.text.contact.link}}">{{pageData.text.contact.text}}</a>
+    </div>
+
+    <span class="d-block d-xl-none mb-1"></span>
+
+    <div class="link">
+      <a target="_blank" (click)="toggleCookiesModal()" href="#">{{pageData.text.cookies}}</a>
+      <span *ngIf="cookiesModalIsOpen">
+      <cookie-banner [openFromExternalMediumOption]="true" [cb]="onCookiesModalClose()"></cookie-banner>
+    </span>
+    </div>
+  </div>
+
+  <!-- Separating line only in sm screen -->
+  <div class="d-flex d-sm-none separating-line"></div>
+
+  <!-- Logos -->
+  <div class="d-flex align-items-center justify-content-center flex-column flex-xl-row">
+
+    <!-- Athena logo -->
+    <img src="{{pageData.athena.file}}" width="{{pageData.athena.w}}" height="auto"
+         (click)="openBrowserTab(pageData.athena.link)" class="cursor-pointer"/>
+
+    <span class="d-none d-xl-block mr-2"></span>
+
+    <span class="d-block d-xl-none mb-2"></span>
+
+    <!-- Desira logo -->
+    <img src="{{pageData.desira.file}}" width="{{pageData.desira.w}}" height="auto"
+         (click)="openBrowserTab(pageData.desira.link)" class="cursor-pointer"  style="position: relative; bottom: 3px" />
+  </div>
+</footer>

@@ -1,0 +1,26 @@
+.add-new-button {
+  background-color: var(--blue-400);
+}
+
+::ng-deep .add-new-outcome-modal{
+  width: 100%;
+  max-width: 1000px !important;
+}
+
+:host ::ng-deep .mat-dialog-container {
+  padding: 0 !important;
+}
+
+.mat-expansion-panel {
+  border: 1px solid var(--light-gray) !important;
+  max-width: none;
+  margin-right: 0;
+}
+
+.mat-expansion-panel:last-child {
+  margin-bottom: 0;
+}
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none !important;
+}

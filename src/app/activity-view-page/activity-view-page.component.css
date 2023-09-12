@@ -1,0 +1,153 @@
+.main {
+  background-color: var(--background-color);
+  padding-top: calc(1.5 * var(--base-layout-vertical-padding));
+  padding-bottom: var(--base-layout-vertical-padding);
+  padding-inline: 5%;
+  font-size: 1rem;
+  line-height: normal;
+}
+
+.back-to-living-lab-text {
+  margin-left: 15px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.activity-main-info {
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  margin-inline: 0;
+  line-height: normal;
+}
+
+.info-field {
+  margin-bottom: 13px;
+  margin-inline: 0;
+}
+
+.info-field-icon {
+  display: flex;
+  justify-content: center;
+  width: 5%;
+}
+
+.info-field-title {
+  font-weight: 400;
+  padding-inline: 7px;
+  letter-spacing: 1px;
+  width: 25%;
+  min-width: 100px;
+}
+
+.info-field-text {
+  font-weight: 100;
+  padding-inline: 7px;
+  width: 65%;
+}
+
+.activity-link {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.section {
+  display: flex;
+}
+
+.section-title {
+  min-width: 150px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.section-content {
+  margin-bottom: 2rem;
+  font-weight: 100;
+}
+
+.participants, .files {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.participant {
+  display: flex;
+  margin-bottom: 2rem;
+  width: 350px;
+  margin-right: 2rem;
+}
+
+.participant-name {
+  margin-bottom: 3px;
+}
+
+.participant-details {
+  color: var(--smart-gray);
+  font-size: 0.875rem;
+}
+
+.see-more-button {
+  margin-left: 20px;
+  padding-left: 1rem;
+}
+
+
+.activity-photo {
+  height: 250px;
+  width: 350px;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 576px) {
+  .info-field-icon {
+    width: unset;
+    padding-right: 0.5rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .info-field-title {
+    width: unset;
+    display: flex;
+    align-items: center;
+  }
+
+  .info-field-text {
+    width: 100%;
+    padding-inline: unset;
+    padding-bottom: 0.5rem;
+  }
+
+  .section {
+    flex-wrap: wrap;
+  }
+
+  .section-title {
+    min-width: 95%;
+    margin-bottom: 1rem;
+  }
+
+  .activity-photo {
+    height: calc(250px * 0.75);
+    width: calc(350px * 0.75);
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+.no-content-found {
+  font-size: 1rem;
+}
+
+.main-image {
+  max-height: 77vh;
+  max-width: 100%;
+}

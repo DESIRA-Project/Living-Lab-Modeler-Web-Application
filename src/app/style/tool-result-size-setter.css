@@ -1,0 +1,17 @@
+.kbtMobile{
+    display:none;
+}
+
+@media screen and (max-width: 768px) {
+    .kbtDesktop{
+        display:none;
+    }
+
+    .kbtMobile{
+        display:unset;
+    }
+
+    .pageResults{
+        font-size:3.5vw;
+    }
+}

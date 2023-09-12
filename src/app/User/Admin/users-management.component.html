@@ -1,0 +1,118 @@
+<style>
+
+  .material-symbols-sharp {
+    font-size: 20px;
+  }
+
+</style>
+
+<div  *ngIf="userCanViewAllUsers(); else unadequatePermissionsBlock">
+
+  <ng-template #notReadyBlock>
+    <div class="d-flex justify-content-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
+  <ng-template #emptyResultsBlock>
+    <div class="no-content-found">
+      No users found!
+    </div>
+  </ng-template>
+
+  <div *ngIf="ready; else notReadyBlock" class="table-gap">
+    <div class="mat-elevation-z8" class="table-section">
+
+      <table mat-table [dataSource]="dataSource"
+             matSort (matSortChange)="onSortChange($event)"
+             class="w-100 scrollable-table">
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef class="font-weight-bold column-font"
+              matTooltip="Click to sort by user name" matTooltipPosition="left"
+              mat-sort-header> User </th>
+          <td mat-cell *matCellDef="let element" class="cell-font">
+            <span class="mr-4">{{element.username}}</span>
+          </td>
+        </ng-container>
+
+        <!-- E-mail Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef class="font-weight-bold column-font"
+              matTooltip="Click to sort by email" matTooltipPosition="left"
+              mat-sort-header> E-mail </th>
+          <td mat-cell *matCellDef="let element"  class="cell-font">
+            <span class="mr-4">{{element.email}}</span>
+          </td>
+        </ng-container>
+
+        <!-- Role Column -->
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef class="font-weight-bold column-font"
+              matTooltip="Click to sort by role" matTooltipPosition="left"
+              mat-sort-header> Role </th>
+          <td mat-cell *matCellDef="let element"  class="cell-font">
+            <span class="mr-4">{{element.role}}</span>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="font-weight-bold column-font">
+
+            <div class="d-flex align-items-center justify-content-center">
+              Actions
+            </div>
+
+          </th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <div *ngIf="userCanEditAllUsers()">
+
+              <div class="d-flex align-items-center justify-content-center">
+                <button mat-button class="blue-text mw-0" (click)="viewUserInfo(i)" matTooltip="View User Profile">
+                  <span class="material-symbols-sharp">visibility</span>
+                </button>
+                <button mat-button class="blue-text mw-0" (click)="editUserInfo(i)" matTooltip="Edit User Profile">
+                  <span class="material-symbols-sharp">edit</span>
+                </button>
+                <button *ngIf="userIsBlocked(i)" mat-button class="green-text mw-0" (click)="activateUser(i)" matTooltip="Activate User">
+                  <span class="material-symbols-sharp">check_circle</span>
+                </button>
+                <button *ngIf="userIsActive(i)" mat-button class="red-text mw-0" (click)="activateUser(i)" matTooltip="Block User">
+                  <span class="material-symbols-sharp">block</span>
+                </button>
+              </div>
+
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+    <mat-paginator [length]="users.length" 
+    [pageSize]="defaultResultLength"
+    [pageSizeOptions]="[5, 10, 25]"
+    (page)="onPaginateChange($event)"
+    showFirstLastButtons
+></mat-paginator>
+  </div>
+</div>
+
+<ng-template #unadequatePermissionsBlock>
+  <div class="card-header" *ngIf="title !== null">{{title}}</div>
+  <div class="card-body">
+    User does not have adequate permissions to view this page
+  </div>
+</ng-template>
+
+<span *ngIf="modalIsOpen">
+    <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onModalClose()" [closeButtonTextAttribute]="'Cancel'" [modalData]="getDynamicContent()" [modalTitle]="getModalTitle()" [modalParent]="this" [modalSize]="'xl'"></dynamic-modal>
+</span>
+
+<span *ngIf="cancellableOperationModalIsOpen">
+  <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onModalClose()" [closeButtonTextAttribute]="'Cancel'" [modalData]="getCancellableContent()" [modalTitle]="''" [modalParent]="this" [modalSize]="'sm'"></dynamic-modal>
+</span>

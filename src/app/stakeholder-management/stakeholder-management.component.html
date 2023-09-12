@@ -1,0 +1,235 @@
+<div class="tableDescription" style="color: gray; margin-bottom: 1.25em">
+  When a user attempts to add a stakeholder entity, global entities will be suggested in a dropdown list.
+</div>
+
+<div class="row">
+
+  <div class="col-lg-5">
+    <mat-form-field  class="searchFilter">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+  </div>
+
+  <div class="col-lg-7 d-flex align-items-center justify-content-lg-end" style="margin-bottom: 1.25em">
+    <div class="d-flex justify-content-lg-end">
+
+      <!-- Verify selected -->
+      <button
+        [style.max-height]="selection.isEmpty() ? '0' : '100%'"
+        [style.opacity]="selection.isEmpty() ? '0' : '100%'"
+        [disabled]="selection.isEmpty()"
+        (click)="verify(selection.selected)"
+        class="mx-3 green-button buttonLabel"
+        mat-raised-button>
+        Set Scope Public
+      </button>
+
+      <!-- Unverify selected -->
+      <button
+        [style.max-height]="selection.isEmpty() ? '0' : '100%'"
+        [style.opacity]="selection.isEmpty() ? '0' : '100%'"
+        [disabled]="selection.isEmpty()"
+        (click)="unverify(selection.selected)"
+        class="mx-3 red-button buttonLabel"
+        mat-raised-button>
+        Set Scope Local
+      </button>
+
+      <!-- Add new entity -->
+      <!--<button (click)="addNewStakeholder()" mat-mini-fab class="mx-3 d-flex justify-content-center align-items-center" style="background-color: white; color: gray"
+        matTooltip="Add stakeholder" matTooltipPosition="left">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-lg"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+        </svg>
+      </button>-->
+    </div>
+  </div>
+
+</div>
+
+<div class="mat-elevation-z8" class="tableSection">
+
+  <!-- TODO: Fix spinner position -->
+  <div class="spinner-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" (matSortChange)="resetPaging()" matSort matSortActive="name"
+    matSortDisableClear matSortDirection="asc" style="width: 100%" class="scrollable-table">
+
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef matTooltip="Click to select all on current page"
+        [matTooltipPosition]="'left'">
+        <div class="row font-weight-bold">
+          <div class="col text-center pr-5">
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()"
+              [color]="'primary'">
+            </mat-checkbox>
+          </div>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let row" (click)="selection.toggle(row)">
+        <div class="row font-weight-bold">
+          <div class="col text-center pr-5">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)" [color]="'primary'">
+            </mat-checkbox>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Click to sort by Name"
+        [matTooltipPosition]="'left'">
+        <div class="row font-weight-bold">
+          <div class="col text-center columnFont">
+            &nbsp;&nbsp;&nbsp;Stakeholder Name
+          </div>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="row">
+          <div class="col px-4 cellFont">
+            {{ element.name }}
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Click to sort by Description"
+        [matTooltipPosition]="'left'">
+        <div class="row font-weight-bold">
+          <div class="col text-center columnFont">
+            &nbsp;&nbsp;&nbsp;Description
+          </div>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="row">
+          <div class="col px-4 cellFont">
+            {{ getLimitedDescription (  element.description ) }}
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+
+    <!-- Last Added At Column -->
+    <ng-container matColumnDef="lastAddedAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Click to sort by Date"
+        [matTooltipPosition]="'left'">
+        <div class="row font-weight-bold">
+          <div class="col text-center columnFont">
+            &nbsp;&nbsp;&nbsp;Last Added At
+          </div>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="row">
+          <div class="col px-4 cellFont">
+            {{ element.lastAddedAt | date:'medium' }}
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+
+    <!-- Moderated Column -->
+    <ng-container matColumnDef="moderated">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Click to sort by Scope"
+          [matTooltipPosition]="'left'">
+        <div class="row font-weight-bold">
+          <div class="col text-center columnFont">
+            &nbsp;&nbsp;&nbsp;Scope
+          </div>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="row " [ngStyle]="{'color': element.moderated === true ? 'green': 'red'}">
+          <div class="col px-4 cellFont">
+            {{ element.moderated === true ? "Public" : "Local" }}
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="row font-weight-bold">
+          <div class="col text-center columnFont">
+            Actions
+          </div>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="row justify-content-center">
+
+          <!--Verify/Unverify-->
+          <div class="col-lg-4 text-center">
+            <button mat-button (click)="unverify([element])" class="green-text" *ngIf="element.moderated === true"
+              matTooltip="Change scope to local" [matTooltipPosition]="'left'">
+              <span class="material-symbols-sharp">radio_button_checked</span>
+            </button>
+            <button mat-button (click)="verify([element])" class="red-text" *ngIf="element.moderated !== true"
+              matTooltip="Change scope to public" [matTooltipPosition]="'left'">
+              <span class="material-symbols-sharp">radio_button_unchecked</span>
+            </button>
+          </div>
+
+          <!--View details-->
+          <div class="col-lg-4 text-center">
+            <button mat-button (click)="stakeholderDetails(element)" style="color: var(--blue-400)" matTooltip="View / Edit"
+                    [matTooltipPosition]="'right'">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list"
+                   viewBox="0 0 16 16">
+                <path
+                  d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                <path
+                  d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+
+</div>
+
+
+<mat-paginator [length]="resultsLength"
+[pageSize]="5"
+[pageSizeOptions]="[5, 10, 25]"
+showFirstLastButtons
+></mat-paginator>
+
+<div class="d-flex justify-content-center" style="margin: 1.25em 0">
+  <!-- Add new entity -->
+  <button (click)="addNewStakeholder()" mat-fab class="mx-3 d-flex justify-content-center align-items-center" style="background-color: white; color: gray"
+          matTooltip="Add stakeholder" matTooltipPosition="left">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-plus-lg"
+         viewBox="0 0 16 16">
+      <path fill-rule="evenodd"
+            d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+    </svg>
+  </button>
+</div>

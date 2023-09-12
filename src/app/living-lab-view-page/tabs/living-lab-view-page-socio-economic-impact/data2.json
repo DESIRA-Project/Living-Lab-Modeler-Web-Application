@@ -1,0 +1,137 @@
+{
+  "name": null,
+  "children": [
+    {
+      "name": "Economic",
+      "active": true,
+      "children": [
+        {
+          "name": "Organization",
+          "active": true,
+          "children": [
+            {"name": "Autonomy", "active": true},
+            {"name": "Cooperation", "active": true},
+            {"name": "Financial risk", "active": true},
+            {"name": "Incomes", "active": true}
+          ]
+        },
+        {
+          "name": "Value Chain",
+          "active": true,
+          "children": [
+            {"name": "Bargaining power", "active": true},
+            {"name": "Food quality", "active": true},
+            {"name": "Resource efficiency", "active": true},
+            {"name": "Transparency", "active": true}
+          ]
+        },
+        {
+          "name": "Markets",
+          "active": true,
+          "children": [
+            {"name": "Equal opportunities", "active": true},
+            {"name": "Market concentration", "active": true}
+          ]
+        }
+      ]
+    },
+
+
+
+    {
+      "name": "Environment",
+      "active": true,
+      "children": [
+        {
+          "name": "Animal well being",
+          "active": true,
+          "children": [
+            {"name": "Animal health", "active": true},
+            {"name": "Animal welfare", "active": true}
+          ]
+        },
+        {
+          "name": "Ecosystem services",
+          "active": true,
+          "children": [
+            {"name": "Biodiversity", "active": true},
+            {"name": "Clime", "active": true}
+          ]
+        },
+        {
+          "name": "Natural resources",
+          "active": true,
+          "children": [
+            {"name": "Energy", "active": true},
+            {"name": "Nutrients", "active": true},
+            {"name": "Plant health", "active": true},
+            {"name": "Soil", "active": true},
+            {"name": "Water", "active": true}
+          ]
+        }
+      ]
+    },
+
+
+
+    {
+      "name": "Social",
+      "active": false,
+      "children": [
+        {
+          "name": "Control",
+          "active": false,
+          "children": [
+            {"name": "Responsibility", "active": false},
+            {"name": "Transparency", "active": false},
+            {"name": "Surveillance", "active": false}
+          ]
+        },
+        {
+          "name": "Social capital",
+          "active": false,
+          "children": [
+            {"name": "Trust", "active": false},
+            {"name": "Participation", "active": false}
+          ]
+        },
+        {
+          "name": "Rights",
+          "active": false,
+          "children": [
+            {"name": "Resilience", "active": false},
+            {"name": "Power", "active": false},
+            {"name": "Gender gap", "active": false},
+            {"name": "Equity", "active": false},
+            {"name": "Autonomy", "active": false}
+          ]
+        }
+      ]
+    },
+
+
+
+    {
+      "name": "Governance",
+      "active": true,
+      "children": [
+        {
+          "name": "Equity",
+          "active": true,
+          "children": [
+            {"name": "Law enforcement", "active": true},
+            {"name": "Participation", "active": true}
+          ]
+        },
+        {
+          "name": "Operationality",
+          "active": true,
+          "children": [
+            {"name": "Cooperation", "active": true},
+            {"name": "Transaction costs", "active": true}
+          ]
+        }
+      ]
+    }
+  ]
+}

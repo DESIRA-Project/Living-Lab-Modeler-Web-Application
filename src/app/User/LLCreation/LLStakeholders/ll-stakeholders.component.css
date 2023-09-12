@@ -1,0 +1,30 @@
+.contributors-grid {
+  border-left: none;
+  margin-bottom: 0;
+}
+
+.main-stakeholder-card, .contributor-card {
+  border: 1px solid var(--light-gray);
+  height: 210px;
+  position: relative;
+}
+
+.main-stakeholder-card {
+  box-shadow: none !important;
+}
+
+.main-stakeholder-name, .contributor-name {
+  font-size: 16px;
+}
+
+.main-stakeholder-text, .contributor-text {
+  font-size: 13px;
+}
+
+.main-stakeholders {
+  margin-bottom: 0;
+}
+
+.main-stakeholders-title {
+  margin-bottom: 20px;
+}

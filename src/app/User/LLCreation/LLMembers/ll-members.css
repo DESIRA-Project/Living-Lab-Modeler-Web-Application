@@ -1,0 +1,26 @@
+:host ::ng-deep tr {
+  height: 61px !important;
+}
+
+@media screen and (max-width: 768px) {
+  ::ng-deep .membershipModal{
+            width:80%;
+     }
+
+     .scrollable-table {
+      overflow:auto;
+    }
+
+    .table-column-mat-form-field{
+      width:10rem;
+    }
+
+    .table-column-mat-form-field-new-member-field{
+      width:8rem;
+    }
+
+    .table-cell{
+      font-size:0.8rem;
+    }
+}
+

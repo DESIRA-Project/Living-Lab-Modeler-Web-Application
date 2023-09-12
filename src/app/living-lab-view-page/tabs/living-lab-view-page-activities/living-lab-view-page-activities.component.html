@@ -1,0 +1,134 @@
+<!-- If there are no activities-->
+<div *ngIf="activities.length === 0" class="no-content-found">
+  <span *ngIf="showNoActivitiesMessage">There are no activities yet.</span>
+
+  <!-- Add new activity button -->
+  <div *ngIf="showAddNewButton && canUserEdit">
+    <div class="timeline-wrapper">
+      <a class="timeline-text" style="height: auto" (click)="onAddNewActivityButtonClick()">
+        <button mat-fab class="d-flex align-items-center justify-content-center add-new-activity-button"
+                matTooltip="Add new activity" matTooltipPosition="right">
+          <span class="material-symbols-sharp">add</span>
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="activities.length !== 0" class="activities-container">
+
+  <!-- Add new activity button -->
+  <div *ngIf="showAddNewButton && canUserEdit" class="row">
+    <div class="d-flex col-lg-2 flex-column timeline-wrapper">
+      <a class="timeline-text mb-3" style="height: auto" (click)="onAddNewActivityButtonClick()">
+        <button mat-fab class="d-flex align-items-center justify-content-center add-new-activity-button"
+                matTooltip="Add new activity" matTooltipPosition="right">
+          <span class="material-symbols-sharp">add</span>
+        </button>
+      </a>
+    </div>
+  </div>
+
+  <div *ngFor="let activity of activities; let i = index" class="row activity-row">
+
+    <!-- Timeline -->
+    <div class="d-lg-flex d-none col-lg-2 flex-column timeline-wrapper">
+      <div class="vertical-line"></div>
+      <div class="timeline-text">
+        <div class="mb-2">
+          {{ activity.dateFrom | date }}
+        </div>
+
+        <!-- Calendar -->
+        <div *ngIf="!activity.isOver">
+          <span class="material-symbols-sharp">calendar_today</span>
+        </div>
+
+        <!-- Checkbox calendar -->
+        <div *ngIf="activity.isOver">
+          <span class="material-symbols-sharp">event_available</span>
+        </div>
+
+      </div>
+      <div class="vertical-line"></div>
+    </div>
+
+    <div class="col-lg-9 activity-card-wrapper">
+
+      <a href="javascript:void(0)" (click)="onClickView(i)">
+
+      <!-- Mat card -->
+      <mat-card class="activity-card">
+
+        <!-- Photo -->
+        <img class="d-none d-md-inline p-0 activity-photo" [src]="activity.displayMainPhotoUrl ? activity.displayMainPhotoUrl : environment.env.activity_default_photo">
+
+        <!-- Activity info -->
+        <div class="activity-body">
+
+          <div class="activity-info">
+
+            <!-- Title -->
+            <div class="activity-title text-truncate" [title]="activity.title">
+              {{ activity.title }}
+            </div>
+
+            <!-- Date -->
+            <div class="activity-date">
+              <b>Date: </b>
+              <span class="activity-text"> {{ activity.tempDateFrom | date }} </span>
+              <span class="activity-text" *ngIf="activity.tempDateTo"> - {{ activity.tempDateTo | date }} </span>
+              <b *ngIf="!activity.isOver" class="d-none d-lg-inline upcoming-text">UPCOMING</b>
+            </div>
+
+            <!-- Location -->
+            <div class="activity-location" *ngIf="activity.location">
+              <b>Location: </b>
+              <span class="activity-text"> {{ activity.location.text }} </span>
+            </div>
+
+            <!-- Format -->
+            <div class="activity-format" *ngIf="activity.activityFormat">
+              <b>Format: </b>
+              <span class="activity-text"> {{ activity.activityFormat?.name }} </span>
+            </div>
+
+            <!-- Activity type -->
+            <div class="activity-type">
+              <b>Type: </b>
+              <span class="activity-text"> {{ activity.activityType.name }} </span>
+            </div>
+
+            <!-- Objective -->
+            <!--<div class="activity-objective">
+              <b>Objective: </b>
+              <span class="activity-text"> {{ activity.objective }} </span>
+            </div>-->
+
+          </div>
+
+
+          <div class="view-more">
+            <div *ngIf="showEditButton && canUserEdit" (click)="$event.stopPropagation(); onClickEdit(i)">
+              <button mat-button class="card-button mw-0" matTooltip="Edit">
+                <span class="material-symbols-sharp">edit</span>
+              </button>
+            </div>
+            <div *ngIf="showDeleteButton && canUserEdit" (click)="$event.stopPropagation(); onClickDelete(i)">
+              <button mat-button class="card-button mw-0 red-text" matTooltip="Delete">
+                <span class="material-symbols-sharp">delete</span>
+              </button>
+            </div>
+            <!--<a [routerLink]="'./activity/' + activity.id" target="_blank">
+              <button mat-button class="card-button">
+                VIEW MORE
+              </button>
+            </a>-->
+          </div>
+
+        </div>
+      </mat-card>
+      </a>
+    </div>
+  </div>
+</div>

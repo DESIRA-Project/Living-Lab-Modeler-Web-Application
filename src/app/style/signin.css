@@ -1,0 +1,11 @@
+.imgStack{
+    text-align: center;
+
+}
+
+@media screen and (max-width: 768px) {
+.imgStack{
+    color:red;
+    text-align: center;
+}
+}

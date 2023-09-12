@@ -1,0 +1,147 @@
+.mat-expansion-panel {
+  margin: 20px;
+  margin-left: 2px;
+  margin-bottom: 0;
+  border-radius: 10px !important;
+  max-width: 1000px;
+}
+
+.mat-expansion-panel-header {
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+
+:host ::ng-deep .mat-expansion-panel {
+  border: none !important;
+}
+
+:host ::ng-deep .mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),0 1px 1px 0 rgba(0, 0, 0, 0.14),0 1px 3px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+:host ::ng-deep .mat-expansion-indicator {
+  display: flex;
+  align-items: center;
+}
+
+:host ::ng-deep .mat-expansion-panel-header-description {
+  flex-grow: 1 !important;
+}
+
+.accordion {
+  padding-right: 250px;
+  position: relative;
+  top: 2px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: normal;
+}
+
+.description {
+  color: var(--smart-gray);
+  font-size: 0.9375rem;
+  font-weight: 100;
+  line-height: normal;
+  position: relative;
+  left: -10px;
+}
+
+.full-description {
+  color: var(--smart-gray);
+  font-size: 0.9375rem;
+  font-weight: 100;
+  line-height: normal;
+}
+
+.photos-title, .files-title {
+}
+
+.files, .tags {
+  font-size: 0.9375rem;
+  line-height: normal;
+  font-weight: 100;
+}
+
+.files {
+  margin-top: 0.5rem;
+}
+
+.tags {
+  margin-top: 0.25rem;
+}
+
+.activity-outcomes {
+  max-width: 1000px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 2px;
+  position: relative;
+  top: 2px;
+}
+
+.activity-outcome-card {
+  max-width: calc((1000px - 20px) / 2);
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 576px) {
+  .activity-outcomes {
+    padding-right: 20px;
+  }
+}
+
+.activity-outcome-header {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.activity-outcome-title {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: normal;
+}
+
+.activity-outcome-badge {
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.875rem;
+  line-height: normal;
+}
+
+.activity-outcome-text {
+  font-size: 0.9375rem;
+  font-weight: 100;
+  line-height: normal;
+  color: var(--smart-gray);
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+.edit-button, .delete-button {
+  margin-left: 20px;
+  max-height: 60px;
+  min-width: 0;
+}
+
+.outcome-photo {
+  width: 150px;
+  height: 100px;
+  border-radius: 10px;
+}
+
+:host ::ng-deep .mat-expansion-panel-header.mat-expanded {
+  height: 100%;
+}

@@ -1,0 +1,50 @@
+<div [ngClass]="chipText || livingLabSummary.isPublic ? 'cursor-pointer' : ''"
+     (click)="(chipText || livingLabSummary.isPublic) && navigateToLivingLab()">
+
+  <mat-card class="mat-card card-wrapper">
+
+    <!-- Photo -->
+    <img [src]="livingLabSummary.iconUrl ? livingLabSummary.iconUrl : environment.env.ll_default_photo_square"
+         class="photo" style="opacity: 0.7">
+
+    <!-- Body -->
+    <div class="body">
+
+      <!-- Title -->
+      <div class="title" [title]="livingLabSummary.name">
+        {{ livingLabSummary.name }}
+      </div>
+
+      <!-- Description -->
+      <div class="description" [title]="livingLabSummary.focalQuestion">
+        {{ livingLabSummary.focalQuestion }}
+      </div>
+
+      <!-- Role chip text -->
+      <div *ngIf="chipText" class="top-left-chip">
+        <mat-chip-list>
+          <mat-chip disabled style="opacity: 0.9"
+                    matTooltip="Your role in this living lab"
+                    matTooltipPosition="above">
+            {{chipText}}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+
+      <!-- Public/Private chip text -->
+      <div class="top-left-chip">
+        <mat-chip-list>
+          <mat-chip disabled style="opacity: 0.9"
+                    matTooltip="This living lab is deactivated"
+                    matTooltipPosition="above">
+            <span class="material-symbols-sharp">lock</span>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+
+
+    </div>
+
+  </mat-card>
+
+</div>

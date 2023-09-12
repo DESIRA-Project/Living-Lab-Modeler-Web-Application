@@ -1,0 +1,111 @@
+<div style="position: relative">
+  <div>
+
+    <header class="sticky-top">
+      <div>
+        <navbar [currentPage]="'About'"></navbar>
+      </div>
+    </header>
+
+    <div style="background-color: var(--background-color)">
+
+      <main>
+
+        <breadcrumb [currentPage]="'about'" [hasGapBottom]="true" [setController]="this"
+          style="padding-inline: var(--base-layout-vertical-padding)"></breadcrumb>
+
+        <div class="sticky-hide-sidebar-border-top"></div>
+
+        <div class="layout">
+          <div class="main-content">
+
+            <div [ngClass]="{'card p-2 shadow-lg' : renderInCard}">
+
+              <div [ngClass]="{'card-body' : renderInCard}">
+                <h4 class="contentTitle" *ngIf="renderInCard"> About </h4>
+                <p *ngIf="!renderInCard" style="padding-bottom:0.8rem;"></p>
+                <br>
+                <div class="content">
+                  Living Lab Modeler - LLM is a tool that aims to facilitate and organize the operation of participatory
+                  processes. Participatory processes and more specifically Living Labs (LLs) are a very widespread
+                  method for identifying problems and work on solutions.
+
+                  LLM offers a digital twin of a Living Lab. It visualizes the available information and automatically
+                  produces assessments based on the information provided. It thereby facilitates the exchange of
+                  information and cooperation between participants, the dissemination of the results of the LL to
+                  external bodies, streamlines processes, and supports the coordinators of the LL in its operation and
+                  helps to achieve its objectives.
+                  <br>
+                  <div class="content">
+
+                    LLM allows its users to perform full text search and / or
+                    filter them based on any of the above classifications, thus enabling quick
+                    identification of tools of interest. It also supports browsing facility based on
+                    the above
+                    classifications and interactive visualisations of the available data.
+                  </div>
+                  <br>
+                  <h4 class="contentHeader">Acknowledgements</h4>
+                  <br>
+                  <div class="content">
+                    This tool has been designed and developed during the DESIRA H2020 project.
+                  </div>
+                  <br>
+                  <h4 class="contentHeader">Attributions</h4>
+                  <br>
+                  <div class="content">
+                    <h5 class="contentHeader">Icons:</h5>
+                    <br>
+  
+                    <ul>
+                      <li>Management system by Eucalyp from <a
+                          href="https://thenounproject.com/browse/icons/term/management-system/" target="_blank"
+                          title="Management System Icons">Noun Project</a> (CCBY3.0)</li>
+                      <li>Blockchain by Selot Lo from <a href="https://thenounproject.com/browse/icons/term/blockchain/"
+                          target="_blank" title="Blockchain Icons">Noun Project</a> (CCBY3.0)</li>
+                      <li>Network by Cahya Kurniawan from <a
+                          href="https://thenounproject.com/browse/icons/term/network/" target="_blank"
+                          title="Network Icons">Noun Project </a> (CCBY3.0)</li>
+                      <li>Social Media by Guilherme Furtado from <a
+                          href="https://thenounproject.com/browse/icons/term/social-media/" target="_blank"
+                          title="Social Media Icons">Noun Project</a> (CCBY3.0)</li>
+                      <li>Drone by Digithrust from <a href="https://thenounproject.com/browse/icons/term/drone/"
+                          target="_blank" title="Drone Icons">Noun Project</a> (CCBY3.0)</li>
+                      <li>Cloud Computing by Digithrust from <a
+                          href="https://thenounproject.com/browse/icons/term/cloud-computing/" target="_blank"
+                          title="Cloud Computing Icons">Noun Project</a> (CCBY3.0)</li>
+                      <li>Internet of things by Digithrust from <a
+                          href="https://thenounproject.com/browse/icons/term/internet-of-things/" target="_blank"
+                          title="Internet-of-Things Icons">Noun Project</a> (CCBY3.0)</li>
+                      <li>Artificial Intelligence by Digithrust from <a
+                          href="https://thenounproject.com/browse/icons/term/artificial-intelligence/" target="_blank"
+                          title="Artificial Intelligence Icons">Noun Project</a> (CCBY3.0)</li>
+                      <li> Virtual Reality by Digithrust from <a
+                          href="https://thenounproject.com/browse/icons/term/virtual-reality/" target="_blank"
+                          title="Virtual Reality Icons">Noun Project</a> (CCBY3.0)</li>
+                      <li>Data analytics by Soremba from <a
+                          href="https://thenounproject.com/browse/icons/term/data-analytics/" target="_blank"
+                          title="Data Analytics Icons">Noun Project</a> (CCBY3.0)</li>
+                      <li> 3D printing by N.Style from <a
+                          href="https://thenounproject.com/browse/icons/term/3d-printing/" target="_blank"
+                          title="3D Printing Icons">Noun Project</a> (CCBY3.0)</li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="sticky-hide-sidebar-border-bottom d-none d-lg-flex"></div>
+
+      </main>
+    </div>
+  </div>
+
+
+  <cookie-banner></cookie-banner>
+  <app-footer></app-footer>
+</div>

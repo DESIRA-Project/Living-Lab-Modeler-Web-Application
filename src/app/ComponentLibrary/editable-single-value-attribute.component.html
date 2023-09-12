@@ -1,0 +1,79 @@
+<style>
+
+    :host ::ng-deep .mat-form-field-infix {
+        border-top-width: calc(0.421875em);
+    }
+
+</style>
+
+<div class="container p-2" *ngIf="data !== null && data.data.type === 'boolean-value' ; else stringBlock">
+    <div class="row justify-content-around">
+        <div class="col-10 attributeName">
+            {{data.data.repr}}
+        </div>
+        <div class="col-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="{{data.data.attribute}}"
+                    [ngModel]="hasNonEmptyBooleanValue()" (click)="toggleValue()" [disabled]="isReadOnly">
+                <!--value !== null && value !== false  -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #stringBlock>
+    <div class="container p-2">
+
+        <div class="row">
+            <div class="col">
+                <div>
+                    <form class="needs-validation" [ngClass]="{'needs-validation': data.data.isRequired === true}">
+                        <label for="{{data.data.attribute}}TextField">{{data.data.repr}} <span
+                                *ngIf="data.data.isRequired === true">*</span> </label>
+
+                        <div class="">
+                            <div class="row">
+                                <div class="col">
+
+                                    <mat-form-field appearance="outline" floatLabel="never" class="w-100">
+                                        <input
+                                            id="{{data.data.attribute}}" placeholder=""
+                                            [attr.required]="data.data.isRequired" (input)="onInputChange($event)"
+                                            [disabled]="isReadOnly" *ngIf="data.data.type !== 'multi-line-value'"
+                                            matInput />
+                                    </mat-form-field>
+
+                                    <textarea type="text" class="form-control" id="{{data.data.attribute}}"
+                                        placeholder="" [attr.required]="data.data.isRequired"
+                                        (input)="onInputChange($event)" [disabled]="isReadOnly"
+                                        *ngIf="data.data.type === 'multi-line-value'" rows="4"></textarea>
+                                </div>
+
+                                <div class="col-1" *ngIf="!isReady() && !isEmpty()">
+                                    <div class="spinner-border" role="status" style="margin-left:45%;margin-top:20%;">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="invalid-feedback" *ngIf="data.data.isRequired === true && isEmpty()">
+                            The {{data.data.repr.toLowerCase()}} is required
+                        </div>
+
+                        <div *ngIf="!isValidValue()" id="invalidValue">
+                            <div style="width: 100%;
+                            margin-top: 0.25rem;
+                            font-size: 80%;
+                            color: #dc3545;">
+                                {{getErrorMessage()}}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</ng-template>

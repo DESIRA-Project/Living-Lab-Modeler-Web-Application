@@ -1,0 +1,163 @@
+<div class="d-flex flex-column align-items-center">
+
+  <div class="mb-3"></div>
+
+  <div class="w-100 d-flex flex-column align-items-center">
+
+    <!-- Title -->
+    <mat-form-field class="form-field">
+      <mat-label class="font-weight-light" style="letter-spacing: 1px">TITLE</mat-label>
+      <input class="font-weight-normal" matInput [(ngModel)]="llName" name="title" required dbgName="name"
+             (ngModelChange)="keepParentUptoDate($event)">
+      <button type="button" mat-button *ngIf="llName" matSuffix mat-icon-button
+              aria-label="Clear" (click)="clearLLName(); $event.stopPropagation()">
+        <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+      </button>
+
+    </mat-form-field>
+
+    <div class="mb-3"></div>
+
+    <!-- Focal question -->
+    <mat-form-field class="form-field">
+      <mat-label class="font-weight-light" style="letter-spacing: 1px">FOCAL QUESTION</mat-label>
+      <textarea cdkTextareaAutosize class="font-weight-normal" matInput [(ngModel)]="llFocalQuestion" name="title" required dbgName="focalQuestion"
+                (ngModelChange)="keepParentUptoDate($event)"></textarea>
+      <button type="button" mat-button *ngIf="llFocalQuestion" matSuffix mat-icon-button
+              aria-label="Clear" (click)="clearLLFocalQuestion(); $event.stopPropagation()">
+        <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+      </button>
+    </mat-form-field>
+
+
+    <!-- Description -->
+    <!--
+ <div class="mb-3"></div>
+
+
+ <mat-form-field class="form-field">
+   <mat-label class="font-weight-light" style="letter-spacing: 1px">DESCRIPTION</mat-label>
+   <textarea cdkTextareaAutosize class="font-weight-normal" matInput [(ngModel)]="llDescription" name="title" required dbgName="description"
+             (ngModelChange)="keepParentUptoDate($event)"></textarea>
+   <button type="button" mat-button *ngIf="llDescription" matSuffix mat-icon-button
+           aria-label="Clear" (click)="clearLLDescription(); $event.stopPropagation()">
+     <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+   </button>
+ </mat-form-field>
+-->
+
+    <div class="mb-3"></div>
+
+    <!-- Description -->
+    <div style="display: inline-block; position: relative; text-align: left; width:75%;">
+      <span class="font-weight-light"
+            style="letter-spacing: 1px; font-size: 14px; color: rgba(0,0,0,.54);
+                transform: translateY(-1.28125em) scale(0.75) perspective(100px) translateZ(0.001px);">
+        DESCRIPTION*</span>
+      <button type="button" mat-button *ngIf="llDescription" matSuffix mat-icon-button
+              class="d-inline-flex justify-content-center align-items-center"
+              aria-label="Clear" (click)="clearLLDescription(); $event.stopPropagation()">
+        <mat-icon style="color: rgba(0,0,0,.54); font-size: 14px; position: relative; bottom: 1px">close</mat-icon>
+      </button>
+      <angular-editor
+        [placeholder]="'Enter text here...'" [(ngModel)]="llDescription" [config]="editorConfig"
+        (ngModelChange)="keepParentUptoDate($event)"
+      ></angular-editor>
+      <!--      <button type="button" mat-button *ngIf="llDescription" matSuffix mat-icon-button
+                    aria-label="Clear" (click)="clearLLDescription(); $event.stopPropagation()">
+              <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+            </button>-->
+    </div>
+
+    <div class="mb-3"></div>
+
+    <!-- Location -->
+    <ll-location class="form-field" [setParent]="this" *ngIf="locationFetched" [setScreenshotCapturer]="this" dbgName="location"></ll-location>
+
+  </div>
+
+  <div class="mb-3"></div>
+  <div class="mb-3"></div>
+
+  <!-- Photo -->
+  <input #csvInput hidden="true" type="file" (change)="handleFileInput($event)" />
+
+  <div *ngIf="!thumbnail" class="insert-photo-here" (click)="csvInput.click()">
+
+    <span class="material-symbols-sharp insert-photo-here-icon-size">
+      add_photo_alternate
+    </span>
+
+    <div class="mb-1"></div>
+
+    <div class="font-weight-light" style="letter-spacing: 1px">
+      Click to upload main photo
+    </div>
+
+  </div>
+
+  <div *ngIf="thumbnail" class="photo">
+    <img [src]="thumbnail" style="max-width: 100%">
+
+    <div class="photo-actions">
+      <div class="photo-actions-button-new" (click)="csvInput.click()">Change Photo</div>
+      <div class="photo-actions-button-remove" (click)="clearImage()">Delete Photo</div>
+    </div>
+  </div>
+
+  <div class="mb-3"></div>
+
+</div>
+
+<!--
+<div class="container" style="width:60%">
+  <span class="row"><h2>{{title}}</h2></span>
+  <span class="row ">
+    <mat-form-field class="example-form-field col" appearance="fill">
+      <mat-label>Living Lab Name*</mat-label>
+      <input matInput type="text" [(ngModel)]="llName" (ngModelChange)="keepParentUptoDate($event)">
+      <button *ngIf="llName"  matSuffix mat-icon-button aria-label="Clear" (click)=" clearLLName(); ">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </span>
+  <span class="row">
+    <mat-form-field class="example-form-field col" appearance="fill">
+      <mat-label>Living Lab Description*</mat-label>
+      <textarea matInput type="text" rows="4" cols="50" [(ngModel)]="llDescription" (ngModelChange)="keepParentUptoDate($event)"></textarea>
+
+      <button *ngIf="llDescription" matSuffix mat-icon-button aria-label="Clear" (click)="clearLLDescription();">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </span>
+
+  <span class="row">
+    <mat-checkbox class="example-margin col" [(ngModel)]="isPublic">Public Living Lab</mat-checkbox>
+  </span>
+
+  <span class="row">
+    <mat-form-field class="example-form-field col" appearance="fill">
+      <mat-label>Focal Question*</mat-label>
+      <textarea  matInput type="text" name="message" [(ngModel)]="llFocalQuestion" (ngModelChange)="keepParentUptoDate($event)"
+      cdkTextareaAutosize
+      rows="4" cols="50"
+      ></textarea>
+      <button *ngIf="llFocalQuestion" matSuffix mat-icon-button aria-label="Clear" (click)="clearLLFocalQuestion();">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </span>
+
+  <span class="row">
+    <img *ngIf="thumbnail !== null" [src]='thumbnail' width="300" height="300"/>
+  </span>
+
+  <span class="row">
+    <input #csvInput hidden="true" type="file" (change)="handleFileInput($event)" />
+    <button mat-flat-button color="primary" (click)="csvInput.click()">Choose Logo for your Living Lab</button>
+    <button mat-flat-button color="primary" style="margin-left:15px;" [disabled]="!thumbnail" (click)="clearImage()">Clear</button>
+
+  </span>
+
+</div>-->

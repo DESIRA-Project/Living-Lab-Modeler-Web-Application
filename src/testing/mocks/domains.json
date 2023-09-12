@@ -1,0 +1,522 @@
+{
+    "data": {
+        "domains": [
+            {
+                "id": 1,
+                "name": "Forestry"
+            },
+            {
+                "id": 2,
+                "name": "Agriculture"
+            },
+            {
+                "id": 3,
+                "name": "Rural Areas"
+            }
+        ],
+        "subdomains": [
+            {
+                "id": 3,
+                "name": "CO2",
+                "parentId": 1
+            },
+            {
+                "id": 5,
+                "name": "Machinery",
+                "parentId": 1
+            },
+            {
+                "id": 11,
+                "name": "Management",
+                "parentId": 1
+            },
+            {
+                "id": 12,
+                "name": "Timber",
+                "parentId": 1
+            },
+            {
+                "id": 13,
+                "name": "Wildfires",
+                "parentId": 1
+            },
+            {
+                "id": 14,
+                "name": "Wood",
+                "parentId": 1
+            },
+            {
+                "id": 1,
+                "name": "Food",
+                "parentId": 2
+            },
+            {
+                "id": 2,
+                "name": "Crops",
+                "parentId": 2
+            },
+            {
+                "id": 7,
+                "name": "Livestock",
+                "parentId": 2
+            },
+            {
+                "id": 8,
+                "name": "Machinery",
+                "parentId": 2
+            },
+            {
+                "id": 9,
+                "name": "Management",
+                "parentId": 2
+            },
+            {
+                "id": 10,
+                "name": "Policy",
+                "parentId": 2
+            },
+            {
+                "id": 4,
+                "name": "Resources",
+                "parentId": 3
+            },
+            {
+                "id": 6,
+                "name": "Education",
+                "parentId": 3
+            },
+            {
+                "id": 15,
+                "name": "Broadband Infrastructure",
+                "parentId": 3
+            },
+            {
+                "id": 16,
+                "name": "Cultural Heritage",
+                "parentId": 3
+            },
+            {
+                "id": 17,
+                "name": "Demography",
+                "parentId": 3
+            },
+            {
+                "id": 18,
+                "name": "Environment And Climate",
+                "parentId": 3
+            },
+            {
+                "id": 19,
+                "name": "Government",
+                "parentId": 3
+            },
+            {
+                "id": 20,
+                "name": "Healthcare",
+                "parentId": 3
+            },
+            {
+                "id": 21,
+                "name": "Information And Promotion",
+                "parentId": 3
+            },
+            {
+                "id": 22,
+                "name": "Legality",
+                "parentId": 3
+            },
+            {
+                "id": 23,
+                "name": "Mobility",
+                "parentId": 3
+            },
+            {
+                "id": 24,
+                "name": "Tourism",
+                "parentId": 3
+            }
+        ],
+        "applicationScenarios": [
+            {
+                "id": 6,
+                "name": "Compensation",
+                "parentId": 3
+            },
+            {
+                "id": 11,
+                "name": "Credits",
+                "parentId": 3
+            },
+            {
+                "id": 37,
+                "name": "Sequestration",
+                "parentId": 3
+            },
+            {
+                "id": 2,
+                "name": "Maintenance",
+                "parentId": 5
+            },
+            {
+                "id": 8,
+                "name": "Autonomous",
+                "parentId": 5
+            },
+            {
+                "id": 38,
+                "name": "Interoperability",
+                "parentId": 5
+            },
+            {
+                "id": 39,
+                "name": "Performance",
+                "parentId": 5
+            },
+            {
+                "id": 40,
+                "name": "FMS/FMIS",
+                "parentId": 11
+            },
+            {
+                "id": 41,
+                "name": "Market",
+                "parentId": 12
+            },
+            {
+                "id": 42,
+                "name": "Supply Chain",
+                "parentId": 12
+            },
+            {
+                "id": 43,
+                "name": "Early Detection",
+                "parentId": 13
+            },
+            {
+                "id": 44,
+                "name": "Modelling and Real-time Analysis",
+                "parentId": 13
+            },
+            {
+                "id": 45,
+                "name": "Prevention",
+                "parentId": 13
+            },
+            {
+                "id": 46,
+                "name": "Protection",
+                "parentId": 13
+            },
+            {
+                "id": 47,
+                "name": "Certification",
+                "parentId": 14
+            },
+            {
+                "id": 48,
+                "name": "Traceability",
+                "parentId": 14
+            },
+            {
+                "id": 9,
+                "name": "Safety",
+                "parentId": 1
+            },
+            {
+                "id": 13,
+                "name": "Quality",
+                "parentId": 1
+            },
+            {
+                "id": 19,
+                "name": "Shelflife",
+                "parentId": 1
+            },
+            {
+                "id": 20,
+                "name": "Supply Chain",
+                "parentId": 1
+            },
+            {
+                "id": 21,
+                "name": "Traceability",
+                "parentId": 1
+            },
+            {
+                "id": 4,
+                "name": "Harvesting",
+                "parentId": 2
+            },
+            {
+                "id": 5,
+                "name": "Spraying",
+                "parentId": 2
+            },
+            {
+                "id": 12,
+                "name": "Modelling",
+                "parentId": 2
+            },
+            {
+                "id": 14,
+                "name": "Fertilization and Fertigation",
+                "parentId": 2
+            },
+            {
+                "id": 15,
+                "name": "Monitoring",
+                "parentId": 2
+            },
+            {
+                "id": 16,
+                "name": "Pest Control",
+                "parentId": 2
+            },
+            {
+                "id": 17,
+                "name": "Sowing",
+                "parentId": 2
+            },
+            {
+                "id": 18,
+                "name": "Vertical Farming",
+                "parentId": 2
+            },
+            {
+                "id": 22,
+                "name": "Carcasses",
+                "parentId": 7
+            },
+            {
+                "id": 23,
+                "name": "Feeding",
+                "parentId": 7
+            },
+            {
+                "id": 24,
+                "name": "Herd Monitoring",
+                "parentId": 7
+            },
+            {
+                "id": 25,
+                "name": "Manure",
+                "parentId": 7
+            },
+            {
+                "id": 26,
+                "name": "Milking",
+                "parentId": 7
+            },
+            {
+                "id": 27,
+                "name": "Reproduction",
+                "parentId": 7
+            },
+            {
+                "id": 28,
+                "name": "Welfare and Health",
+                "parentId": 7
+            },
+            {
+                "id": 29,
+                "name": "Autonomous",
+                "parentId": 8
+            },
+            {
+                "id": 30,
+                "name": "Interoperability",
+                "parentId": 8
+            },
+            {
+                "id": 31,
+                "name": "Maintenance",
+                "parentId": 8
+            },
+            {
+                "id": 32,
+                "name": "Performance",
+                "parentId": 8
+            },
+            {
+                "id": 33,
+                "name": "Renting",
+                "parentId": 8
+            },
+            {
+                "id": 34,
+                "name": "FMS/FMIS",
+                "parentId": 9
+            },
+            {
+                "id": 35,
+                "name": "CAP",
+                "parentId": 10
+            },
+            {
+                "id": 36,
+                "name": "Incentives",
+                "parentId": 10
+            },
+            {
+                "id": 3,
+                "name": "Digital Data",
+                "parentId": 4
+            },
+            {
+                "id": 7,
+                "name": "Soil",
+                "parentId": 4
+            },
+            {
+                "id": 70,
+                "name": "Air",
+                "parentId": 4
+            },
+            {
+                "id": 71,
+                "name": "Energy",
+                "parentId": 4
+            },
+            {
+                "id": 72,
+                "name": "Waste",
+                "parentId": 4
+            },
+            {
+                "id": 73,
+                "name": "Water",
+                "parentId": 4
+            },
+            {
+                "id": 1,
+                "name": "Advisory",
+                "parentId": 6
+            },
+            {
+                "id": 10,
+                "name": "Knowledge",
+                "parentId": 6
+            },
+            {
+                "id": 53,
+                "name": "Schools",
+                "parentId": 6
+            },
+            {
+                "id": 54,
+                "name": "Training",
+                "parentId": 6
+            },
+            {
+                "id": 49,
+                "name": "Connectivity",
+                "parentId": 15
+            },
+            {
+                "id": 50,
+                "name": "Online Discovery",
+                "parentId": 16
+            },
+            {
+                "id": 51,
+                "name": "Regional History",
+                "parentId": 16
+            },
+            {
+                "id": 52,
+                "name": "Promotion",
+                "parentId": 17
+            },
+            {
+                "id": 55,
+                "name": "Communication and Information",
+                "parentId": 18
+            },
+            {
+                "id": 56,
+                "name": "Intervention",
+                "parentId": 18
+            },
+            {
+                "id": 57,
+                "name": "Monitoring",
+                "parentId": 18
+            },
+            {
+                "id": 58,
+                "name": "Protection",
+                "parentId": 18
+            },
+            {
+                "id": 59,
+                "name": "E-government",
+                "parentId": 19
+            },
+            {
+                "id": 60,
+                "name": "E-health and Telemedicine",
+                "parentId": 20
+            },
+            {
+                "id": 61,
+                "name": "Incentives",
+                "parentId": 21
+            },
+            {
+                "id": 62,
+                "name": "Stakeholder Involvement",
+                "parentId": 21
+            },
+            {
+                "id": 63,
+                "name": "Start-ups",
+                "parentId": 21
+            },
+            {
+                "id": 64,
+                "name": "Corruption",
+                "parentId": 22
+            },
+            {
+                "id": 65,
+                "name": "Environmental Crimes",
+                "parentId": 22
+            },
+            {
+                "id": 66,
+                "name": "Frauds",
+                "parentId": 22
+            },
+            {
+                "id": 67,
+                "name": "Neighborhood Watch",
+                "parentId": 22
+            },
+            {
+                "id": 68,
+                "name": "Carsharing and Carpooling",
+                "parentId": 23
+            },
+            {
+                "id": 69,
+                "name": "Public and Private Transporation",
+                "parentId": 23
+            },
+            {
+                "id": 74,
+                "name": "Market Prices",
+                "parentId": 24
+            },
+            {
+                "id": 75,
+                "name": "Offered Activies",
+                "parentId": 24
+            },
+            {
+                "id": 76,
+                "name": "Promotion",
+                "parentId": 24
+            }
+        ]
+    }
+}

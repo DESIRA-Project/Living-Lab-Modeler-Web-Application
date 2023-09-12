@@ -1,0 +1,123 @@
+<h1 mat-dialog-title>Add Stakeholders</h1>
+<div class="container" *ngIf="!ready">
+    <div class="row justify-content-center">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>
+<div *ngIf="ready" mat-dialog-content>
+    <div class="container">
+        <div class="row">
+            <mat-form-field class=" col-5 example-form-field" appearance="fill">
+                <mat-label>Stakeholder Name</mat-label>
+                <input matInput type="text" [(ngModel)]="keyword">
+                <button *ngIf="keyword" matSuffix mat-icon-button aria-label="Clear" (click)="keyword=''">
+                    <mat-icon (click)="clearValue()">close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <div class="col-5" style="margin-top:10px">
+                <section>
+                    <div class="example-button-row">
+                        <button mat-flat-button color="primary" (click)="search()">Search</button>
+                        <button mat-flat-button color="primary" (click)="clearValue()" style="margin-left:10px"
+                            [disabled]="keyword.length === 0">Clear</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <table *ngIf="ready && hasData()" mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="table-layout: fixed;
+    width: 100%;
+    display: table;" matSort (matSortChange)="announceSortChange($event)">
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+
+            <th mat-header-cell *matHeaderCellDef style="    min-width: 100px;
+          max-width: 100px;
+          width: 100px;">
+
+                <mat-checkbox (change)="$event ? enableAllDropDowns() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell (click)="disableClickEventPropagation($event)" *matCellDef="let row">
+<!--                {{selection.isSelected(row)}} -->
+                <mat-checkbox (click)="handleSelection($event);enableRoleDropDown(row);" (change)="$event ? selectRow(row) : null"
+                    [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="{{getColumnName(1)}}">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="    min-width: 200px;
+          max-width: 200px;
+          width: 200px;"> {{getColumnNameFirstCapitalLetter(1)}} </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();"> {{ getLimitAwareString (
+                element[ getColumnName(1) ], 25 )}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="{{getColumnName(2)}}">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="    min-width: 200px;
+          max-width: 200px;
+          width: 200px;"> {{getColumnNameFirstCapitalLetter(2)}} </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();"> {{ getLimitAwareString (
+                element[ getColumnName(2) ], 25 )}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="{{getColumnName(3)}}">
+            Role
+           <th mat-header-cell *matHeaderCellDef mat-sort-header style="    min-width: 200px;
+          max-width: 200px;
+          width: 200px;"> {{getColumnNameFirstCapitalLetter(3)}} </th>
+            <td mat-cell *matCellDef="let element" 
+            (click)="$event.stopPropagation();"> 
+            <span  *ngIf="selectedStakeholders[element.id] === undefined">
+                {{getStakeholderRole(element) }} 
+            </span>
+
+            <p *ngIf="selectedStakeholders[element.id] !== undefined">
+                <mat-form-field style="width: 80%">
+                  <mat-label>Role</mat-label>
+                <mat-select [(value)]="selectedStakeholders[element.id]">
+                  <mat-option value="{{role.id}}" *ngFor="let role of stakeholderRoles" >
+                    {{role.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              </p>
+
+            </td> 
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+        </tr>
+    </table>
+
+    <div *ngIf="hasData()">
+
+        <mat-paginator [pageSizeOptions]="paginationConfig.acceptedSizeOptions" [pageIndex]="pageIndex"
+            [length]="resultsLength" [pageSize]="pageSize" showFirstLastButtons
+            aria-label="Select page of periodic elements" (page)=" onPaginateChange($event)">
+        </mat-paginator>
+    </div>
+
+    <div *ngIf="!hasData()">
+        The list of Stakeholders is empty.
+    </div>
+
+    <div class="container" *ngIf="!ready">
+        <div class="row justify-content-center">
+            <mat-spinner></mat-spinner>
+        </div>
+    </div>
+</div>
+
+<div mat-dialog-actions *ngIf="ready">
+    <button mat-button mat-dialog-close>CANCEL</button>
+    <button mat-button  cdkFocusInitial (click)="addStakeholders()" [disabled]="!onUpdate()">UPDATE</button>
+</div>

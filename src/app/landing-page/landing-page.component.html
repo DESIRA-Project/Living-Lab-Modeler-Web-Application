@@ -1,0 +1,57 @@
+<navbar style="position: absolute; top: 0; z-index: 1; width: 100%" [backgroundTransparent]="true"
+  [whiteSignInButton]="true">
+
+</navbar>
+
+<div class="page-1-wrapper">
+
+  <div class="quote-wrapper">
+
+    <div class="quote1">
+      Explore <br>
+      Connect <br>
+      Innovate
+    </div>
+
+    <div class="quote2">
+      <b>Living Lab Modeler</b>: A tool to leverage the activities and impact of your Living Lab
+    </div>
+
+  </div>
+
+  <div class="light-bulb"></div>
+
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" preserveAspectRatio="none" viewBox="0 0 1680 40"
+    style="bottom: -1px; position: absolute;">
+    <path d="M0 40h1680V30S1340 0 840 0 0 30 0 30z" fill="hsl(0, 0%, 97%)"></path>
+  </svg>
+
+</div>
+
+<div class="page-2-wrapper">
+  <div class="living-labs-title">
+    Living Labs
+  </div>
+
+  <div class="living-labs" *ngIf="ready; else noReadyBlock">
+    <div *ngFor="let livingLab of publishedLivingLabs" class="living-lab-card">
+      <landing-published-living-lab-summary-card [livingLabSummary]="livingLab"
+        [showButtons]="true" ></landing-published-living-lab-summary-card>
+    </div>
+  </div>
+
+  <div style="margin-top: 0.625em" *ngIf="hasMore()">
+    <button mat-flat-button class="blue-button" (click)="showMore()" style="margin-inline: 5px">Show more</button>
+  </div>
+
+  <ng-template #noReadyBlock>
+    <div class="row justify-content-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
+
+</div>
+
+
+<app-footer></app-footer>

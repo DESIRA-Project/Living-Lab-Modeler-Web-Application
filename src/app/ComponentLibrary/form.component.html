@@ -1,0 +1,5 @@
+<div *ngIf="_data !== null">
+    <div *ngFor="let tab of _data.tabs">
+        <form-tab [data]="tab"></form-tab>
+    </div>
+</div>

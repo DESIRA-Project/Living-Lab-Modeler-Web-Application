@@ -1,0 +1,127 @@
+::ng-deep * {
+  font-family: "Oswald" !important;
+}
+
+header.kbtHeader{
+  background-color: white;
+}
+
+*.smallTopSpace{
+  padding-top:15px;
+}
+
+div.mainContent{
+  image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges;          /* Firefox */
+  image-rendering: -o-crisp-edges;            /* Opera */
+  image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming)*/
+  -ms-interpolation-mode: nearest-neighbor;   /* IE (non-standard property) */
+  background-image: url("../../assets/background.jpg");
+  background-size: 100% 100%;
+}
+
+div.textShadow{
+/*  text-shadow: 1px 0.4px #000; */
+}
+
+div.maincontainer{
+  padding-top:2%;
+  margin-top:80px;
+
+}
+
+div.welcome {
+    font-size:2vw;
+    white-space: nowrap;
+}
+
+div.description{
+  font-size:3vw;
+  white-space: nowrap;
+  padding-left: 0%;
+  text-shadow: 1px 0.4px #000;
+
+}
+
+div.welcome_kbt {
+  font-size:1vw;
+  white-space: nowrap;
+  padding-bottom:1%;
+
+}
+
+
+div.logoDiv{
+    padding-left:2%;
+    padding-top:1.5%;
+}
+
+img.logoImg{
+  padding-bottom:10px;
+  width: min(75vw, 120px);
+  padding-left:10px;
+/*  height: min(50vw, 100px);*/
+
+}
+
+.mainLogoImg{
+  height:100px;
+}
+
+
+div.externalLinks{
+  white-space: nowrap;
+  text-shadow: none;
+  font-weight: bold;
+
+}
+
+div.landingLinks{
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+
+
+.mainLogoImg{
+  height:60px;
+}
+
+  div.maincontainer{
+    padding-top:5%;
+    margin-top:30px;
+  }
+
+    div.welcome {
+      font-size: 3.3vw;
+      text-align: center;
+    }
+
+    div.description {
+      font-size: 3.3vw;
+      word-break: break-all;
+      white-space: unset;
+      white-space: nowrap;
+      padding-left: 0%;
+      text-align: center;
+    }
+
+
+    div.welcome_kbt {
+      font-size: 3vw;
+      padding-left: 0%;
+      padding-bottom:1%;
+      padding-top:5px;
+      text-align: center;
+    }
+
+
+    span.landingSearchButton{
+        display:none;
+    }
+
+    div.externalLinks{
+       font-size:3vw;
+       white-space: nowrap;
+    }
+  }

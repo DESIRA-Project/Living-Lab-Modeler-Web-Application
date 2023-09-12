@@ -1,0 +1,17 @@
+:host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: var(--blue-450);
+}
+
+:host ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: var(--blue-450);
+}
+
+.buttons {
+  transition: all 0.6s ease-in-out;
+}
+
+@media screen and (max-width: 992px) {
+  .button-label {
+    font-size: 0.7rem;
+  }
+}

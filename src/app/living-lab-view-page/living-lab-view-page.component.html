@@ -1,0 +1,137 @@
+<navbar [toggleableSideMenu]="false"></navbar>
+
+<div style="background-color: var(--background-color)">
+
+  <main>
+    <breadcrumb [currentPage]="'ll'" [hasGapBottom]="true" [setController]="this"
+                style="padding-top: calc(0.5 * var(--base-layout-vertical-padding)); padding-inline: calc(5%)"
+    ></breadcrumb>
+  </main>
+</div>
+
+<div #mainScreen class="main" *ngIf="ready; else noReadyBlock">
+
+  <!-- Title -->
+  <div class="title">
+    {{ livingLab.name }}
+  </div>
+
+  <!-- Focal question -->
+  <div class="focal-question ml-md-5 text-md-right">
+    {{ livingLab.focalQuestion }}
+  </div>
+
+  <!-- Living lab image -->
+  <div class="row">
+    <div class="col-lg-7 living-lab-main-image">
+      <img [src]="this.defaultMainPhoto ? environment.env.ll_default_photo_landscape : livingLab.iconUrl"
+           [ngStyle]="{'height': mainPhotoHeight, 'width': mainPhotoWidth, 'max-width': mainPhotoMaxWidth}">
+    </div>
+
+    <!-- Icons -->
+    <div class="col-lg-5 badges">
+
+      <!-- SDGs -->
+      <div class="sdgs" *ngIf="livingLab.sdgs && livingLab.sdgs.length > 0">
+        <div class="sdgs-title">SUSTAINABLE DEVELOPMENT GOALS</div>
+        <div class="sdgs-grid">
+          <img *ngFor="let sdg of livingLab.sdgs" [src]="sdg.iconUrl" [matTooltip]="sdg.name"
+               [matTooltipPosition]="'above'" class="sdg">
+        </div>
+      </div>
+
+      <!-- Digital Technologies -->
+      <div class="digital-technologies" *ngIf="livingLab.digitalTechnologies && livingLab.digitalTechnologies.length > 0">
+        <div class="digital-technologies-title">DIGITAL TECHNOLOGIES</div>
+        <div class="digital-technologies-grid">
+          <img *ngFor="let digitalTechnology of livingLab.digitalTechnologies" [src]="digitalTechnology.iconUrl"
+               [matTooltip]="digitalTechnology.name" [matTooltipPosition]="'above'" class="digital-technology">
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Tabs -->
+  <mat-tab-group id="tabs" [tabIndex]="tabNo" [selectedIndex]="tabNo" mat-align-tabs="start" (selectedTabChange)="selectTab($event.index)" >
+
+    <!-- About -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="tab-title">ABOUT</span>
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="tab-content">
+          <app-living-lab-view-page-about [livingLab]="livingLab"></app-living-lab-view-page-about>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+    <!-- Stakeholders -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="tab-title">STAKEHOLDERS</span>
+      </ng-template>
+      <div class="tab-content">
+        <app-living-lab-view-page-stakeholders [livingLab]="livingLab"></app-living-lab-view-page-stakeholders>
+      </div>
+    </mat-tab>
+
+    <!-- Activities -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="tab-title">ACTIVITIES</span>
+      </ng-template>
+      <div class="tab-content">
+        <app-living-lab-view-page-activities [livingLab]="livingLab"></app-living-lab-view-page-activities>
+      </div>
+    </mat-tab>
+
+    <!-- Outcomes -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="tab-title">OUTCOMES</span>
+      </ng-template>
+      <div class="tab-content">
+        <app-living-lab-view-page-outcomes [livingLab]="livingLab"></app-living-lab-view-page-outcomes>
+      </div>
+    </mat-tab>
+
+    <!-- SCP System -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="tab-title">SOCIO CYBER PHYSICAL SYSTEM</span>
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="tab-content">
+          <app-living-lab-view-page-scp-system [livingLab]="livingLab"></app-living-lab-view-page-scp-system>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+    <!-- Socio Economic Impact -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="tab-title">SOCIO ECONOMIC IMPACT</span>
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="tab-content">
+          <app-living-lab-view-page-socio-economic-impact [livingLab]="livingLab"></app-living-lab-view-page-socio-economic-impact>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+  </mat-tab-group>
+
+</div>
+
+<ng-template #noReadyBlock>
+  <div class="container emptyContainer ">
+  <div class="row justify-content-center emptyContent" >
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+</ng-template>
+
+<app-footer></app-footer>

@@ -1,0 +1,70 @@
+<footer class="container-fluid w-100   py-1" *ngIf="pageData !== null" style="background-color:white;font-size: {{pageData.font.size}}">
+    <div id="footer" class="container">
+        <div class="row">
+            <div class="col-2">
+                <img src="{{pageData.eu.file}}" width="{{pageData.eu.w}}" height="{{pageData.eu.h}}" />
+            </div>
+            <div class="col-8" style="padding-left:55px;">
+                <div class="container">
+                    <div class="row">
+                        <div >
+                            <span>{{pageData.text.funding}}</span>
+                        </div>                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="">{{pageData.text.privacy}}</a>
+                        </div>                        
+                        <div class="col-4">
+                            <a href="">{{pageData.text["terms-of-service"]}}</a>
+                        </div>                        
+
+                        <div class="col-4">
+                            <a href="">{{pageData.text.about}}</a>
+                        </div>                        
+
+                        <div class="col-4">
+                            <a href="">{{pageData.text.contact}}</a>
+                        </div>                        
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col">
+                <img src="{{pageData.athena.file}}"  width="{{pageData.athena.w}}" height="{{pageData.athena.h}}"
+                (click)="openBrowserTab(pageData.athena.link)" style="cursor: pointer;" />
+            </div>
+        
+        </div>
+    </div>
+</footer>
+
+
+<!--
+
+<div class="d-flex flex-column">
+    <footer class="footer"  style="background-color: white;">
+        <div class="container" *ngIf="pageData !== null" >
+            <div class="row  mx-md-n5">
+                <div class="col px-md-5">
+                    <img   src="{{pageData.eu.file}}" width="{{pageData.eu.w}}" height="{{pageData.eu.h}}" />
+                </div>
+                
+               <div class="col-sm">
+                    TEXT
+                </div> 
+                <div class="col-sm">
+                    <img src="{{pageData.athena.file}}" width="{{pageData.athena.w}}" height="{{pageData.athena.h}}" />
+                </div>
+
+</div>
+</div>
+</footer>
+</div>
+
+
+-->

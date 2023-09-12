@@ -1,0 +1,56 @@
+<div *ngIf="dataReady === true && !_toggleable; else mobileBlock" class="card">
+    <div class="card-header  gnomeeFilter"> 
+      
+      <span class="categoryTitle" placement="right" ngbTooltip="{{description}}">
+      
+      {{name}} </span> </div>
+    <div class="card-body" style="height:200px;overflow-y:scroll;">
+      <div class="form-check">
+        <div *ngFor="let opt of _data.data">
+          <input type="checkbox" value="{{opt.id}}" id="{{opt.id}}" (click)="onOptionClicked(opt.id,opt.selected)"
+            class="form-check-input" [ngModel]="opt.selected" style="cursor:pointer;" [disabled]="isReadOnly">
+          <label for="{{opt.id}}" class="form-check-label" style="cursor:pointer;"> {{getLabel(opt)}} </label>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <ng-template #mobileBlock>
+    <div *ngIf="dataReady === true" class="card">
+      <div class="card-text">
+  
+        <button class="btn btn-link" type="button"   attr.data-target="#collapse_{{_id}}"
+         attr.aria-expanded="{{isToggled()}}"
+         attr.aria-controls="#collapse_{{_id}}" style="font-size:3vw;">
+      <span (click)="toggleList()">    {{name}}</span>
+        </button>
+      
+      </div>
+      
+      <div id="collapse_{{_id}}"  [ngClass]="{'show': isToggled(),'collapse':!isToggled()}">
+            <div class="card-body">
+              <div class="form-check">
+                <div *ngFor="let opt of _data.data.slice(0,maxItemsOnViewLess);">
+                  <input type="checkbox" value="{{opt.id}}" id="{{opt.id}}" (click)="onOptionClicked(opt.id,opt.selected)"
+                    class="form-check-input" [ngModel]="opt.selected" style="cursor:pointer;" [disabled]="isReadOnly">
+                  <label for="{{opt.id}}" class="form-check-label nodeName" style="cursor:pointer;"> {{getLabel(opt)}} </label>
+                </div>
+              </div>
+          </div>
+  
+          <div *ngIf="showAll == false" class="card-footer" style="cursor:pointer;">
+            <a target="_blank" class="font-weight-bold font-xs btn-block text-muted" (click)="viewAll()">View All
+              <i class="fa fa-angle-right float-right font-lg"></i></a>
+          </div>
+        
+          <div *ngIf="showAll == true && _data.data.length > defaultMaxItemsOnViewLess" style="cursor:pointer;" class="card-footer">
+            <a target="_blank" class="font-weight-bold font-xs btn-block text-muted" (click)="viewLess()">View Less
+              <i class="fa fa-angle-right float-right font-lg"></i></a>
+          </div>
+      </div>
+    </div>
+  
+  
+    
+  </ng-template>

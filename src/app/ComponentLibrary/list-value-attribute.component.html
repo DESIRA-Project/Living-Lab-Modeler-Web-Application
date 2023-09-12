@@ -1,0 +1,25 @@
+<style>
+
+    :host ::ng-deep .mat-form-field-infix {
+        border-top-width: calc(0.421875em);
+    }
+
+</style>
+
+<div class="container p-2" *ngIf="data.data.data.length > 0">
+
+    <div class="row">
+        <div class="col">
+            <div>
+                <form >
+                    <label for="{{data.data.attribute}}TextField">{{data.data.repr}} </label>
+                    <span *ngFor="let item of data.data.data;  let i = index ">
+                        <mat-form-field appearance="outline" floatLabel="never" class="w-100">
+                            <input matInput id="{{data.data.attribute}}_{{i}}" [disabled]="isReadonly">
+                        </mat-form-field>
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

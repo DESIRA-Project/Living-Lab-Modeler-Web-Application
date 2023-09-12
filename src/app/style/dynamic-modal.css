@@ -1,0 +1,54 @@
+.dynamicModal{
+/*    height:500px;*/
+}
+
+.closeButton{
+    background-color: #089C89 !important;
+    background-image: linear-gradient(to right, #089C89 , #07C19A)   !important;
+    border-color:#089C89;
+}
+
+::ng-deep .responsiveModal {
+    width: 45%;
+  }
+
+/*  .responsive-modal-width{
+    min-width: 450px;
+  }*/
+
+@media screen and (max-width: 768px) {
+    .dynamicModal{
+        height:600px;
+        position: fixed;
+        top: 10px;
+        left: 5%;
+        right: 5%;/*
+        width: 90%;
+        z-index: 99999;
+        padding: 5px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #eee;
+        border-radius: 5px;
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);*/
+    }
+
+    .responsive-modal-width{
+        min-width: unset;
+      }
+
+
+    .dynamicModalTitle{
+        font-size:4vw;
+    }
+
+    .dynamicModalContent{
+        font-size:3vw;
+    }
+
+/*    ::ng-deep .responsiveModal {
+        width: 20rem;
+      }*/
+
+}

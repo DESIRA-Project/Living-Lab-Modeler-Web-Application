@@ -1,0 +1,134 @@
+.ll-creation-section-title {
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 600;
+}
+
+.selectable-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: calc(var(--base-layout-horizontal-padding) / 2);
+  width: 250px;
+  height: 250px;
+}
+
+.open-in-new-icon {
+  position: relative;
+  bottom: -0.3rem;
+  color: var(--blue-300);
+/*  color: #089C89 !important;*/
+}
+
+.selectable-card-clicked:hover {
+  background-color: var(--background-color) !important;
+}
+
+:host ::ng-deep .mat-ripple-element {
+  z-index: -1;
+}
+
+:host ::ng-deep .mat-ripple {
+  z-index: 50;
+}
+
+:host ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: var(--blue-400);
+}
+
+:host ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: var(--blue-700);
+}
+
+.toggle-public {
+  color: var(--smart-gray);
+}
+
+.toggle-public:checked {
+  color: blue;
+}
+
+:host ::ng-deep .mat-tab-body-content {
+  overflow: auto;
+}
+
+.toggle-published {
+  color: var(--smart-gray);
+}
+
+.toggle-published:checked {
+  color: blue;
+}
+
+.tab-title {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--smart-gray);
+  font-size: 12px;
+}
+
+.tab-title-active {
+  color: var(--blue-400) !important;
+}
+
+:host ::ng-deep.mat-tab-label-active{
+  opacity: 1.0 !important;
+}
+
+:host ::ng-deep .mat-tab-label {
+  height: 54px !important;
+}
+
+:host ::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: var(--blue-400);
+}
+
+:host ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: var(--blue-400);
+}
+
+:host ::ng-deep .mat-tab-label {
+  height: 63px !important;
+}
+
+:host ::ng-deep mat-card-title {
+  margin-top: 0 !important;
+  font-size: 20px !important;
+}
+
+.data-not-ready-spinner{
+  padding-top: 100px;
+    height: 300px;
+}
+
+
+@media screen and (max-width: 768px){
+  .mini-llm-title{
+    font-size:0.8rem;
+  }
+
+  .toggle-public {
+    font-size:0.7rem;
+  }
+
+  .toggle-public:checked {
+    font-size:0.7rem;
+  }
+
+  .toggle-published {
+    font-size:0.7rem;
+  }
+
+  .toggle-published:checked {
+    font-size:0.7rem;
+  }
+
+  .submit-button-save{
+    font-size:0.7rem;
+  }
+
+  .view-link-div{
+    padding-bottom:1rem;
+  }
+}

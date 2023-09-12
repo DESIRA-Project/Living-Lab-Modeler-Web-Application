@@ -1,0 +1,21 @@
+<div *ngIf="_data !== null">
+
+      <div class="form-group" *ngIf="_data.maxLength < 100; else textAreaBlock">
+        <label for="{{_data.name}}">{{_data.value}}</label>
+        <input type="text" id="{{_data.name}}"   [(ngModel)]="_content" [attr.maxlength]="_data.maxLength" class="form-control" placeholder="{{_data.description}}" [attr.aria-label]="_data.value" 
+        aria-describedby="basiaddon1" [attr.required]="_data.required">
+        <div class="invalid-feedback" *ngIf="_data.required === true">
+            Please provide your {{_data.value.toLowerCase()}}
+         </div>
+      </div>
+
+      <ng-template #textAreaBlock>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">{{_data.value}}</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1"  [(ngModel)]="_content" rows="3" placeholder="{{_data.description}}" [attr.required]="_data.required"></textarea>
+            <div class="invalid-feedback" *ngIf="_data.required === true">
+                Please provide your {{_data.value.toLowerCase()}}
+             </div>
+            </div>
+      </ng-template>
+</div>

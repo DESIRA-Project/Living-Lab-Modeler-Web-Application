@@ -1,0 +1,166 @@
+<div style="font-size: 0.9375rem;">
+  <div class="d-flex justify-content-center w-100" *ngIf="ready">
+
+    <button mat-fab class="d-flex align-items-center justify-content-center"
+            matTooltip="Add SCP Entity" matTooltipPosition="right"
+            style="background-color: var(--blue-400); margin: 1rem 0"
+            (click)="addNewEntity()">
+      <span class="material-symbols-sharp">add</span>
+    </button>
+
+  </div>
+
+  <div class="d-flex w-100 justify-content-center flex-wrap mt-3">
+    <div class="col-12 col-md" *ngFor="let group of allGroups">
+
+      <!-- Scp category title -->
+      <h2 class="entity-group-title mb-2">
+        {{group.value}}
+        <span class="ml-2">({{entities[group.id] !== undefined ? entities[group.id].length : 0}})</span>
+      </h2>
+
+      <!-- SCP entities -->
+      <div *ngFor="let es of entities[group.id]; let i = index"
+           class="row justify-content-center mb-3 mb-lg-0"
+           style="display: flex; align-items: center; justify-content: center;"
+           [attr.data-dbgName]="group.value+'-'+es.name">
+
+        <!-- Entity name -->
+        <div class="col-12 col-xl-6 text-truncate text-center text-xl-left" [title]="getConnectionName(es.name)" style="color: var(--smart-gray);">{{getConnectionName( es.name ) }}</div>
+
+        <!-- Actions -->
+        <div class="col-12 col-xl-6 text-center text-xl-left">
+
+          <!-- Edit entity -->
+          <button class="cursor-pointer mw-0"
+                  style="color: var(--blue-400)"
+                  mat-button aria-label="Edit entity"
+                  (click)="editEntity(i,group.id)">
+            <span class="material-symbols-sharp">edit</span>
+          </button>
+
+          <!-- Delete entity-->
+          <button class="cursor-pointer mw-0"
+                  style="color: var(--red-400)"
+                  mat-button aria-label="Remove entity"
+                  (click)="removeEntity(i,group.id)">
+            <span class="material-symbols-sharp">delete</span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="container" *ngIf="!ready">
+    <div class="row justify-content-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+
+
+  <!-- Graph and SCP connections grid -->
+  <div *ngIf="ready" class="w-100 mb-2" style="margin-top: 2rem">
+
+    <div class="w-100 d-flex flex-wrap" style="padding-top: 10px;">
+
+      <!-- Graph -->
+      <div class="col-12 col-lg-7" style="margin-bottom: 15px">
+        <ll-scp-graph [controller]="this"></ll-scp-graph>
+      </div>
+
+      <!-- Connections grid -->
+      <div class="col">
+        <div class="d-flex justify-content-center align-items-center mb-4">
+
+          <!-- Connections Title -->
+          <h2 class="connections-title">
+            Connections <span class="ml-2">({{connections.length}})</span>
+          </h2>
+
+          <div class="mr-3"></div>
+
+          <button mat-mini-fab
+                  class="d-flex align-items-center justify-content-center disableable-button mw-0"
+                  matTooltip="Add SCP Connection" matTooltipPosition="right"
+                  style="background-color: var(--blue-400); color: white"
+                  (click)="newConnectionMode()"
+                  *ngIf="onNewConnectionMode === false"
+                  [disabled]="!hasMoreThanOneEntity()">
+            <span class="material-symbols-sharp">format_list_bulleted_add</span>
+          </button>
+
+          <button class="col-0" mat-mini-fab aria-label="Add a new SCP Connection"
+                  (click)="cancelConnectionMode();" *ngIf="onNewConnectionMode === true">
+            Cancel
+          </button>
+
+          <button class="col-0" mat-mini-fab aria-label="Add a new SCP Connection"
+                  [disabled]="currentConnection.source === null || currentConnection.dest === null"
+                  (click)="saveCurrentConnection()" *ngIf="onNewConnectionMode === true">
+            Save
+          </button>
+
+        </div>
+
+        <!-- Connections -->
+        <div class="row justify-content-center mb-3 mb-md-0" *ngFor="let connection of connections; let i = index">
+          <div class="w-100 d-flex align-items-center justify-content-between position-relative flex-wrap"
+               *ngIf="connection.source !== null && connection.dest !== null"
+               #tooltip="matTooltip"
+               matTooltip="{{connection.description}}"
+               [matTooltipPosition]="'left'"
+               matTooltipHideDelay="0">
+
+            <div class="col-12 col-md-8 d-flex">
+
+              <!-- Connects from -->
+              <div class="col-5 p-0 d-flex justify-content-end">
+                <div class="text-truncate" [title]="connection.source.name" style="color: var(--smart-gray);"> {{ getConnectionMiniName ( connection.source.name ) }}</div>
+              </div>
+
+              <!-- Arrow -->
+              <div class="col-2 d-flex align-items-center justify-content-center">
+                <span class="material-symbols-sharp">trending_flat</span>
+              </div>
+
+              <!-- Connects to -->
+              <div class="col-5 p-0 d-flex justify-content-start">
+                <div class="text-truncate" [title]="connection.dest.name" style="color: var(--smart-gray);"> {{ getConnectionMiniName ( connection.dest.name ) }} </div>
+              </div>
+
+            </div>
+
+            <!-- Actions -->
+            <div class="col-12 col-md-4 d-flex justify-content-center">
+
+              <!-- Edit -->
+              <button class="mw-0" style="color: var(--blue-400)" mat-button aria-label="Edit connection"
+                      (click)="editConnection(i)">
+                <span class="material-symbols-sharp">edit</span>
+              </button>
+
+              <span class="mr-2"></span>
+
+              <!-- Delete -->
+              <button style="color: var(--red-400)" class="mw-0" mat-button aria-label="Remove connection"
+                      (click)="removeConnection(i)">
+                <span class="material-symbols-sharp">delete</span>
+              </button>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="mb-2"></div>
+
+  </div>
+</div>

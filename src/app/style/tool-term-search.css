@@ -1,0 +1,22 @@
+.kbtMobile{
+    display:none;
+}
+
+@media screen and (max-width: 768px) {
+    .kbtDesktop{
+        display:none;
+    }
+
+    .kbtMobile{
+        display:unset;
+    }
+
+    button{
+        font-size:4vw;
+    }
+
+    span{
+        font-size:4vw;
+    }
+
+}

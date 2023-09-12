@@ -1,0 +1,60 @@
+<div *ngIf="dataReady === true  && !_toggleable" class="container p-2">
+
+  <div class="row">
+  <div class="col gnomeeFilter">
+    <span class="" placement="right" ngbTooltip="{{description}}">{{name}} </span>
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col dropdown">
+
+      <mat-form-field appearance="outline" class="w-100">
+          <mat-select [value]="getSelection() !== -1 ?_data.data[getSelection()].id : null" [disabled]="isReadOnly">
+              <mat-option *ngFor="let opt of rendered" [value]="opt.id" (click)="onOptionClicked(opt.id, opt.selected)" id="{{opt.id}}">
+                  {{ getLabel(opt) }}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+
+    <!--
+    <button class="btn btn-secondary dropdown-toggle" id="{{attributeName}}DropDown" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false" [disabled]="isReadOnly">
+      {{getSelection() !== -1 ? _data.data[getSelection()].name : "No "+attributeName+" selected"}}
+    </button>
+
+    <div class="dropdown-menu" attr.aria-labelledby="{{attributeName}}DropDown">
+      <div class="container">
+        <div class="row">
+          <div class="col input-group no-gutters">
+
+
+            <input type="search" action="." id="{{attributeName}}Search" name="{{attributeName}}Search" placeholder="{{name}} search"
+              (input)="onInputChange($event)" class="form-control">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col dropdown-divider"></div>
+        </div>
+        <div class="row">
+          <div class="col" style="height:200px;overflow-y:scroll;">
+&lt;!&ndash;            <div class="form-check"> &ndash;&gt;
+              <div *ngFor="let opt of rendered" class="dropdown-option" [ngClass]="{'dropdown-option-selected' : opt.selected === true}"
+              style="cursor:pointer;"  (click)="onOptionClicked(opt.id,opt.selected)"
+              >
+&lt;!&ndash;                <input type="checkbox" value="{{opt.id}}" id="{{opt.id}}" (click)="onOptionClicked(opt.id,opt.selected)"
+                  class="form-check-input" [ngModel]="opt.selected" style="cursor:pointer;" [disabled]="isReadOnly"> &ndash;&gt;
+                <label for="{{opt.id}}" class="form-check-label"    style="cursor:pointer;" > {{getLabel(opt)}} </label>
+              </div>
+    &lt;!&ndash;        </div> &ndash;&gt;
+          </div>
+        </div>
+
+      </div>
+    </div>
+    -->
+  </div>
+
+  </div>
+  </div>

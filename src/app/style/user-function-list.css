@@ -1,0 +1,106 @@
+/*mat-toolbar {
+    background: #004a9f;
+    color: white;
+}
+
+mat-sidenav {
+    margin: 16px;
+    width: 200px;
+    border-right: none;
+    background: #002b5c;
+    color: white;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+}*/
+
+.user-function-list-font{
+  font-size: 0.875rem;
+}
+
+
+.gnomee-user-sidenav {
+/*    width:190px;*/
+}
+
+.gnomee-sidenavlink {
+  color: hsl(0, 0%, 35%);
+}
+
+.gnomee-sidenavlink:hover {
+  color: hsl(0, 0%, 35%);
+  background-color: var(--gray-900);
+}
+
+.nav-link {
+  padding-inline: 0;
+}
+
+.nav-link-active {
+  border: 1px solid var(--purple);
+  color: var(--purple);
+}
+
+.nav-link-active:hover {
+  background-color: var(--background-color);
+  color: var(--purple);
+}
+
+.admin-section-title {
+  display: flex;
+  flex-direction: column;
+  margin-top: calc(var(--base-layout-vertical-padding));
+  margin-bottom: calc(var(--base-layout-vertical-padding) / 2);
+}
+
+::ng-deep .side-menu-tooltip {
+  display: none;
+  font-size: 11px;
+}
+
+@media screen and (max-width: 992px) {
+  ::ng-deep .side-menu-tooltip {
+    display: inline;
+  }
+
+  .user-function-list-font{
+    font-size:0.8rem;
+  }
+
+}
+
+.content {
+    height: calc(100vh - 98px);
+    border-radius: 10px;
+    margin: 16px;
+    margin-left: 32px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+    color: lightgray;
+}
+
+/*mat-sidenav-container {
+    height: calc(100vh - 65px);
+}*/
+
+@media screen and (max-width: 1px) {
+    .gnomee-user-sidenav{
+        width:40px;
+    }
+
+    .imgSize{
+        font-size:10px;
+    }
+
+    .gnomee-sidenavlink{
+       font-size:1.4vw;
+    }
+
+    .hideInMobile{
+        display:none;
+    }
+}

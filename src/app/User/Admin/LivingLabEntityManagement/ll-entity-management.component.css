@@ -1,0 +1,26 @@
+.tableDescription{
+    text-align:right;
+    color: gray;
+    margin-bottom: 1.25em;
+  }
+
+  ::ng-deep .addNewSCPLabelModal  .deleteSCPLabelModal .editSCPLabelModal{
+    width: 45%;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .tableDescription{
+        padding-top:2rem;
+        font-size:0.8rem;
+        text-align:unset;
+    }
+
+    ::ng-deep .addNewSCPLabelModal .deleteSCPLabelModal .editSCPLabelModal{
+      width: 20rem;
+    }
+
+    .add-new-label-button-margin{
+        margin-bottom:2rem;
+    }
+  }

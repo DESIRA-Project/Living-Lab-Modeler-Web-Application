@@ -1,0 +1,24 @@
+<div *ngIf="ready" class="d-flex justify-content-around flex-column flex-sm-row">
+
+  <div *ngFor="let d of indices;let i = index">
+    <mat-tree [dataSource]="dataSources[i]" [treeControl]="treeControl">
+      <!-- This is the tree node template for leaf nodes -->
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <!-- use a disabled button to provide padding for tree leaf -->
+        <button mat-icon-button disabled></button>
+        <mat-checkbox  [(ngModel)]="selectedNodes[node.level][node.id]" ngDefaultControl  (ngModelChange)="selectParents(node)"  [attr.data-dbgName]="node.level+'-'+node.id" >{{node.name}}</mat-checkbox>
+
+      </mat-tree-node>
+      <!-- This is the tree node template for expandable nodes -->
+      <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+      <mat-checkbox   [(ngModel)]="selectedNodes[node.level][node.id]" ngDefaultControl   (ngModelChange)="selectParents(node)"
+      [attr.data-dbgName]="node.level+'-'+node.id">{{node.name}}</mat-checkbox>
+      </mat-tree-node>
+    </mat-tree>
+  </div>
+  </div>

@@ -1,0 +1,45 @@
+<h3 mat-dialog-title style="text-align: center">
+    {{getTitle()}}
+  </h3>
+
+  <mat-dialog-content style="text-align: center">
+
+    <p>
+      <mat-form-field appearance="standard" style="width: 80%">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="name" (input)="checkIfNameExists()">
+      </mat-form-field>
+
+      <mat-error *ngIf="nameExists">
+        {{errorMessage}}
+      </mat-error>
+    </p>
+
+    <p>
+      <mat-form-field appearance="standard" style="width: 80%">
+        <mat-label>Description</mat-label>
+        <input matInput [(ngModel)]="description">
+      </mat-form-field>
+    </p>
+
+    <div class="row justify-content-center" style="padding-bottom: calc(1.34375em - 36px / 3.5)" *ngIf="showGroups">
+        <mat-chip-list #groupListBubbles *ngIf="groups.length > 0">
+    <!--        <mat-chip style="color:white;" [style.background-color]="selectedBadges[o.id] === undefined ? o.color : 'grey'" *ngFor="let o of groupOptions" (click)="selectBadge(o)">-->
+        <mat-chip style="color:white;" *ngFor="let o of groups; let i = index" (click)="selectGroup(i)"
+        [style.background-color]="selectedGroupIdIndex === i ? o.color : 'grey'"
+        >
+                {{o.value}}
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+
+
+
+    <div class="row justify-content-center">
+      <button mat-button (click)="save()" [ngStyle]="{ 'color' : !canSave() ? 'grey' : 'blue' }"  [disabled]="!canSave()" >{{getActionButtonTitle()}}</button>
+      <button mat-button (click)="close()" style="color: grey">Cancel</button>
+    </div>
+
+
+
+  </mat-dialog-content>

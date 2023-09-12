@@ -1,0 +1,85 @@
+:host ::ng-deep .mat-paginator-container {
+  padding-inline: 1rem !important;
+  justify-content: space-between !important;
+}
+
+.buttons {
+  transition: all 0.6s ease-in-out;
+}
+
+.tableDescription{
+  text-align:right;
+}
+
+.searchFilter{
+  font-size:1rem;
+  width: 90%;
+}
+
+::ng-deep .verifyStakeholderModal {
+  width: 45%;
+}
+
+::ng-deep .addStakeholderModal {
+  width: 45%;
+}
+
+::ng-deep .editStakeholderModal {
+  width: 45%;
+}
+
+
+@media screen and (max-width: 992px) {
+  .tableDescription{
+    padding-top:2rem;
+    font-size:0.8rem;
+    text-align:unset;
+  }
+
+  ::ng-deep .verifyStakeholderModal {
+    width: 20rem;
+  }
+
+  ::ng-deep .addStakeholderModal {
+    width: 20rem;
+  }
+
+  ::ng-deep .editStakeholderModal {
+    width: 20rem;
+  }
+  
+
+  .searchFilter{
+    font-size:0.8rem;
+    width: 90%;
+  }
+
+  
+  .scrollable-table {
+    overflow:auto;
+  }
+
+  .tableSection{
+    overflow:auto;
+    font-size:0.6rem;
+  }
+
+  .cellFont{
+    font-size:0.6rem;
+  }
+
+  .columnFont{
+    font-size:0.8rem;
+    white-space: nowrap;
+  }
+
+  ::ng-deep .mat-paginator-range-label{
+    margin:0!important;
+    font-size:0.6rem;
+  }
+
+  .buttonLabel{
+    font-size:0.7rem;
+  }
+  
+}

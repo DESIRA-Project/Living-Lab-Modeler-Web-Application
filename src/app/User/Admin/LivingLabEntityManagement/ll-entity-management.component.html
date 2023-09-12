@@ -1,0 +1,39 @@
+<div class="tableDescription" >
+  When a user attempts to add an SCP entity, global entities will be suggested in a dropdown list.
+</div>
+
+<ll-entity-search [setParent]="this" [setGroupingData]="groupOptions" [parentSearch]="performFilteredSearch()"></ll-entity-search>
+
+<div *ngIf="ready">
+  <ll-entity-bulk-operations [setParent]="this" [setActions]="bulkActions"></ll-entity-bulk-operations>
+</div>
+
+<div *ngIf="ready && data" style="padding-bottom: 1.25em">
+
+  <ll-entity-table [setData]="latestQueryResult" [setGroupOptions]="groupOptions" [setActions]="actions" [parentActionOnSelection]="onEntitySelection()"
+                   [parentActionOnPaginationChange]="onPaginationChange()"   [parentActionOnSortChange]="onSortChange()"
+  ></ll-entity-table>
+</div>
+
+<div *ngIf="ready" class="d-flex justify-content-center">
+
+  <button (click)="createNewSCPEntity();" mat-fab class="mx-3 d-flex justify-content-center align-items-center"
+          style="background-color: white; color: gray;"
+          matTooltip="Add a new SCP Entity" matTooltipPosition="left" class="add-new-label-button-margin">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-plus-lg"
+         viewBox="0 0 16 16">
+      <path fill-rule="evenodd"
+            d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+    </svg>
+  </button>
+
+</div>
+
+
+
+<div class="container" *ngIf="!ready">
+  <div class="row justify-content-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+

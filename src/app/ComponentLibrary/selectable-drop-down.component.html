@@ -1,0 +1,95 @@
+<style>
+
+    :host ::ng-deep .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+        transform: none !important;
+    }
+
+</style>
+<!--<div class="container p-2" *ngIf="ready">
+    <div class="row justify-content-around">
+        <div class="col-sm attributeName">
+            {{_data.data.repr}}
+        </div>
+        <div class="col-sm">
+
+            <div class="dropdown" *ngIf="!isReadOnly; else readonlyBlock">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="{{attributeName}}Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{_data.data.data[selectedIndex].value}}
+                </button>
+                <div class="dropdown-menu"  [attr.aria-labelledby]="attributeName+'Button'">
+
+                    <a class="dropdown-item" (click)="selectElement(i)" *ngFor="let d of _data.data.data; let i = index ">
+                      {{d.value}}
+                  </a>
+
+                </div>
+              </div>
+              <ng-template #readonlyBlock>
+                <span>
+                  {{_data.data.data[selectedIndex].value}}
+                </span>
+              </ng-template>
+
+        </div>
+    </div>
+</div>-->
+
+
+<div class="container p-2" *ngIf="ready">
+  <div class="row justify-content-around">
+      <div class="col attributeName">
+          {{_data.data.repr}} <span *ngIf="isRequired">*</span>
+      </div>
+</div>
+<div class="row">
+
+      <div class="col">
+<!--        <form class="needs-validation" [ngClass]="{'needs-validation': isRequired === true}"> -->
+
+          <!--<div class="dropdown" *ngIf="!isReadOnly; else readonlyBlock">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="{{attributeName}}Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{_data.data.data[selectedIndex].value}}
+              </button>
+              <div class="dropdown-menu"  [attr.aria-labelledby]="attributeName+'Button'">
+
+                  <a class="dropdown-item" (click)="selectElement(i)" *ngFor="let d of _data.data.data; let i = index ">
+                    {{d.value}}
+                </a>
+
+              </div>
+          </div>-->
+
+
+          <mat-form-field *ngIf="!isReadOnly; else readonlyBlock" appearance="outline" class="w-100">
+              <mat-select [value]="_data.data.data[selectedIndex].value">
+                  <mat-option *ngFor="let d of _data.data.data; let i = index" [value]="d.value" (click)="selectElement(i)">
+                      {{d.value}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+
+
+    <!--      </form> -->
+            <ng-template #readonlyBlock>
+                <mat-form-field appearance="outline" class="w-100">
+                <input matInput type="text" [disabled]="true" value="{{_data.data.data[selectedIndex].value}}" />
+                </mat-form-field>
+            </ng-template>
+
+</div>
+<div class="row">
+  <div *ngIf="isRequired === true && _data.data.data[selectedIndex].id === -1 && validationActive === true" class="col">
+    <div style="width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;">
+        Please select the most appropriate option.
+    </div>
+</div>
+</div>
+  </div>
+</div>
+
+
+
+

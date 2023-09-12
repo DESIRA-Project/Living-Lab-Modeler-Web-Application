@@ -1,0 +1,28 @@
+.left {
+  position: absolute;
+  left: 0;
+}
+
+.right {
+  position: absolute;
+  right: 0;
+}
+
+.entity-group-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.connections-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.material-symbols-sharp {
+  font-size: 1.5rem;
+}

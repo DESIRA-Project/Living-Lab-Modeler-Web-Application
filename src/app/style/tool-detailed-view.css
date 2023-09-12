@@ -1,0 +1,125 @@
+.attributeName{
+    color:rgb(102,102,102);
+    font-family:'Oswald';
+    font-size:1.5vw;
+}
+
+.attributeValue{
+    font-family:'Roboto';
+    font-size:1.2vw;
+}
+
+.toolName{
+    font-family:'Oswald';
+    font-size:2vw;
+    color: #089C89;
+}
+
+.mapSettings{
+    height: 90%;
+  /*  width:350px;*/
+}
+
+.toolBubbleColor{
+    color: white;
+    background-color: #a6a6a6;
+}
+
+.toolBubble{
+    font-size:1vw;
+}
+
+.first {
+    order: 1;
+}
+.second {
+    order: 2;
+}
+.third {
+    order: 3;
+}
+
+.clickable{
+    cursor:pointer;
+}
+
+div.pageTitleWithBack{
+    padding-top:2%;
+    font-size: 1.3vw;
+    /*padding-left: 50px;*/
+    text-align: center;
+}
+
+.goBackButton{
+    font-size:1.2vw;
+    color:#089C89;
+    padding-top:10px;
+    cursor:pointer;
+}
+
+.gapBetweenHeaderAndMainContent{
+    padding-top:2%;
+}
+
+@media screen and (max-width: 768px) {
+    .goBackButton{
+        font-size:4vw;
+        color:#089C89;
+        padding-top:10px;
+        cursor:pointer;
+    }
+
+    .gapBetweenHeaderAndMainContent{
+        padding-top:10%;
+    }
+
+    .toolName{
+        font-family:'Oswald';
+        font-size:6vw;
+    }
+
+    .attributeName{
+/*        color:rgb(102,102,102);
+        font-family:'Oswald';*/
+        font-size:4vw;
+    }
+
+    .attributeValue{
+     /*   font-family:'Roboto';*/
+        font-size:3vw;
+    }
+
+    .toolBubble{
+        font-size:2vw;
+    }
+
+
+    .mapSettings{
+        height: 210px;
+/*        width:100%;*/
+    }
+
+    .first {
+        order: 2;
+    }
+    .second {
+        order: 1;
+    }
+    .third {
+        order: 3;
+    }
+
+    .gapBetweenRows{
+      padding-bottom:30px;
+    }
+
+    div.pageTitle{
+        font-size:5vw;
+        padding-left:20px;
+    }
+
+    .kbtHeader{
+        display:unset;
+    }
+
+}

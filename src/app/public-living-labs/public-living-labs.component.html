@@ -1,0 +1,25 @@
+<div class="card p-2 pb-0 shadow-lg">
+  <div class="card-header">
+    Public Living Labs
+  </div>
+  <div class="card-body" *ngIf="ready">
+    <div class="layout">
+      <div *ngFor="let livingLab of publicLivingLabs" >
+        <div *ngIf="livingLab.isActive" class="living-lab-card">
+          <app-living-lab-summary-card *ngIf="livingLab.isActive"
+                                       [showButtons]="false"
+                                       [livingLabSummary]="livingLab">
+          </app-living-lab-summary-card>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: calc(0px - 1.5 * var(--base-layout-vertical-padding))"></div>
+  </div>
+
+  <div class="card-body container" *ngIf="!ready">
+    <div class="row justify-content-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,79 @@
+<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#userMenu" aria-controls="userMenu" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button> -->
+
+<!--
+
+https://getbootstrap.com/docs/5.0/examples/sidebars/
+
+-->
+
+<div class="d-flex flex-column w-100 mw-0">
+
+  <ul class="nav nav-pills flex-column mb-auto h-100 w-100 mw-0 user-function-list-font" id="userMenu" *ngIf="viewsReady && view !== null">
+
+    <li class="nav-item w-100 mw-0" *ngFor="let f of view ;let i = index">
+
+      <div *ngIf="itemCanBeViewed(f) && !f.hidden" class="mb-2 w-100 mw-0">
+
+      <!-- Administration title -->
+      <div *ngIf="i - 1>0 && view[i - 1].scope !== view[i].scope && itemCanBeViewed(view[i])"
+           class="admin-section-title" style="padding-inline: 13px; color: var(--purple)">
+        <span class="d-flex d-sm-none d-lg-flex">{{view[i].scope}}</span>
+      </div>
+
+      <!-- Normal nav items -->
+      <a target="_blank" class="nav-link gnomee-sidenavlink w-100 mw-0" aria-current="page" (click)="performNavigationTasks(i, f)"
+         style="cursor:pointer;" [ngClass]="{'nav-link-active gnomee-user-sidenav': activeItem === i && !f.children}"
+      [matTooltip]="f.desc" matTooltipPosition="right" [matTooltipClass]="'side-menu-tooltip'">
+            <span class="d-flex align-items-center justify-content-start justify-content-sm-center justify-content-lg-start mw-0 w-100" style="padding-inline: 13px" *ngIf="f.children === undefined; else showChildrenBlock">
+              <!--<i class="fas m-0 mr-lg-2 {{f.icon ? f.icon : ''}} imgSize"></i>-->
+              <span class="mr-2 m-sm-0 mr-lg-2 material-symbols-sharp mw-0">{{f.icon ? f.icon : ''}}</span>
+
+              <span class="m-0 d-flex d-sm-none d-lg-flex text-nowrap mw-0">{{f.desc}}</span>
+            </span>
+        <ng-template #showChildrenBlock>
+
+          <div (click)="openParentNode(i)">
+
+            <div class="d-flex align-items-center justify-content-center justify-content-lg-start" style="padding-inline: 13px">
+              <i class="fas m-0 mr-lg-2 {{f.icon ? f.icon : ''}} imgSize"></i>
+              <span class="d-none d-lg-inline text-nowrap"  style="margin-right: 10px"> {{f.desc}}</span>
+              <i class="fas fa-angle-right d-none d-xl-inline" *ngIf="!f.open"></i>
+              <i class="fas fa-angle-down d-none d-xl-inline" *ngIf="f.open"></i>
+
+            </div>
+          </div>
+
+        </ng-template>
+      </a>
+
+      <!-- Subcategory nav items -->
+      <ul class="nav nav-pills flex-column mb-auto h-100" *ngIf="f.open">
+        <li class="nav-item" *ngFor="let c of f.children ;let j = index" style="font-size: 12px">
+
+          <a target="_blank" class="nav-link gnomee-sidenavlink ml-0 ml-lg-3" aria-current="page" (click)="setActiveChild([i,j])"
+             style="cursor:pointer;" [ngClass]="{'nav-link-active gnomee-user-sidenav': activeItem === i && activeChild === j}"
+             [ngStyle]="{'margin-top': j === 0 ? '10px' : '5px' }" *ngIf="itemCanBeViewed(c)"
+             [matTooltip]="c.desc" matTooltipPosition="right" [matTooltipClass]="'side-menu-tooltip'">
+                <div class="d-flex align-items-center justify-content-center justify-content-lg-start" style="padding-inline: 13px">
+                  <!--<i class="fas m-0 mr-lg-2 {{c.icon ? c.icon : ''}} imgSize"></i>-->
+                  <span class="m-0 mr-lg-2  row material-symbols-sharp">{{c.icon ? c.icon : ''}}</span>
+                  <span class="d-none d-lg-inline text-nowrap">
+                    {{c.desc}}
+                  </span>
+                </div>
+          </a>
+
+        </li>
+      </ul>
+
+      </div>
+
+    </li>
+
+  </ul>
+
+  <hr>
+
+</div>

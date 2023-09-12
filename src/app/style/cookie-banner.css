@@ -1,0 +1,172 @@
+.cookie-button{
+    background-color: #089C89 !important;
+    background-image: linear-gradient(to right, #089C89 , #07C19A)   !important;
+}
+
+.cookie-button-color{
+    background-color: #089C89 !important;
+}
+.cookie-banner{
+    position: fixed;
+    bottom: 0%;
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    z-index: 99999;
+    padding: 5px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.cookie-message{
+    /*font-size:0.8vw;*/
+}
+
+.content{
+    /*font-size:0.9vw;*/
+}
+
+.cookie-table{
+    border: 1px solid #d8d8d8;
+}
+
+.cookie-category{
+    /*font-size:0.8vw;*/
+}
+
+.cookie-name{
+    font-weight:bold;
+}
+
+.clickable{
+    cursor:pointer;
+}
+
+.selected-row{
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.selected-row-content{
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.c-switch-success{
+    color:#089C89;
+}
+
+/*.lala{
+    background-color: red;
+    border-color: red;
+}*/
+
+.gnomeeSwitch .c-switch-input:checked+.c-switch-slider {
+/*    background-color: red;
+    border-color: red;
+*/
+    background-color: #089C89 !important;
+    background-image: linear-gradient(to right, #089C89 , #07C19A)   !important;
+    border-color: #089C89;
+}
+
+.always-enabled{
+    color:#089C89;
+    font-weight: bold;
+}
+
+.cookie-description{
+    /*font-size:0.8vw;*/
+    background-color: #F8F8F8;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .cookie-message{
+        /*font-size:2vw;*/
+    }
+
+    .content{
+        /*font-size:3vw;*/
+    }
+
+    .cookie-category{
+        /*font-size:3vw;*/
+    }
+
+    .cookie-description{
+        /*font-size:3vw;*/
+        background-color: #F8F8F8;
+    }
+
+    .cookie-button-font{
+        font-size:0.7rem;
+    }
+
+    .cookie-banner{
+        position: fixed;
+        bottom: 0px;
+        left: 5%;
+        right: 5%;
+        width: 90%;
+        z-index: 99999;
+        padding: 5px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    }
+
+}
+
+.close-button {
+  color: hsl(0, 0%, 45%) !important;
+  font-size: 28px !important;
+}
+
+.close-button:hover {
+  color: hsl(0, 0%, 30%) !important;;
+  cursor: pointer;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: var(--blue-400);
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: var(--blue-700);
+}
+
+.toggle {
+  color: var(--smart-gray);
+}
+
+.toggle:checked {
+  color: blue;
+}
+
+::ng-deep .mat-expansion-panel {
+  border: 1px solid var(--blue);
+}
+
+::ng-deep .mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none !important;
+}
+
+::ng-deep .mat-expansion-indicator {
+  display: flex;
+  align-items: center;
+}
+
+ ::ng-deep .mat-expansion-panel-header-description {
+  flex-grow: 1 !important;
+}

@@ -1,0 +1,77 @@
+<div class="d-flex flex-column align-items-center">
+
+
+  <!--<div class="ll-creation-section-title"> {{ title }} </div>-->
+
+
+  <div class="d-flex flex-wrap justify-content-center" *ngIf="ready">
+
+    <ng-container *ngFor="let row of digitalTechnologiesPerRow">
+
+      <ng-container *ngFor="let digitalTechnology of row">
+
+        <mat-card (click)="selectEntity(digitalTechnology.id)" 
+                  matRipple
+                  [matRippleDisabled]="selectedEntityIds[digitalTechnology.id] !== undefined && selectedEntityIds[digitalTechnology.id] !== false"
+                  matRippleColor="var(--light-gray)"
+                  [ngStyle]="{'background-color': selectedEntityIds[digitalTechnology.id] === undefined ||
+                  selectedEntityIds[digitalTechnology.id] === false ? 'white' : 'var(--light-gray)' }"
+                  [ngClass]="selectedEntityIds[digitalTechnology.id] === undefined ||
+                  selectedEntityIds[digitalTechnology.id] === false ? 'selectable-card-clicked' : ''"
+                  class="selectable-card cursor-pointer"
+                  >
+
+            <img *ngIf="digitalTechnology.iconUrl && digitalTechnology.iconUrl !== 'undefined'" style="height: 50px; width: 50px" useCache="false" [src]="digitalTechnology.iconUrl" alt="Digital Technology Img">
+            <mat-card-title><span [title]="digitalTechnology.name" class="dots-after-3-lines text-center">{{digitalTechnology.name}}</span></mat-card-title>
+            <mat-card-subtitle><span [title]="digitalTechnology.description" class="dots-after-4-lines text-center">{{digitalTechnology.description}}</span></mat-card-subtitle>
+
+        </mat-card>
+
+      </ng-container>
+
+    </ng-container>
+
+  </div>
+
+  <div *ngIf="!ready">
+    <mat-spinner></mat-spinner>
+  </div>
+
+</div>
+
+<!--
+<div class="container">
+    <div class="row justify-content-center"><div class="ll-creation-section-title">{{title}}</div></div>
+
+
+                <div class=" row container">
+                    <div class="row justify-content-center" *ngFor="let row of digitalTechnologiesPerRow">
+                      <div class="col-md-6 col-xl-3" style="height: 220px; padding: 12px" *ngFor="let digitalTechnology of row">
+                        <mat-card style="height: 100%;cursor:pointer;" (click)="selectEntity(digitalTechnology.id)"
+                        [ngStyle]="{'background-color': selectedEntityIds[digitalTechnology.id] === undefined ||
+                        selectedEntityIds[digitalTechnology.id] === false ? 'white' : 'grey' }">
+
+                          <div class="row justify-content-center" style="margin-bottom: 10px">
+                            <img style="height: 50px; width: 50px" useCache="false" [src]="digitalTechnology.iconUrl" alt="Digital Technology Img">
+                          </div>
+
+                          <div style="height: 200px; width: 100%; text-align: center">
+                            <mat-card-title><span [title]="digitalTechnology.name" class="dots-after-3-lines">{{digitalTechnology.name}}</span></mat-card-title>
+                            <mat-card-subtitle><span [title]="digitalTechnology.description" class="dots-after-4-lines">{{digitalTechnology.description}}</span></mat-card-subtitle>
+                          </div>
+
+                        </mat-card>
+                      </div>
+                    </div>
+                  </div>
+
+
+        <div class="container" *ngIf="!ready">
+            <div class="row justify-content-center">
+                <mat-spinner></mat-spinner>
+            </div>
+        </div>
+
+
+</div>
+-->

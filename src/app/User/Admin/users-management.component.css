@@ -1,0 +1,44 @@
+:host ::ng-deep .mat-paginator-container {
+  padding-inline: 1rem !important;
+  justify-content: space-between !important;
+}
+
+::ng-deep .editUserModal .deleteUserModal .viewUserModal {
+  width: 45%;
+}
+
+@media screen and (max-width: 992px) {
+  .table-section{
+    overflow:auto;
+    font-size:0.6rem;
+  }
+
+  .table-gap{
+    margin-bottom:2rem;
+  }
+
+  .cell-font{
+    font-size:0.6rem;
+  }
+
+  .column-font{
+    font-size:0.8rem;
+    white-space: nowrap;
+  }
+
+
+  .scrollable-table {
+    overflow:auto;
+    margin-top:2rem;
+  }
+
+  ::ng-deep .mat-paginator-range-label{
+    margin:0!important;
+    font-size:0.6rem;
+  }
+
+  ::ng-deep .editUserModal .deleteUserModal .viewUserModal {
+    width: 20rem;
+  }
+  
+}

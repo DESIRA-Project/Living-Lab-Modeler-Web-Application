@@ -1,0 +1,77 @@
+<div [ngClass]="chipText || livingLabSummary.isPublic ? 'cursor-pointer' : ''"
+     (click)="(chipText || livingLabSummary.isPublic) && navigateToLivingLab()">
+
+  <mat-card class="mat-card card-wrapper">
+
+    <!-- Photo -->
+    <img [src]="livingLabSummary.iconUrl ? livingLabSummary.iconUrl : environment.env.ll_default_photo_square"
+         class="photo">
+
+    <!-- Body -->
+    <div class="body">
+
+      <!-- Title -->
+      <div class="title" [title]="livingLabSummary.name">
+        {{ livingLabSummary.name }}
+      </div>
+
+            <!-- Role chip text -->
+            <div *ngIf="livingLabSummary.members" class="top-right-chip">
+              <mat-chip-list>
+                <mat-chip disabled style="opacity: 0.9"
+                          matTooltip="Show Living Lab Information"
+                          matTooltipPosition="above" style="cursor: pointer" (click)="$event.stopPropagation();openLLInfoModal()">
+                 i
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+
+      <!-- Description -->
+      <div class="description" [title]="livingLabSummary.focalQuestion">
+        {{ livingLabSummary.focalQuestion }}
+      </div>
+
+      <div  class="left-side-buttons" [matTooltip]="livingLabSummary.isActive ? 'Deactivate' : 'Activate'">
+        <button mat-icon-button
+                matTooltipPosition="right"
+                (click)="$event.stopPropagation(); switchActivation()">
+          <span class="material-symbols-sharp d-flex align-items-center justify-content-center red-text" *ngIf="livingLabSummary.isActive">
+            visibility_off
+          </span>
+
+          <span class="material-symbols-sharp d-flex align-items-center justify-content-center blue-text" *ngIf="!livingLabSummary.isActive">
+            visibility
+          </span>
+
+        </button>
+      </div>
+
+
+      <div  class="middle-side-buttons"
+      [matTooltip]="'Edit'">
+        <button mat-icon-button
+                matTooltipPosition="right"
+                (click)="$event.stopPropagation(); editLivingLab()">
+          <span class="material-symbols-sharp d-flex align-items-center justify-content-center blue-text">
+            edit
+          </span>
+        </button>
+      </div>
+
+      
+      <div  class="right-side-buttons"
+      [matTooltip]="'Delete'">
+        <button mat-icon-button
+                matTooltipPosition="right"
+                (click)="$event.stopPropagation(); deleteLivingLab()">
+          <span class="material-symbols-sharp d-flex align-items-center justify-content-center red-text">
+            delete
+          </span>
+        </button>
+      </div>
+
+    </div>
+
+  </mat-card>
+
+</div>

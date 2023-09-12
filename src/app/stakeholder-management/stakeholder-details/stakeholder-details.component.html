@@ -1,0 +1,97 @@
+<h3 *ngIf="!editing" style="text-align: center;  margin-bottom: 0" class="titleGap">
+  {{title}}
+</h3>
+
+<h3 *ngIf="!editing && stakeholder.description" style="text-align: center; margin-bottom: 0" class="titleGap">
+  {{getLimitedDescription (stakeholder.description ) }}
+</h3>
+
+<div class="d-flex justify-content-center">
+  <a [href]="stakeholder.link" target="_blank" *ngIf="!editing && stakeholder.link" class="titleGap">
+    {{getLimitedLink (stakeholder.link ) }}
+  </a>
+</div>
+
+<div *ngIf="editing" style="text-align: center;" class="titleGap">
+  <mat-form-field style="width: 33%">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="stakeholder.name" #name>
+  </mat-form-field>
+</div>
+
+<div *ngIf="editing" style="text-align: center;" class="titleGap">
+  <mat-form-field style="width: 33%">
+    <mat-label>Description</mat-label>
+    <input matInput [(ngModel)]="stakeholder.description" #name>
+  </mat-form-field>
+</div>
+
+<div *ngIf="editing" style="text-align: center;" class="titleGap">
+  <mat-form-field style="width: 33%">
+    <mat-label>Link</mat-label>
+    <input matInput [(ngModel)]="stakeholder.link" #link>
+  </mat-form-field>
+</div>
+
+<div style="overflow: auto;" class="mb-3 main-content">
+  <table mat-table style="width: 100%" [dataSource]="stakeholderLivingLabs" class="mat-elevation-z8">
+
+    <!-- User Name -->
+    <ng-container matColumnDef="addedByUserName">
+      <th mat-header-cell *matHeaderCellDef class="table-column"> Added by </th>
+      <td mat-cell class="table-cell" *matCellDef="let element"> {{element.addedByUserName}} </td>
+    </ng-container>
+
+    <!-- Added At -->
+    <ng-container matColumnDef="addedAt">
+      <th mat-header-cell *matHeaderCellDef class="table-column"> Added at </th>
+      <td mat-cell class="table-cell" *matCellDef="let element"> {{ element.addedAt | date:'medium' }} </td>
+    </ng-container>
+
+    <!-- Living Lab Name -->
+    <ng-container matColumnDef="livingLabName">
+      <th mat-header-cell *matHeaderCellDef class="table-column"> Living Lab </th>
+      <td mat-cell  class="table-cell" *matCellDef="let element"> {{element.livingLabName}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>
+
+<div class="row justify-content-between">
+  <div class="col-lg text-center text-lg-left">
+
+    <!-- Invisible button for dealing with weird autofocus bug -->
+    <button mat-raised-button style="min-width: 0; width: 0; height: 0; padding: 0; outline: none" class="buttonLabel"></button>
+
+    <!-- Edit -->
+    <button *ngIf="!editing" (click)="edit()" class="mr-3" mat-raised-button style="color: gray" class="buttonLabel">
+      Edit
+    </button>
+
+    <!-- Save -->
+    <button *ngIf="editing" (click)="save()" class="mr-3" mat-raised-button style="color: gray" class="buttonLabel">
+      Save
+    </button>
+
+    <!-- Delete -->
+    <button matTooltip="Stakeholder must not be included in any living labs in order to be able to delete it" matTooltipPosition="right" [disabled]="stakeholderLivingLabs.length !== 0" (click)="delete()" class="mr-3 buttonLabel gapBetweenButtons" mat-raised-button style="color: gray">
+      Delete
+    </button>
+  </div>
+
+  <div class="col-lg text-center text-lg-right mt-3 mt-lg-0">
+
+    <!-- Verify -->
+    <button *ngIf="!moderated" (click)="moderate()" mat-raised-button style="background-color: var(--blue-400); color: white" class="buttonLabel">
+      Set Scope Public
+    </button>
+
+    <!-- Unverify -->
+    <button *ngIf="moderated" (click)="moderate()" mat-raised-button style="background-color: var(--blue-400); color: white" class="buttonLabel">
+      Set Scope Private
+    </button>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="d-flex flex-column">
+
+  <div class="d-flex justify-content-center">
+    <h3>Join Request Form</h3>
+  </div>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Living Lab</mat-label>
+    <input disabled [value]="data.ll.name" matInput>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard" floatLabel="always">
+    <mat-label>Accompanying Text</mat-label>
+    <textarea cdkTextareaAutosize [(ngModel)]="text" matInput placeholder="(Optional)"></textarea>
+  </mat-form-field>
+
+  <div class="d-flex justify-content-end">
+    <button mat-button mat-dialog-close (click)="submitRequest()">SEND</button>
+    <button mat-button mat-dialog-close>CANCEL</button>
+  </div>
+
+</div>

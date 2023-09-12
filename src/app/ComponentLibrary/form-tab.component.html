@@ -1,0 +1,24 @@
+<div id="{{alertId}}" class="alert alert-dismissible fade show {{requestStatusClass}}" role="alert" *ngIf="alert !== null">
+    {{alert.msg}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<form class="needs-validation" *ngIf="_data !== null" novalidate>
+    <div *ngFor="let d of _data.data">
+        <div *ngIf="d.type === 'string';else emailBlock">
+            <string-attribute  [data]="d" [parent]="this"></string-attribute>
+        </div>
+        <ng-template #emailBlock>
+            <div *ngIf="d.type === 'email'">
+                <email-string-attribute [data]="d" [parent]="this"></email-string-attribute>
+            </div>
+        </ng-template>
+    </div>
+    <div id="formSubmit">
+        <div id="rc" class="form-group"></div>
+        <button *ngIf="_data.action !== undefined" class="btn btn-primary gnomeeButton" type="submit" (click)="performValidation()" 
+        [disabled]="(!recaptchaClicked && usesRecaptcha)">Submit</button>
+    </div>
+</form>

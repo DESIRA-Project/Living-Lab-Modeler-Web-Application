@@ -1,0 +1,138 @@
+[
+    {
+        "id": "1",
+        "name": "No Poverty",
+        "description": "End poverty in all its forms everywhere",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\iVSeHCo.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-01.png",
+        "link": "https://sdgs.un.org/goals/goal1"
+    },
+    {
+        "id": "2",
+        "name": "Zero Hunger",
+        "description": "End hunger, achieve food security and improved nutrition and promote sustainable agriculture",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\EPXTccR.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-02.png",
+        "link": "https://sdgs.un.org/goals/goal2"
+    },
+    {
+        "id": "3",
+        "name": "Good Health and Well Being",
+        "description": "Ensure healthy lives and promote well-being for all at all ages",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\NnYpRRr.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-03.png",
+        "link": "https://sdgs.un.org/goals/goal3"
+    },
+    {
+        "id": "4",
+        "name": "Quality Education",
+        "description": "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\cRdqwcr.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-04.png",
+        "link": "https://sdgs.un.org/goals/goal4"
+    },
+    {
+        "id": "5",
+        "name": "Gender Equality",
+        "description": "Achieve gender equality and empower all women and girls",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\kzUtpva.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-05.png",
+        "link": "https://sdgs.un.org/goals/goal5"
+    },
+    {
+        "id": "6",
+        "name": "Clean Water and Sanitation",
+        "description": "Ensure availability and sustainable management of water and sanitation for all",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\QfrUnLw.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-06.png",
+        "link": "https://sdgs.un.org/goals/goal6"
+    },
+    {
+        "id": "7",
+        "name": "Affordable and Clean Energy",
+        "description": "Ensure access to affordable, reliable, sustainable and modern energy for all",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\gCQjiBZ.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-07.png",
+        "link": "https://sdgs.un.org/goals/goal7"
+    },
+    {
+        "id": "8",
+        "name": "Decent Work and Economic Growth",
+        "description": "Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\KbzdToI.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-08.png",
+        "link": "https://sdgs.un.org/goals/goal8"
+    },
+    {
+        "id": "9",
+        "name": "Industry Innovation and Infrastructure",
+        "description": "Build resilient infrastructure, promote inclusive and sustainable industrialization and foster innovation",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\eJFEPzJ.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-09.png",
+        "link": "https://sdgs.un.org/goals/goal9"
+    },
+    {
+        "id": "10",
+        "name": "Reduced Inequalities",
+        "description": "Reduce inequality within and among countries",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\emAtHPg.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-10.png",
+        "link": "https://sdgs.un.org/goals/goal10"
+    },
+    {
+        "id": "11",
+        "name": "Sustainable Cities and Communities",
+        "description": "Make cities and human settlements inclusive, safe, resilient and sustainable",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\znugZfs.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-11.png",
+        "link": "https://sdgs.un.org/goals/goal11"
+    },
+    {
+        "id": "12",
+        "name": "Responsible Consumption and Production",
+        "description": "Ensure sustainable consumption and production patterns",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\cZJkfmq.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-12.png",
+        "link": "https://sdgs.un.org/goals/goal12"
+    },
+    {
+        "id": "13",
+        "name": "Climate Action",
+        "description": "Take urgent action to combat climate change and its impacts",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\wveLTAK.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-13.png",
+        "link": "https://sdgs.un.org/goals/goal13"
+    },
+    {
+        "id": "14",
+        "name": "Life Below Water",
+        "description": "Conserve and sustainably use the oceans, seas and marine resources for sustainable development",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\JjKCrAx.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-14.png",
+        "link": "https://sdgs.un.org/goals/goal14"
+    },
+    {
+        "id": "15",
+        "name": "Life On Land",
+        "description": "Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\vBPMegD.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-15.png",
+        "link": "https://sdgs.un.org/goals/goal15"
+    },
+    {
+        "id": "16",
+        "name": "Peace, Justice and Strong Institutions",
+        "description": "Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable and inclusive institutions at all levels",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\EyXzxxV.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-16.png",
+        "link": "https://sdgs.un.org/goals/goal16"
+    },
+    {
+        "id": "17",
+        "name": "Partnerships For The Goals",
+        "description": "Strengthen the means of implementation and revitalize the global partnership for sustainable development",
+        "iconUrl": "http://localhost:8080/assets/SDGs\\WUExgWX.png?t=1674659486390",
+        "originalIconName": "E-WEB-Goal-17.png",
+        "link": "https://sdgs.un.org/goals/goal17"
+    }
+]

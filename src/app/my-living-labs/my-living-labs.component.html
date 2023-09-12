@@ -1,0 +1,65 @@
+<div  [ngClass]="{'card p-2 shadow-lg' : renderInCard}" style="padding-bottom: 0 !important;">
+  <div   [ngClass]="{'card-header' : renderInCard}" *ngIf="renderInCard" >
+    My Living Labs
+  </div>
+  <div  *ngIf="!renderInCard" style="margin-bottom:100px;">
+  </div>
+
+  <div class=" d-flex justify-content-center align-items-center flex-column" [ngClass]="{'card-body' : renderInCard}" *ngIf="ready" style="padding-bottom: 0 !important">
+
+    <!-- Filter by only if there are at least two categories -->
+    <div *ngIf="(creatorOf.length > 0 ? 1 : 0) + llUserRolesIds.length >= 2" class="d-flex justify-content-center align-items-center w-100 filters">
+      <div class="mr-2">
+        Filter by role:
+      </div>
+      <mat-chip-list aria-label="Fish selection">
+        <mat-chip (click)="filterByCreator()"
+                  [ngStyle]="roleIdOfActiveFilter === 0 ? {'background-color': 'var(--blue-600)'} : {}">
+          Living Lab Creator
+          <mat-icon matChipRemove *ngIf="roleIdOfActiveFilter === 0" (click)="clearFilter()">cancel</mat-icon>
+        </mat-chip>
+        <mat-chip (click)="filterByRoleId(id)"
+                  *ngFor="let id of llUserRolesIds"
+                  [ngStyle]="roleIdOfActiveFilter === id ? {'background-color': 'var(--blue-600)'} : {}">
+          {{llUserRoles[id]}}
+          <mat-icon matChipRemove *ngIf="roleIdOfActiveFilter === id" (click)="clearFilter()">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+
+    </div>
+
+    <!-- Zero living labs display message -->
+    <div *ngIf="displayedLivingLabs.length === 0" class="no-content-found">
+      <div style="margin-bottom: 1.25rem;">
+        You don't participate in any living labs yet.
+      </div>
+    </div>
+
+    <!-- Living lab grid-->
+    <div *ngIf="displayedLivingLabs.length > 0" class="layout h-100">
+      <div *ngFor="let livingLab of displayedLivingLabs" class="d-flex">
+        <div *ngIf="livingLab.isActive" class="living-lab-card d-flex">
+          <app-living-lab-summary-card *ngIf="livingLab.isActive"
+                                       [livingLabSummary]="livingLab"
+                                       [chipText]="livingLab.chipText"
+                                       (onChanges)="fetchLLs();"
+                                       [setParent]="this">
+          </app-living-lab-summary-card>
+        </div>
+
+        <div *ngIf="!livingLab.isActive" class="living-lab-card d-flex">
+         <deactivated-living-lab-summary-card   [livingLabSummary]="livingLab" >
+
+         </deactivated-living-lab-summary-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" [ngClass]="{'card-body' : renderInCard}" *ngIf="!ready">
+    <div class="row justify-content-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,45 @@
+<div>
+    <ng-template class="modal fade" let-modal id="dynamicModal" #dynamicContent tabindex="-1" role="dialog"
+        aria-labelledby="filterModalTitle" aria-hidden="true">
+        <div>
+        <div class="modal-dialog-scrollable d-flex align-items-center justify-content-center" [ngClass]="{'dynamicModal' : fullHeight === false}" role="document"
+            *ngIf="configData">
+            <div class="modal-content responsive-modal-width">
+                <div class="modal-header d-flex align-items-center">
+                    <div class="container">
+                        <div class="row">
+                            <span class="col-7-sm modal-title dynamicModalTitle"
+                                *ngIf="title !== null">{{title}}</span>
+
+                                <span class="col" *ngIf="usesRecaptcha && recaptchaLogo">
+
+                                    <img src="{{recaptchaLogo.file}}" width="{{recaptchaLogo.width}}" height="{{recaptchaLogo.height}}">
+                                </span>
+                        </div>
+                    </div>
+                    <button type="button" class="close row" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+                        <span class="material-symbols-sharp">close</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div>
+                        <dynamic-content-section [item]="_modalData" [parent]="this"></dynamic-content-section>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button mat-button data-dismiss="modal"
+                        (click)="closeModal()">{{closeButtonText}}</button>
+
+                    <button mat-button *ngFor="let b of buttons" [disabled]="b.onChange && !b.onChange() ? 'disabled' : null" class="{{b.style}}"
+                        [style.cursor]="b.onChange && !b.onChange() ? 'not-allowed' : 'pointer' " (click)="b.cb()">
+                            {{b.title}}
+                        </button>
+
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </ng-template>
+</div>

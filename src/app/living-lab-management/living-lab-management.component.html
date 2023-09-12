@@ -1,0 +1,88 @@
+<div  [ngClass]="{'card p-2 pb-0 shadow-lg' : renderInCard}">
+    <div  [ngClass]="{'card-header' : renderInCard}" *ngIf="renderInCard" >
+      All Living Labs
+    </div>
+    <div  [ngClass]="{'card-body' : renderInCard}">
+  
+  
+      <!-- Filter by only if there are at least two categories -->
+      <div class="d-flex justify-content-center align-items-center w-100 filters flex-column flex-xl-row paddingTop" (keyup.enter)="onEnterPress()">
+        <div class="mr-2 chip-label">
+          Show:
+        </div>
+
+        <span class="d-block d-xl-none mb-1"></span>
+
+        <mat-chip-list aria-label="Filter selection" class="mr-2">
+          <mat-chip (click)="applyFilters()"
+                    class="mr-2 chip-label"
+                    [ngStyle]="showAll ? {'background-color': 'var(--blue-600)'} : {}">
+            All Living Labs
+          </mat-chip>
+  
+          <mat-chip (click)="applyDeactivated();"
+                    class="mr-2 chip-label"
+                    [ngStyle]="showAllDeactivated ? {'background-color': 'var(--blue-600)'} : {}">
+                    All Deactivated Living Labs
+            <mat-icon matChipRemove *ngIf="showAllOnJoinRequest "
+              (click)="clearShowAllOnJoinRequestFilter()">cancel</mat-icon>
+          </mat-chip>
+  
+        </mat-chip-list>
+  
+  
+        <mat-form-field class="mr-2 searchLabel">
+          <mat-label>Type a keyword</mat-label>
+          <input matInput type="text" [(ngModel)]="value">
+          <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon (click)="clearValue()">close</mat-icon>
+          </button>
+        </mat-form-field>
+  
+        <div style="margin-bottom: 0.25rem">
+          <button mat-flat-button class="blue-button mr-2 buttonLabel" (click)="performSearch();" [disabled]="!canSearchAnew()" >Search</button>
+          <button mat-flat-button class="blue-button buttonLabel" (click)="clearValue();" [disabled]="value === ''" style="margin-inline: 5px">Clear</button>
+        </div>
+  
+      </div>
+  <div *ngIf="ready">
+      <!-- Zero living labs display message -->
+      <div *ngIf="livingLabs.length === 0" class="no-content-found layout">
+        <div style="margin-bottom: 1.25rem;">
+          <span *ngIf="showAllOnJoinRequest">You don't have any open join requests to participate in any Living Labs.</span>
+          <span *ngIf="!showAllOnJoinRequest">No Living Labs found.</span>
+        </div>
+      </div>
+  
+  
+      <div class="layout">
+        <div *ngFor="let livingLab of livingLabs">
+          <div class="living-lab-card">
+            <managed-living-lab-summary-card [setParent]="this" [showButtons]="true" [livingLabSummary]="livingLab" [chipText]="getUserLLRole(livingLab)"
+            [showPrivacy]="true"
+            >
+            </managed-living-lab-summary-card>
+          </div>
+        </div>
+  
+      </div>
+  
+      <div class="container d-flex justify-content-center align-items-center w-100 filters" >
+      <div class="row justify-content-center" style="margin-top: 0.625em" *ngIf="hasMore()">
+        <div class="col">
+        <button mat-flat-button class="blue-button buttonLabel loadMoreButtonGap" (click)="showMore()" style="margin-inline: 5px">Show more</button>
+      </div>
+      </div>
+    </div>
+  
+      <div style="margin-top: calc(0px - 1.5 * var(--base-layout-vertical-padding))"></div>
+    </div>
+  </div>
+    <div  class=" container"  *ngIf="!ready"  [ngClass]="{'card-body' : renderInCard}">
+      <div class="row justify-content-center">
+        <mat-spinner></mat-spinner>
+      </div>
+    </div>
+  
+  </div>
+  

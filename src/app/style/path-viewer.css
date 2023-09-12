@@ -1,0 +1,67 @@
+.contentTitle{
+    font-size:1.8vw;
+    text-align: center;
+}
+
+.browse-by{
+    font-size:1vw;
+    font-weight: bold;
+}
+
+.card-container-position{
+    margin-top:2%;
+}
+
+.goBackButton{
+    font-size:1.2vw;
+    color:#089C89;
+    padding-top:10px;
+    cursor:pointer;
+}
+
+.gapBetweenRows{
+    margin-bottom: 30px;
+}
+
+.gapBetweenRowsTop{
+    margin-top: 30px;
+}
+
+.gnomeeButton{
+    background-color: #089C89 !important;
+    background-image: linear-gradient(to right, #089C89 , #07C19A)   !important;
+    border-color:#089C89;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .goBackButton{
+        font-size:4vw;
+        color:#089C89;
+        padding-top:10px;
+        cursor:pointer;
+    }
+
+    .contentTitle{
+        font-size:5vw;
+    }
+
+    .card-container-center{
+        margin-left:unset;
+    }
+
+    .browse-by{
+        font-size:3vw;
+        font-weight: bold;
+    }
+
+    .align-container{
+        text-align: center;
+    }
+
+    .gapBetweenCols{
+        padding-top:20px;
+    }
+
+}

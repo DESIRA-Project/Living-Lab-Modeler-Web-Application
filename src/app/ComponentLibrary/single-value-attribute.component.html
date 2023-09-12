@@ -1,0 +1,26 @@
+<div class="container" *ngIf="data !== null">
+    <div class="row justify-content-around">
+        <div class="col-md-3 attributeName">
+            {{data.data.repr}}
+        </div>
+        <div class="col-md-4" *ngIf="data.data.type === 'boolean-value'; else stringBlock">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="{{data.data.attribute}}CheckBox" (click)= "disableClick();" 
+                [ngModel]="data.data.data !== null">
+              </div>
+        </div>
+
+        <ng-template #stringBlock>
+            <div *ngIf="data.data.type !== 'date-value'; else dateBlock" class="col-md-4 attributeValue">
+            {{capitalizeFirstLetter ( data.data.data ) }}
+            </div>
+
+            <ng-template #dateBlock>
+                <div class="col-md-4 attributeValue">
+                {{data.data.data | date:'dd/MM/yyyy'}}
+                    </div>
+            </ng-template>
+        </ng-template>
+    </div>
+
+</div>

@@ -1,0 +1,91 @@
+<h3 mat-dialog-title style="text-align: center" class="mb-1">
+  {{title}}
+</h3>
+
+<mat-dialog-content style="text-align: center">
+
+  <mat-form-field floatLabel="never">
+    <mat-label>Add</mat-label>
+    <mat-select  required  (selectionChange)="uiModeChanged($event)">
+      <!--<mat-option value="none"></mat-option>-->
+      <mat-option value="existing">Existing Stakeholder</mat-option>
+      <mat-option value="new">New Stakeholder</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="isOnAddNewStakeholderMode(); else AddExistingStakeholderBlock">
+    <p>
+      <mat-form-field style="width: 80%">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="stakeholder.name">
+        <mat-hint *ngIf="onInputError()">{{hintMessage}}</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field style="width: 80%">
+        <mat-label>Description</mat-label>
+        <textarea cdkTextareaAutosize matInput [(ngModel)]="stakeholder.description"></textarea>
+      </mat-form-field>
+    </p>
+
+    <p *ngIf="stakeholderRoles.length > 0">
+      <mat-form-field style="width: 80%">
+        <mat-label>Role</mat-label>
+        <mat-select [(value)]="selectedRole">
+          <mat-option value="{{role.id}}" *ngFor="let role of stakeholderRoles" >
+            {{role.name}}
+          </mat-option>
+        </mat-select>
+        <mat-hint *ngIf="roleNotSet">{{noRoleSelectedMessage}}</mat-hint>
+      </mat-form-field>
+    </p>
+  </div>
+
+  <ng-template #AddExistingStakeholderBlock>
+    <mat-dialog-content *ngIf="isOnAddExistingStakeholderMode()">
+      <div>
+        <p>
+          <mat-form-field style="width: 80%">
+            <mat-label>Name</mat-label>
+            <input matInput [formControl]="stakeholderControl" [matAutocomplete]="auto" (click)="showAllOptionsOnFocus()">
+          </mat-form-field>
+
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let stakeholder of stakeholders" [value]="stakeholder.id">
+              {{stakeholder.name}}
+            </mat-option>
+          </mat-autocomplete>
+
+        </p>
+
+        <p>
+          <mat-form-field style="width: 80%">
+            <mat-label>Description</mat-label>
+            <textarea cdkTextareaAutosize matInput [(ngModel)]="stakeholder.description"></textarea>
+          </mat-form-field>
+        </p>
+
+        <p *ngIf="stakeholderRoles.length > 0">
+          <mat-form-field style="width: 80%">
+            <mat-label>Role</mat-label>
+            <mat-select [(value)]="selectedRole">
+              <mat-option value="{{role.id}}" *ngFor="let role of stakeholderRoles" >
+                {{role.name}}
+              </mat-option>
+            </mat-select>
+            <mat-hint *ngIf="roleNotSet">{{noRoleSelectedMessage}}</mat-hint>
+          </mat-form-field>
+        </p>
+
+      </div>
+    </mat-dialog-content>
+  </ng-template>
+
+  <div class="row justify-content-center">
+    <button mat-button (click)="save()" style="color: blue">SAVE</button>
+    <button mat-button (click)="close()" style="color: grey">CANCEL</button>
+  </div>
+
+
+</mat-dialog-content>

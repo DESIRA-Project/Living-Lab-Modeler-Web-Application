@@ -1,0 +1,77 @@
+<h3 mat-dialog-title style="text-align: center">
+    {{title}}
+  </h3>
+
+  <mat-dialog-content style="text-align: center" *ngIf="isUserDefinedStakeholder();else ModeratedStakeholderBlock">
+
+    <p>
+      <mat-form-field style="width: 80%">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="stakeholder.name">
+        <mat-hint *ngIf="onInputError()">{{hintMessage}}</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field style="width: 80%">
+        <mat-label>Description</mat-label>
+        <textarea cdkTextareaAutosize matInput [(ngModel)]="stakeholder.description"></textarea>
+      </mat-form-field>
+    </p>
+
+    <p *ngIf="stakeholderRoles.length > 0">
+      <mat-form-field style="width: 80%">
+        <mat-label>Role</mat-label>
+      <mat-select [(value)]="selectedRole">
+        <mat-option value="{{role.id}}" *ngFor="let role of stakeholderRoles" >
+          {{role.name}}
+        </mat-option>
+      </mat-select>
+      <mat-hint *ngIf="roleNotSet">{{noRoleSelectedMessage}}</mat-hint>
+    </mat-form-field>
+    </p>
+
+    <div class="row justify-content-center">
+      <button mat-button (click)="save()" style="color: blue">SAVE</button>
+      <button mat-button (click)="close()" style="color: grey">CANCEL</button>
+    </div>
+
+  </mat-dialog-content>
+
+  <ng-template #ModeratedStakeholderBlock>
+    <mat-dialog-content style="text-align: center">
+
+      <p>
+        <mat-form-field style="width: 80%">
+          <mat-label>Name</mat-label>
+          <input matInput disabled [value]="stakeholder.name">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field style="width: 80%">
+          <mat-label>Description</mat-label>
+          <textarea cdkTextareaAutosize matInput [(ngModel)]="stakeholder.description"></textarea>
+        </mat-form-field>
+      </p>
+
+      <p *ngIf="stakeholderRoles.length > 0">
+        <mat-form-field style="width: 80%">
+          <mat-label>Role</mat-label>
+        <mat-select [(value)]="selectedRole">
+          <mat-option value="{{role.id}}" *ngFor="let role of stakeholderRoles" >
+            {{role.name}}
+          </mat-option>
+        </mat-select>
+        <mat-hint *ngIf="roleNotSet">{{noRoleSelectedMessage}}</mat-hint>
+      </mat-form-field>
+      </p>
+
+      <div class="row justify-content-center">
+        <button mat-button (click)="save()" style="color: blue">SAVE</button>
+        <button mat-button (click)="close()" style="color: grey">CANCEL</button>
+      </div>
+
+
+    </mat-dialog-content>
+  </ng-template>

@@ -1,0 +1,742 @@
+<!--<navbar></navbar>-->
+
+<mat-dialog-content>
+
+  <div class="d-flex justify-content-center align-items-center" style="min-height: 75vh" *ngIf="!ready">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="main" *ngIf="ready">
+
+    <div class="close-button" (click)="close()">
+      <span class="material-symbols-sharp" style="font-size: 3rem">close</span>
+    </div>
+
+    <form id="form" (ngSubmit)="onSubmit()">
+
+      <!-- Main screen -->
+      <div class="row mx-0 activity-main-info">
+
+
+
+        <!-- Main image -->
+        <div class="col-xl-6 mb-lg-0 mb-5">
+          <input autofocus #fileInput hidden="true" type="file" onclick="this.value=null" (change)="addNewMainPhoto($event)">
+          <div [id]="'mainPhoto'" *ngIf="!activity.mainPhotoWrapper.content" class="insert-image-here" (click)="fileInput.click()">
+            <span class="material-symbols-sharp insert-photo-here-icon-size">
+              add_photo_alternate
+            </span>
+            <div class="insert-image-here-text">Click to upload activity main photo</div>
+          </div>
+          <div *ngIf="activity.mainPhotoWrapper.content" class="mb-1 mb-lg-0">
+            <img [src]="activity.mainPhotoWrapper.content" style="width: 100%" alt="Activity main image">
+            <div class="photo-actions">
+              <div (click)="fileInput.click()" class="photo-actions-button-new">
+                Change photo
+              </div>
+              <div (click)="removeMainPhoto()" class="photo-actions-button-remove">
+                Delete photo
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+        <!-- Main info-->
+        <div class="col-xl-6">
+
+          <!-- Title -->
+          <div class="title row">
+            <div class="add-title">
+              <mat-form-field class="w-100 right-distance">
+                <mat-label class="font-weight-light" style="letter-spacing: 1px">ACTIVITY TITLE</mat-label>
+                <input class="font-weight-normal" matInput [(ngModel)]="activity.title" name="title" required>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Living lab title -->
+          <div class="info-field row" *ngIf="livingLabName">
+            <div class="info-field-icon hold-height">
+              <span class="material-symbols-sharp">lightbulb</span>
+            </div>
+            <div class="info-field-title hold-height"> LIVING LAB </div>
+            <!--<a *ngIf="livingLabSummary" href="javascript:void(0);" (click)="returnToLivingLab(true, '')" class="info-field-text right-distance hold-height"> {{ livingLabSummary.name }} </a>-->
+            <a target="_blank" [routerLink]="'/living-lab/' + livingLabId" class="info-field-text right-distance hold-height my-2 my-sm-0"> {{ livingLabName }} </a>
+          </div>
+
+          <!-- Activity type -->
+          <div class="info-field row">
+            <div class="info-field-icon">
+              <span class="material-symbols-sharp">sell</span>
+            </div>
+            <div class="info-field-title"> ACTIVITY TYPE </div>
+            <div class="info-field-text right-distance">
+              <mat-form-field class="w-100" floatLabel="never">
+                <mat-select [(ngModel)]="selectedActivityTypeId" name="activityType" placeholder="(required)" required>
+                  <mat-option *ngFor="let activityType of activityTypes" [value]="activityType.id">
+                    {{ activityType.name }}
+                  </mat-option>
+                </mat-select>
+                <button type="button" mat-button *ngIf="activity.activityType" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="activity.activityType=undefined; selectedActivityTypeId=undefined; $event.stopPropagation()">
+                  <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="info-field row">
+            <div class="info-field-icon">
+              <span class="material-symbols-sharp">location_on</span>
+            </div>
+            <div class="info-field-title"> LOCATION </div>
+            <div class="info-field-text right-distance">
+              <mat-form-field class="w-100" floatLabel="never">
+                <input matInput (keyup)="filterLocation($event)" [(ngModel)]="locationText" name="locationText" [matAutocomplete]="auto" placeholder="(required)" required>
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                  <mat-option *ngFor="let location of locationResults" [value]="location.text" (onSelectionChange)="selectLocation(location)">
+                    {{ location.text }}
+                  </mat-option>
+                </mat-autocomplete>
+                <button type="button" mat-button *ngIf="locationText" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="activity.location=undefined; locationText=null; $event.stopPropagation()">
+                  <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Activity format -->
+          <div class="info-field row">
+            <div class="info-field-icon">
+              <span class="material-symbols-sharp">sms</span>
+            </div>
+            <div class="info-field-title"> ACTIVITY FORMAT </div>
+            <div class="info-field-text right-distance">
+              <mat-form-field class="w-100">
+                <mat-select [(ngModel)]="selectedActivityFormatId" name="activityFormat">
+                  <mat-option *ngFor="let activityFormat of activityFormats" [value]="activityFormat.id">
+                    {{ activityFormat.name }}
+                  </mat-option>
+                </mat-select>
+                <button type="button" mat-button *ngIf="activity.activityFormat" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="activity.activityFormat=undefined; selectedActivityFormatId=undefined; $event.stopPropagation()">
+                  <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Venue -->
+          <div class="info-field row">
+            <div class="info-field-icon">
+              <span class="material-symbols-sharp">apartment</span>
+            </div>
+            <div class="info-field-title"> VENUE </div>
+            <div class="info-field-text right-distance">
+              <mat-form-field class="w-100">
+                <input matInput [(ngModel)]="activity.venue" name="venue">
+                <button type="button" mat-button *ngIf="activity.venue" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="activity.venue=undefined; $event.stopPropagation()">
+                  <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Start datetime -->
+          <div class="info-field row">
+            <div class="info-field-icon">
+              <span class="material-symbols-sharp">calendar_today</span>
+            </div>
+            <div class="info-field-title"> START DATETIME </div>
+            <div class="info-field-text right-distance">
+
+              <!-- Start date -->
+              <mat-form-field class="date pr-3" floatLabel="never" (click)="dateFromPicker.open()">
+                <mat-label>(required)</mat-label>
+                <input class="cursor-pointer" matInput [matDatepicker]="dateFromPicker" [(ngModel)]="selectedDateFrom" name="dateFrom" required>
+                <mat-datepicker-toggle matSuffix [for]="dateFromPicker"></mat-datepicker-toggle>
+                <mat-datepicker #dateFromPicker></mat-datepicker>
+                <button type="button" mat-button *ngIf="selectedDateFrom" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="selectedDateFrom=undefined; $event.stopPropagation()">
+                  <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                </button>
+              </mat-form-field>
+
+              <!-- Start time -->
+              <mat-form-field class="time pl-3" floatLabel="never">
+                <mat-select [(ngModel)]="selectedTimeFrom" name="timeFrom">
+                  <ng-container *ngFor="let hour of formattedHours">
+                    <mat-option *ngFor="let minutes of formattedMinutes" [value]="hour + ' : ' + minutes">
+                      {{ hour + ' : ' + minutes }}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+                <button type="button" mat-button *ngIf="selectedTimeFrom" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="selectedTimeFrom=undefined; $event.stopPropagation()">
+                  <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- End datetime -->
+          <div class="info-field row">
+            <div class="info-field-icon">
+              <span class="material-symbols-sharp">event_available</span>
+            </div>
+            <div class="info-field-title"> END DATETIME </div>
+            <div class="info-field-text right-distance">
+
+              <!-- End date -->
+              <mat-form-field class="date pr-3" floatLabel="never" (click)="dateToPicker.open()">
+                <input class="cursor-pointer" matInput [matDatepicker]="dateToPicker" [(ngModel)]="selectedDateTo" name="dateTo">
+                <mat-datepicker-toggle matSuffix [for]="dateToPicker"></mat-datepicker-toggle>
+                <mat-datepicker #dateToPicker></mat-datepicker>
+                <button type="button" mat-button *ngIf="selectedDateTo" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="selectedDateTo=undefined; $event.stopPropagation()">
+                  <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                </button>
+              </mat-form-field>
+
+              <!-- End Time -->
+              <mat-form-field class="time pl-3" floatLabel="never">
+                <mat-select [(ngModel)]="selectedTimeTo" name="timeTo">
+                  <ng-container *ngFor="let hour of formattedHours">
+                    <mat-option *ngFor="let minutes of formattedMinutes" [value]="hour + ' : ' + minutes">
+                      {{ hour + ' : ' + minutes }}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+                <button type="button" mat-button *ngIf="selectedTimeTo" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="selectedTimeTo=undefined; $event.stopPropagation()">
+                  <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                </button>
+              </mat-form-field>
+
+            </div>
+          </div>
+
+          <!-- Timezone -->
+          <div class="info-field row">
+            <div class="info-field-icon">
+              <span class="material-symbols-sharp">schedule</span>
+            </div>
+            <div class="info-field-title"> TIMEZONE </div>
+            <div class="info-field-text right-distance">
+              <mat-form-field class="w-100">
+                <mat-select [(ngModel)]="selectedTimezoneId" name="timezone">
+                  <mat-option *ngFor="let timezone of timezones" [value]="timezone.id">
+                    {{ '(' + timezone.utcName + ')' + ' ' + timezone.displayName }}
+                  </mat-option>
+                </mat-select>
+                <button type="button" mat-button *ngIf="activity.timezone" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="activity.timezone=undefined; selectedTimezoneId=undefined; $event.stopPropagation()">
+                  <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Language -->
+          <div class="info-field row">
+            <div class="info-field-icon">
+              <span class="material-symbols-sharp">translate</span>
+            </div>
+            <div class="info-field-title"> LANGUAGE </div>
+            <div class="info-field-text right-distance">
+              <mat-form-field class="w-100" floatLabel="never">
+                <mat-select [(ngModel)]="selectedLanguageId" name="language" placeholder="(required)" required>
+                  <mat-option *ngFor="let language of languages" [value]="language.id">
+                    {{ language.name }}
+                  </mat-option>
+                </mat-select>
+                <button type="button" mat-button *ngIf="activity.language" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="activity.language=undefined; selectedLanguageId=undefined; $event.stopPropagation()">
+                  <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Link -->
+          <div class="info-field row">
+            <div class="info-field-icon">
+              <span class="material-symbols-sharp">link</span>
+            </div>
+            <div class="info-field-title"> LINK </div>
+            <div class="info-field-text right-distance">
+              <mat-form-field class="w-100">
+                <input matInput style="color: var(--blue-400)" [(ngModel)]="activity.link" name="link">
+                <button type="button" mat-button *ngIf="activity.link" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="activity.link=undefined; $event.stopPropagation()">
+                  <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Agenda -->
+          <div class="info-field row">
+            <div class="info-field-icon hold-height">
+              <span class="material-symbols-sharp">library_books</span>
+            </div>
+            <div class="info-field-title hold-height"> AGENDA </div>
+            <input #agendaDiv hidden="true" type="file" onclick="this.value=null" (change)="addNewAgenda($event)">
+            <a href="javascript:void(0);" *ngIf="!activity.agendaWrapper.content" (click)="agendaDiv.click()"
+               class="hold-height info-field-text p-0 my-2 my-sm-0">
+              Click to upload
+            </a>
+
+            <div *ngIf="activity.agendaWrapper.content" class="hold-height info-field-text my-2 my-sm-0 p-0 pl-2 d-flex justify-content-between">
+              <a [download]="activity.agendaWrapper.name" [href]="safeUrl(activity.agendaWrapper.content)" target="_blank" class="text-truncate">
+                {{ activity.agendaWrapper.name }}
+              </a>
+              <a href="javascript:void(0);" (click)="removeAgenda()" class="delete-agenda-icon" matTooltip="Delete agenda" matTooltipPosition="left">
+                <span class="material-symbols-sharp">delete</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Only For Members -->
+          <div class="info-field row">
+            <div class="info-field-icon hold-height">
+              <span class="material-symbols-sharp">disabled_visible</span>
+            </div>
+            <div class="info-field-title hold-height"> MEMBERS ONLY </div>
+            <div [matTooltip]="'If checked, only living lab members will be able to view this activity'">
+              <mat-checkbox
+                [(ngModel)]="activity.onlyForMembers"
+                name="onlyForMembers"
+                class="hold-height info-field-text">
+              </mat-checkbox>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <!-- Objective -->
+      <div class="row mx-0">
+        <div class="col d-flex align-items-center mb-5 flex-wrap flex-lg-nowrap">
+          <div class="section-title">OBJECTIVE</div>
+          <mat-form-field class="section-content w-100 right-distance" floatLabel="never">
+            <textarea matInput cdkTextareaAutosize [(ngModel)]="activity.objective" name="objective" placeholder="(required)" required></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+      <!-- Outcome -->
+      <div class="row mx-0">
+        <div class="col d-flex align-items-center mb-5 flex-wrap flex-lg-nowrap">
+          <div class="section-title">OUTCOME</div>
+          <mat-form-field class="section-content w-100 right-distance">
+            <textarea matInput cdkTextareaAutosize [(ngModel)]="activity.outcome" name="outcome"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+      <!-- Material row -->
+      <div class="row mx-0">
+
+        <!-- Material -->
+        <div class="col d-flex mb-5 flex-wrap flex-lg-nowrap">
+
+          <div class="section-title hold-height">MATERIAL</div>
+          <div class="section-content d-flex flex-wrap w-100">
+
+            <table mat-table [dataSource]="materialDataSource" class="w-100" style="background-color: transparent; border-radius: 10px; box-shadow: none ">
+
+              <!-- Title Column -->
+              <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef> Title </th>
+                <td mat-cell *matCellDef="let element; let index = index" class="px-2">
+
+                  <!-- If displaying cell -->
+                  <div *ngIf="index !== editingMaterialIndex">
+                    {{ element.title }}
+                  </div>
+
+                  <!-- If editing cell -->
+                  <div *ngIf="index === editingMaterialIndex" class="right-distance">
+                    <mat-form-field class="w-100">
+                      <input matInput [(ngModel)]="editingMaterial.title" name="editingmaterialTitle">
+                    </mat-form-field>
+                  </div>
+                </td>
+
+                <!-- Footer cell for adding new material -->
+                <td mat-footer-cell *matFooterCellDef>
+                  <div class="right-distance">
+                    <mat-form-field class="w-100">
+                      <input matInput [(ngModel)]="newMaterial.title" name="materialTitle">
+                    </mat-form-field>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Description Column -->
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let element; let index = index" class="px-2">
+
+                  <!-- If displaying cell -->
+                  <div *ngIf="index !== editingMaterialIndex">
+                    {{ element.description }}
+                  </div>
+
+                  <!-- If editing cell -->
+                  <div *ngIf="index === editingMaterialIndex" class="right-distance">
+                    <mat-form-field class="w-100">
+                      <input matInput [(ngModel)]="editingMaterial.description" name="editingmaterialDescription">
+                    </mat-form-field>
+                  </div>
+                </td>
+
+                <!-- Footer cell for adding new material -->
+                <td mat-footer-cell *matFooterCellDef>
+                  <div class="right-distance">
+                    <mat-form-field class="w-100">
+                      <input matInput [(ngModel)]="newMaterial.description" name="materialDescription">
+                    </mat-form-field>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- File -->
+              <ng-container matColumnDef="file">
+                <th mat-header-cell *matHeaderCellDef> File </th>
+                <td mat-cell *matCellDef="let element; let index = index" class="px-2">
+
+                  <!--If displaying cell -->
+                  <div *ngIf="element.fileWrapper.content && editingMaterialIndex !== index">
+                    <a [download]="element.fileWrapper.name" [href]="element.fileWrapper.content" target="_blank" class="font-weight-light"
+                       matTooltip="Click to download" matTooltipPosition="left">
+                      {{ element.fileWrapper.name }}
+                    </a>
+                  </div>
+
+                  <!-- If editing cell -->
+                  <div *ngIf="element.fileWrapper.content && editingMaterialIndex === index">
+                    <input #addEditingMaterialFileDiv hidden="true" type="file" onclick="this.value=null" (change)="addEditingMaterialFile($event)">
+                    <a href="javascript:void(0);" (click)="addEditingMaterialFileDiv.click()" class="font-weight-light"
+                       matTooltip="Click to change" matTooltipPosition="left">
+                      {{ editingMaterial.fileWrapper.name }}
+                    </a>
+                  </div>
+                </td>
+
+                <!-- Footer cell for adding new material-->
+                <td mat-footer-cell *matFooterCellDef>
+                  <input #addNewMaterialFileDiv hidden="true" type="file" onclick="this.value=null" (change)="addNewMaterialFile($event)">
+                  <div *ngIf="!newMaterial.fileWrapper.content">
+                    <a href="javascript:void(0);" (click)="addNewMaterialFileDiv.click()" class="font-weight-light">
+                      Click to upload
+                    </a>
+                  </div>
+                  <div *ngIf="newMaterial.fileWrapper.content">
+                    <a href="javascript:void(0);" (click)="addNewMaterialFileDiv.click()" class="font-weight-light"
+                       matTooltip="Click to change" matTooltipPosition="left">
+                      {{ newMaterial.fileWrapper.name }}
+                    </a>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Actions -->
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>
+                  <div class="d-flex justify-content-center">
+                    Actions
+                  </div>
+                </th>
+                <td mat-cell *matCellDef="let element; let index = index" class="px-2">
+                  <div class="d-flex align-items-center justify-content-center">
+
+                    <!-- Edit material button -->
+                    <button *ngIf="editingMaterialIndex !== index" type="button" (click)="editMaterial(index)" mat-button class="d-flex align-middle justify-content-center" style="color: var(--blue)"
+                            [matTooltip]="'Edit material'" [matTooltipPosition]="'left'">
+                      <span class="material-symbols-sharp">edit</span>
+                    </button>
+
+                    <!-- Save material button -->
+                    <button *ngIf="editingMaterialIndex === index" type="button" (click)="saveEditingMaterial()" mat-button class="d-flex align-middle justify-content-center" style="color: var(--blue)"
+                            [matTooltip]="'Save material'" [matTooltipPosition]="'left'">
+                      <span class="material-symbols-sharp">check_circle</span>
+                    </button>
+
+                    <!-- Delete material button -->
+                    <button type="button" (click)="removeMaterial(element)" mat-button style="color: var(--red-400)" class="d-flex align-middle justify-content-center"
+                            [matTooltip]="'Delete material'" [matTooltipPosition]="'right'">
+                      <span class="material-symbols-sharp">delete</span>
+                    </button>
+                  </div>
+                </td>
+                <td mat-footer-cell *matFooterCellDef>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <button type="button" (click)="addNewMaterial()" mat-button style="color: var(--blue-400)" class="d-flex align-middle justify-content-center"
+                            [matTooltip]="'Add material'" [matTooltipPosition]="'left'">
+                      <span class="material-symbols-sharp">add</span>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="materialDisplayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: materialDisplayedColumns;"></tr>
+              <tr mat-footer-row *matFooterRowDef="materialDisplayedColumns"></tr>
+            </table>
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <!-- Participants row -->
+      <div class="row mx-0">
+
+        <!-- Participants -->
+        <div class="col d-flex mb-5 flex-wrap flex-lg-nowrap">
+
+          <div class="section-title hold-height">PARTICIPANTS</div>
+          <div class="section-content d-flex flex-wrap w-100">
+
+            <table mat-table [dataSource]="participantsDataSource" style="background-color: transparent; border-radius: 10px; box-shadow: none;">
+
+              <!-- Firstname Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element; let index = index">
+
+                  <!--If displaying cell --><!--If editing cell -->
+                  <div *ngIf="index !== editingParticipantIndex">
+                    {{ element.firstname }}
+                  </div>
+
+                  <!--If editing cell -->
+                  <div *ngIf="index === editingParticipantIndex" class="right-distance">
+                    <mat-form-field class="w-100">
+                      <input matInput [(ngModel)]="editingParticipant.firstname" name="editingparticipantFirstname">
+                    </mat-form-field>
+                  </div>
+                </td>
+
+                <!-- Footer cell for adding new participant -->
+                <td mat-footer-cell *matFooterCellDef>
+                  <div class="right-distance">
+                    <mat-form-field class="w-100">
+                      <input matInput [(ngModel)]="newParticipant.firstname" name="participantFirstname">
+                    </mat-form-field>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Lastname Column -->
+              <ng-container matColumnDef="surname">
+                <th mat-header-cell *matHeaderCellDef> Surname </th>
+                <td mat-cell *matCellDef="let element; let index = index">
+
+                  <!--If displaying cell -->
+                  <div *ngIf="index !== editingParticipantIndex">
+                    {{ element.lastname }}
+                  </div>
+
+                  <!--If editing cell -->
+                  <div *ngIf="index === editingParticipantIndex" class="right-distance">
+                    <mat-form-field class="w-100">
+                      <input matInput [(ngModel)]="editingParticipant.lastname" name="editingparticipantLastname">
+                    </mat-form-field>
+                  </div>
+                </td>
+
+                <!-- Footer cell for adding new participant -->
+                <td mat-footer-cell *matFooterCellDef>
+                  <div class="right-distance">
+                    <mat-form-field class="w-100">
+                      <input matInput [(ngModel)]="newParticipant.lastname" name="participantLastname">
+                    </mat-form-field>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Organization Column -->
+              <ng-container matColumnDef="organization">
+                <th mat-header-cell *matHeaderCellDef> Organization </th>
+                <td mat-cell *matCellDef="let element; let index = index">
+
+                  <!--If displaying cell -->
+                  <div *ngIf="index !== editingParticipantIndex">
+                    {{ element.organization }}
+                  </div>
+
+                  <!--If editing cell -->
+                  <div *ngIf="index === editingParticipantIndex" class="right-distance">
+                    <mat-form-field class="w-100">
+                      <input matInput [(ngModel)]="editingParticipant.organization" name="editingparticipantOrganization">
+                    </mat-form-field>
+                  </div>
+                </td>
+
+                <!-- Footer cell for adding new participant -->
+                <td mat-footer-cell *matFooterCellDef>
+                  <div class="right-distance">
+                    <mat-form-field class="w-100">
+                      <input matInput [(ngModel)]="newParticipant.organization" name="participantOrganization">
+                    </mat-form-field>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Position -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> Position </th>
+                <td mat-cell *matCellDef="let element; let index = index">
+
+                  <!--If displaying cell -->
+                  <div *ngIf="index !== editingParticipantIndex">
+                    {{ element.position }}
+                  </div>
+
+                  <!--If editing cell -->
+                  <div *ngIf="index === editingParticipantIndex" class="right-distance">
+                    <mat-form-field class="w-100">
+                      <input matInput [(ngModel)]="editingParticipant.position" name="editingparticipantPosition">
+                    </mat-form-field>
+                  </div>
+                </td>
+
+                <!-- Footer cell for adding new participant -->
+                <td mat-footer-cell *matFooterCellDef>
+                  <div class="right-distance">
+                    <mat-form-field class="w-100">
+                      <input matInput [(ngModel)]="newParticipant.position" name="participantPosition">
+                    </mat-form-field>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Actions -->
+              <ng-container matColumnDef="actions">
+
+                <th mat-header-cell *matHeaderCellDef>
+                  <div class="d-flex justify-content-center">
+                    Actions
+                  </div>
+                </th>
+
+                <td mat-cell *matCellDef="let element; let index = index">
+                  <div class="d-flex align-items-center justify-content-center">
+
+                    <!-- Edit participant button -->
+                    <button *ngIf="editingParticipantIndex !== index" type="button" (click)="editParticipant(index)" mat-button class="d-flex align-middle justify-content-center" style="color: var(--blue)"
+                            [matTooltip]="'Edit participant'" [matTooltipPosition]="'left'">
+                      <span class="material-symbols-sharp">edit</span>
+                    </button>
+
+                    <!-- Save participant button -->
+                    <button *ngIf="editingParticipantIndex === index" type="button" (click)="saveEditingParticipant()" mat-button class="d-flex align-middle justify-content-center" style="color: var(--blue)"
+                            [matTooltip]="'Save participant'" [matTooltipPosition]="'left'">
+                      <span class="material-symbols-sharp">check_circle</span>
+                    </button>
+
+                    <!-- Delete participant button-->
+                    <button type="button" (click)="removeParticipant(element)" mat-button style="color: var(--red-400)" class="d-flex align-middle justify-content-center"
+                            [matTooltip]="'Delete participant'" [matTooltipPosition]="'right'">
+                      <span class="material-symbols-sharp">delete</span>
+                    </button>
+                  </div>
+                </td>
+
+                <!-- Footer cell for adding new participant -->
+                <td mat-footer-cell *matFooterCellDef>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <button type="button" (click)="addNewParticipant()" mat-button style="color: var(--blue-400)" class="d-flex align-middle justify-content-center"
+                            [matTooltip]="'Add participant'" [matTooltipPosition]="'left'">
+                      <span class="material-symbols-sharp">add</span>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="participantsDisplayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: participantsDisplayedColumns;"></tr>
+              <tr mat-footer-row *matFooterRowDef="participantsDisplayedColumns"></tr>
+            </table>
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <!-- Photos -->
+      <div class="row mx-0">
+        <div class="col d-flex mb-3 flex-wrap flex-lg-nowrap">
+
+          <!-- Title -->
+          <div class="section-title mb-4">PHOTOS</div>
+
+          <div class="section-content d-flex flex-wrap">
+
+            <!-- List of already uploaded photos -->
+            <div *ngFor="let photoWrapper of activity.photosWrappers; let i = index" class="d-flex flex-column activity-photo-margins">
+
+              <!-- Image with link -->
+              <a [href]="photoWrapper.content" target="_blank">
+                <img [src]="photoWrapper.content" class="activity-photo-marginless" alt="photo">
+              </a>
+
+              <!-- Delete button -->
+              <div class="photo-actions">
+                <div (click)="removePhoto(i)" class="photo-actions-button-remove">
+                  Delete photo
+                </div>
+              </div>
+            </div>
+
+            <!-- Add new photo input & button -->
+            <input #addNewPhotoTag hidden="true" type="file" onclick="this.value=null" (change)="addNewPhoto($event)">
+            <button type="button" (click)="addNewPhotoTag.click()" mat-button class="d-flex flex-column align-items-center justify-content-center add-new-photo-button activity-photo">
+              <span class="material-symbols-sharp" style="font-size: 3rem">
+                add
+              </span>
+              <div class="font-weight-light" style="letter-spacing: 1px">Add photo</div>
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <!-- Submit button -->
+      <div class="submit d-flex justify-content-between justify-content-md-center align-items-center px-3 mb-3">
+        <div class="d-none d-md-inline blue-line"></div>
+        <input class="save-button mat-button" type="submit" style="min-width: 180px;" [value]="submitButtonText">
+        <div class="d-none d-md-inline blue-line"></div>
+        <button type="button" mat-button class="d-md-none gray-text mw-0" (click)="close()">Cancel</button>
+      </div>
+
+
+
+    </form>
+  </div>
+
+</mat-dialog-content>
+
+<!--<app-footer></app-footer>-->

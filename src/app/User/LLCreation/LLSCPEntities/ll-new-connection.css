@@ -1,0 +1,23 @@
+button:disabled {
+  color: gray !important;
+}
+
+.mat-select-panel mat-option.mat-option {
+  height: unset;
+}
+
+.mat-option-text.mat-option-text {
+  white-space: normal;
+}
+
+.mat-option-width{
+  /*width:300px;*/
+  width:100%;
+}
+
+@media screen and (max-width: 768px) {
+  ::ng-deep .mat-option-width{
+            width:100%;
+     }
+
+}

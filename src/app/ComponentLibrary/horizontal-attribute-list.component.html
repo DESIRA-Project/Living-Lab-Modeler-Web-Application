@@ -1,0 +1,17 @@
+
+<div class="container">
+    <div class="row justify-content-around">
+        <div class="col-md-3 attributeName">
+            {{data.data.repr}}
+        </div>
+        
+        <div class="col-md-4">
+        <span class="badge  mr-2 clickable toolBubble toolBubbleColor" *ngFor="let el of data.data.data"  
+         placement="top" ngbTooltip="Search for '{{el.value}}' under {{data.data.repr}}"
+         (click)="performQuery(el)">
+            {{ capitalizeFirstLetter ( el.value ) }}
+      <!--      <i class="cil-x-circle" (click)="remove(selectedAttribute)"></i> -->
+          </span>
+        </div>
+    </div>
+</div>

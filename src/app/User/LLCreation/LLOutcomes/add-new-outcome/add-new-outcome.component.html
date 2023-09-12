@@ -1,0 +1,155 @@
+<!--<div class="close-button" (click)="close()">
+  <span class="material-symbols-sharp" style="font-size: 36px">close</span>
+</div>-->
+
+<mat-dialog-content>
+
+
+  <div *ngIf="!ready" class="d-flex justify-content-center">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="ready" class="wrapper">
+
+    <!-- Modal Title -->
+    <!--  <div class="title">New Outcome</div>-->
+
+    <!-- Form -->
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+      <!-- Title -->
+      <div class="section">
+        <div class="section-title">TITLE</div>
+        <mat-form-field class="section-content" floatLabel="never">
+          <input formControlName="title"
+                 type="text"
+                 matInput
+                 required
+                 placeholder="(required)"
+          >
+          <mat-error *ngIf="formGroup.get('title')?.invalid && formGroup.get('title')?.touched">
+            Title is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Description -->
+      <div class="section">
+        <div class="section-title">DESCRIPTION</div>
+<!--        <mat-form-field class="section-content">
+            <textarea formControlName="description"
+                      matInput cdkTextareaAutosize>
+          </textarea>
+        </mat-form-field>
+      -->
+
+      <angular-editor  formControlName="description" 
+      [placeholder]="''"  [config]="editorConfig"     
+      ></angular-editor>
+
+      </div>
+
+      <!-- Tags -->
+      <div class="section">
+        <div class="section-title">TAGS</div>
+        <mat-form-field class="section-content">
+          <mat-select formControlName="outcomeTags" multiple>
+            <mat-option *ngFor="let tag of outcomeTags" [value]="tag">{{tag.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Files -->
+      <div class="section files-section">
+        <div class="section-title">FILES</div>
+        <div class="section-content files-section-content">
+          <div formArrayName="assetResourceDetails">
+            <div class="file-section" *ngFor="let assetResourceDetailsFormGroup of assetResourceDetails.controls; let i = index">
+              <div [formGroup]="getFormGroup(assetResourceDetailsFormGroup)" class="w-100 d-flex flex-wrap align-items-center">
+
+                <!-- File title -->
+                <mat-form-field floatLabel="never" class="col-12 col-md-4">
+                  <input matInput
+                         placeholder="File title (required)"
+                         formControlName="title"
+                         required>
+                </mat-form-field>
+
+                <!-- File type -->
+                <!--<mat-form-field floatLabel="never" class="mr-3" style="position: relative; top: -1px">
+                  <mat-select
+                    placeholder="File type (required)"
+                    formControlName="assetResourceType"
+                    required>
+                    <mat-option *ngFor="let assetResourceType of assetResourceTypes" [value]="assetResourceType">
+                      {{ assetResourceType.name | titlecase }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>-->
+
+                <!-- Hidden file input -->
+                <input #fileInput hidden="true" type="file"
+                       onclick="this.value=null" (change)="onFileChange($event, i)"
+                       class="text-truncate" style="max-width: 400px">
+
+                <!-- Asset Resource Details -->
+                <div class="d-inline-flex col col-md-4">
+
+                  <!-- File name, if exists -->
+                  <a [href]="safeUrl(assetResourceDetailsFormGroup.value.fileWrapper.content)" target="_blank"
+                     [download]="assetResourceDetailsFormGroup.value.fileWrapper.name"
+                     *ngIf="assetResourceDetailsFormGroup.value.fileWrapper"
+                     class="text-truncate file-name">
+                    {{ assetResourceDetailsFormGroup.value.fileWrapper.name }}
+                  </a>
+                </div>
+
+                <div class="col col-md-4 d-flex justify-content-end">
+
+                  <!-- Select file button -->
+                  <button mat-button class="blue-text mw-0"
+                          type="button"
+                          matTooltip="Select file" matTooltipPosition="right"
+                          (click)="fileInput.click()">
+                    <span class="material-symbols-sharp">draft</span>
+                  </button>
+
+                  <!-- Delete file button -->
+                  <button mat-button class="red-text mw-0"
+                          type="button"
+                          matTooltip="Delete row" matTooltipPosition="right"
+                          (click)="onDeleteAssetResourceDetails(i)">
+                    <span class="material-symbols-sharp">delete</span>
+                  </button>
+
+                  </div>
+
+                <!-- Please select a file error message -->
+                <mat-error style="display: unset" *ngIf="assetResourceDetailsFormGroup.get('fileWrapper')?.invalid && assetResourceDetailsFormGroup.get('fileWrapper')?.touched">
+                  Please select a file.
+                </mat-error>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Add new asset resource details row -->
+          <a href="javascript:void(0)"
+             (click)="addAssetResourceDetailsFormGroup()"
+             class="blue-text mw-0" style="width: fit-content">
+            Add {{ assetResourceDetails.length > 0 ? 'another' : '' }} file
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="d-flex justify-content-center align-items-center">
+        <button type="submit" [disabled]="!formGroup.dirty || !formGroup.valid || !outcomeHasChanged()" mat-button class="blue-text">SAVE</button>
+        <button type="button" (click)="close()" mat-button class="gray-text">CANCEL</button>
+      </div>
+
+    </form>
+  </div>
+
+</mat-dialog-content>

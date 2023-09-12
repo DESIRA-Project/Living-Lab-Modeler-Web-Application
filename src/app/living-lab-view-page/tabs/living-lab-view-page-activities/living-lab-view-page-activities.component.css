@@ -1,0 +1,122 @@
+.activities-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.timeline-wrapper {
+}
+
+.vertical-line {
+  height: 35%;
+  width: 50%;
+  border-right: solid 1px var(--light-gray);
+}
+
+.timeline-text {
+  font-size: 1rem;
+  color: var(--smart-gray);
+  height: 30%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.activity-row {
+  height: 230px;
+}
+
+.activity-card-wrapper {
+  max-width: 700px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.activity-card {
+  height: 200px;
+  width: 100%;
+  padding: 0;
+  margin-inline: 3px;
+  border-radius: 10px;
+  font-family: inherit;
+  display: flex;
+  flex-direction: row;
+}
+
+.activity-photo {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  /*width: 38%;*/
+  height: 100%;
+  width: 250px;
+}
+
+.activity-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25rem;
+  height: 100%;
+  padding-inline: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.activity-info {
+  position: relative;
+}
+
+.view-more {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: var(--blue);
+  display: flex;
+}
+
+.activity-title {
+  font-size: 1.125rem;
+  line-height: normal;
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.activity-date, .activity-location, .activity-format, .activity-type {
+  font-size: 0.9375rem;
+  font-weight: 100;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-bottom: 5px;
+}
+
+.activity-text {
+  color: var(--smart-gray);
+  font-size: 0.9375rem;
+}
+
+.upcoming-text {
+  color: white;
+  background-color: var(--green);
+  letter-spacing: 1px;
+  margin-left: 10px;
+  font-size: 0.8125rem;
+  border: solid 1px var(--green);
+  border-radius: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.add-new-activity-button {
+  background-color: var(--blue-400);
+}
+
+a:hover {
+  text-decoration: none;
+}

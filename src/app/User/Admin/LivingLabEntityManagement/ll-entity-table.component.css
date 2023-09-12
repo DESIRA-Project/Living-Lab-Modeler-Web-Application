@@ -1,0 +1,52 @@
+:host ::ng-deep .mat-paginator-container {
+  padding-inline: 1rem !important;
+  justify-content: space-between !important;
+}
+
+.big-space-element{
+  min-width: 370px;
+      max-width: 370px;
+      width: 370px;
+}
+
+@media screen and (max-width: 992px) {
+  .scrollable-table {
+    overflow:auto;
+  }
+
+  .table-section{
+    overflow:auto;
+    font-size:0.6rem;
+  }
+
+  .column-font{
+    font-size:0.8rem;
+    white-space: nowrap;
+  }
+
+  .cell-font{
+    font-size:0.6rem;
+  }
+
+  .big-space-element{
+    min-width: 10rem;
+        max-width: 10rem;
+        width: 5rem;
+  }
+
+  .numeric-element{
+    min-width: 7rem;
+        max-width: 20rem;
+        width: 1rem;
+  }
+
+  .cell-numeric{
+    text-align: center;
+  }
+  
+  
+  ::ng-deep .mat-paginator-range-label{
+    margin:0!important;
+    font-size:0.6rem;
+  }
+}

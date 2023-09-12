@@ -1,0 +1,63 @@
+.mat-card-height {
+    height: 100%;
+}
+
+.mat-card-content {
+    height: 10rem;
+}
+
+::ng-deep .editSDGModal {
+    width: 45%;
+}
+
+::ng-deep .saveConfirmationModal{
+    width: 45%;
+}
+
+@media screen and (max-width: 768px) {
+    ::ng-deep .editSDGModal {
+        width: 20rem;
+    }
+
+    ::ng-deep .saveConfirmationModal{
+        width: 20rem;
+    }
+
+    .paddingTop{
+        padding-top:2rem;
+    }
+
+    .mat-card-height {
+        height: 50vh;
+    }
+
+    .mat-card-content {
+        height: 20vh;
+    }
+
+    .sdg-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1vh;
+        line-height: 1.2rem;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+    .sdg-description {
+        font-size: 0.8rem;
+        font-weight: 300;
+        line-height: 1.2rem;
+        margin-bottom: 0.5rem;
+
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+    }
+
+    .buttonLabel{
+        font-size:0.8rem;
+    }
+
+}

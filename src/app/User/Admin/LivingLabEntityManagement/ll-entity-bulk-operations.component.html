@@ -1,0 +1,13 @@
+<div *ngIf="ready"
+     class="buttons"
+     [style.max-height]="isDisabled ? '0' : '100%'"
+     [style.opacity]="isDisabled ? '0' : '100%'">
+  <button mat-raised-button class="" style="margin-inline:5px; max-height: inherit; margin-bottom: 1.25em"
+          [disabled]="isDisabled"
+          *ngFor="let a of actions"
+          (click)="a.actionCb(a)"
+          [style.background-color]="!isDisabled ? a.color : 'grey'"
+          [style.color]="'white'" class="button-label">
+    {{ a.label(a) }}
+  </button>
+</div>

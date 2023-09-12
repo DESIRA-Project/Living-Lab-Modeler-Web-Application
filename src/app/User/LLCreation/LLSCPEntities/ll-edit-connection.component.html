@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center align-items-center flex-column">
+
+    <h3 mat-dialog-title class="mb-2">{{title}}</h3>
+    <div mat-dialog-content>
+      <mat-form-field class="mat-option-width">
+        <mat-label>Connect</mat-label>
+        <mat-select [formControl]="connectionFromControl" style="pointer-events: none;" >
+
+          <mat-option [value]="source.value" style="pointer-events: none;">
+            {{source.viewValue}}
+          </mat-option>
+
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="mat-option-width">
+        <mat-label>To</mat-label>
+        <mat-select [formControl]="connectionToControl" style="pointer-events: none;" >
+          <mat-option [value]="dest.value">
+            {{dest.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="mat-option-width" >
+        <mat-label>Description</mat-label>
+        <textarea cdkTextareaAutosize matInput [(ngModel)]="connectionDescription"></textarea>
+
+        <button type="button" mat-button *ngIf="connectionDescription.trim().length > 0" matSuffix
+                mat-icon-button aria-label="Clear" (click)="clearConnectionDescription(); $event.stopPropagation()">
+          <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial style="color: blue" (click)="saveConnection()"
+            [disabled]="initialDescription.trim() === connectionDescription.trim()">SAVE</button>
+        <button mat-button mat-dialog-close style="color: gray">CANCEL</button>
+    </div>
+
+</div>

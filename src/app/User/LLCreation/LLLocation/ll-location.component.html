@@ -1,0 +1,36 @@
+<div *ngIf="ready" class="w-100 d-flex flex-column align-items-center justify-content-center">
+
+  <!-- Input field -->
+  <form class="w-100">
+    <mat-form-field class="w-100" [matTooltip]="'Type the name of a city, country, enter free text, or pin-point your location on the map'" matTooltipPosition="left">
+      <mat-label class="font-weight-light" style="letter-spacing: 1px">
+        <!--{{ 'Type the name of a city, country, enter free text, or pin-point your location on the map' | uppercase }}-->
+        LOCATION*
+      </mat-label>
+      <input [(ngModel)]="searchTerm"
+             (keyup)="search($event)"
+             (keyup.enter)="setPreventSearch(true)"
+             [matAutocomplete]="auto"
+             matInput
+             name="searchTerm">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let result of searchResults"
+                    [value]="result.text"
+                    (onSelectionChange)="selectLocation(result)">
+          {{ result.text }}
+        </mat-option>
+      </mat-autocomplete>
+      <button type="button" mat-button *ngIf="isDirty()" matSuffix mat-icon-button
+              aria-label="Clear" (click)="clear(); $event.stopPropagation()">
+        <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+      </button>
+      <mat-hint *ngIf="showHint" style="color: var(--red-400) !important;">Type at least 3 characters</mat-hint>
+    </mat-form-field>
+  </form>
+
+  <div class="mb-3"></div>
+
+  <!-- Map -->
+  <div id="{{htmlLabel}}" class="living-lab-map" style="width: 100%; height: 350px"></div>
+
+</div>

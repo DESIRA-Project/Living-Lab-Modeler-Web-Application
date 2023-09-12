@@ -1,0 +1,26 @@
+<div class="container paddingTop" style="max-width: none; margin-inline: -12px" *ngIf="ready">
+  <div class="row justify-content-center" *ngFor="let row of sdgsPerRow">
+    <div class="col-md-6 col-xl-3" style=" padding: 0 12px 24px" *ngFor="let sdg of row">
+      <mat-card class="mat-card-height">
+
+        <div class="row justify-content-center" style="margin-bottom: 10px">
+          <a [href]="sdg.link" target="_blank">
+            <img style="height: 50px; width: 50px" [src]="sdg.iconUrl" alt="SDG Img">
+          </a>
+        </div>
+
+        <div style=" width: 100%; text-align: center" class="mat-card-content">
+          <mat-card-title class="sdg-title">{{sdg.name}}</mat-card-title>
+          <mat-card-subtitle class="sdg-description">{{sdg.description}}</mat-card-subtitle>
+        </div>
+
+        <div class="row justify-content-center">
+          <mat-card-actions>
+            <button mat-button class="buttonLabel" (click)="edit(sdg.id)" style="color: blue">EDIT</button>
+            <button mat-button class="buttonLabel" (click)="deleteOne(sdg.id)" style="color: red">DELETE</button>
+          </mat-card-actions>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

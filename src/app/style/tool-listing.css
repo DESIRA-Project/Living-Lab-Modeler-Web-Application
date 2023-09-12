@@ -1,0 +1,8 @@
+.content{
+    font-size:0.7vw;
+}
+@media screen and (max-width: 768px) {
+    .content{
+        font-size:3vw;
+    }
+}

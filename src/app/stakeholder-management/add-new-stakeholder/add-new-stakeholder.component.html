@@ -1,0 +1,40 @@
+<h3 mat-dialog-title style="text-align: center">
+  Add New Stakeholder
+</h3>
+
+<mat-dialog-content style="text-align: center">
+
+  <p>
+    <mat-form-field style="width: 80%">
+      <mat-label>Name</mat-label>
+      <input (keyup)="onKeyUp()" matInput [(ngModel)]="stakeholder.name">
+      <mat-hint style="color: var(--red) !important;" *ngIf="errorMessage !== undefined">
+        <b>{{errorMessage}}</b>
+      </mat-hint>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field style="width: 80%">
+      <mat-label>Description</mat-label>
+      <input matInput [(ngModel)]="stakeholder.description">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field style="width: 80%">
+      <mat-label>Link</mat-label>
+      <input matInput [(ngModel)]="stakeholder.link">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="stakeholder.moderated">Verified</mat-checkbox>
+  </p>
+
+  <div class="row justify-content-center">
+    <button [ngClass]="!errorMessage ? 'blue-text' : 'gray-text'" mat-button [disabled]="errorMessage !== undefined" (click)="save()">SAVE</button>
+    <button mat-button (click)="close()" style="color: grey">CANCEL</button>
+  </div>
+
+</mat-dialog-content>

@@ -1,0 +1,149 @@
+<div style="position: relative">
+    <div>
+
+        <header class="sticky-top">
+            <div>
+                <navbar [currentPage]="'About'"></navbar>
+            </div>
+        </header>
+
+        <div style="background-color: var(--background-color)">
+
+            <main>
+
+                <breadcrumb [currentPage]="'about'" [hasGapBottom]="true" [setController]="this"
+                    style="padding-inline: var(--base-layout-vertical-padding)"></breadcrumb>
+
+                <div class="sticky-hide-sidebar-border-top"></div>
+
+                <div class="layout">
+                    <div class="main-content">
+
+
+                        <div  [ngClass]="{'card p-2 shadow-lg' : renderInCard}" >
+
+                            <div [ngClass]="{'card-body' : renderInCard}">
+                                <h4 class="contentTitle" > Contact Us </h4>
+
+                                <div class="content" *ngIf="!ready">
+                                    <div  class="d-flex flex-column align-items-center">
+                                        
+                                      <mat-spinner></mat-spinner>
+                                    </div>
+                                  </div>
+
+                                <div class="content" *ngIf="ready">
+
+                                    <div class="d-flex flex-column align-items-start">
+
+                                        <div class="mb-3"></div>
+
+                                        <div class="w-100 d-flex flex-column align-items-center">
+
+                                            <!-- Name -->
+                                            <mat-form-field class="form-field">
+                                                <mat-label class="font-weight-light"
+                                                    style="letter-spacing: 1px">Name</mat-label>
+                                                <input class="font-weight-normal" matInput [(ngModel)]="visitorName"
+                                                    name="visitorName" required
+                                                    (ngModelChange)="keepParentUptoDate($event)" />
+                                                <button type="button" mat-button *ngIf="visitorName" matSuffix
+                                                    mat-icon-button aria-label="Clear"
+                                                    (click)="clearVisitorName(); $event.stopPropagation()">
+                                                    <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                                                </button>
+
+                                            </mat-form-field>
+
+                                            <div class="mb-3"></div>
+
+                                            <!-- Email -->
+                                            <mat-form-field class="form-field">
+                                                <mat-label class="font-weight-light"
+                                                    style="letter-spacing: 1px">Email</mat-label>
+                                                <input cdkTextareaAutosize class="font-weight-normal" matInput
+                                                    [(ngModel)]="visitorEmail" name="visitorEmail"
+                                                    pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+                                                    (ngModelChange)="keepParentUptoDate($event)" required/>
+                                                <button type="button" mat-button *ngIf="visitorEmail" matSuffix
+                                                    mat-icon-button aria-label="Clear"
+                                                    (click)="clearVisitorEmail(); $event.stopPropagation()">
+                                                    <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                                                </button>
+                                            </mat-form-field>
+
+                                            <div class="mb-3"></div>
+
+                                            <!-- Subject -->
+                                            <mat-form-field class="form-field">
+                                                <mat-label class="font-weight-light"
+                                                    style="letter-spacing: 1px">Subject</mat-label>
+                                                <input cdkTextareaAutosize class="font-weight-normal" matInput
+                                                    [(ngModel)]="visitorSubject" name="visitorSubject" required
+                                                    (ngModelChange)="keepParentUptoDate($event)" />
+                                                <button type="button" mat-button *ngIf="visitorSubject" matSuffix
+                                                    mat-icon-button aria-label="Clear"
+                                                    (click)="clearVisitorSubject(); $event.stopPropagation()">
+                                                    <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                                                </button>
+                                            </mat-form-field>
+
+                                            <div class="mb-3"></div>
+
+                                            <!-- Message -->
+                                            <mat-form-field class="form-field">
+                                                <mat-label class="font-weight-light"
+                                                    style="letter-spacing: 1px">Message</mat-label>
+                                                <textarea cdkTextareaAutosize class="font-weight-normal" matInput
+                                                    [(ngModel)]="visitorMessage" name="visitorMessage"
+                                                    (ngModelChange)="keepParentUptoDate($event)"></textarea>
+                                                <button type="button" mat-button *ngIf="visitorMessage" matSuffix
+                                                    mat-icon-button aria-label="Clear"
+                                                    (click)="clearVisitorMessage(); $event.stopPropagation()">
+                                                    <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+                                                </button>
+                                            </mat-form-field>
+
+                                            <div class="mb-3"></div>
+                                            <div class="mb-3"></div>
+                                            <div class="mb-3"></div>
+                                            <div class="container">
+                                                <div class="row justify-content-center">
+                                                    <div id="rc"   class="form-group"></div>
+                                                </div>
+                                                <div class="row justify-content-center">
+                                                    <button mat-button style="min-width: 100px" type="submit" (click)="submitContent()" 
+                                                        [disabled]="(!recaptchaClicked && usesRecaptcha) || !canSubmit() || !ready">Submit</button>
+
+                                                    <button mat-button style="min-width: 100px" (click)="clearContent()"
+                                                        [disabled]="!hasContent()">
+                                                        Clear
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="sticky-hide-sidebar-border-bottom d-none d-lg-flex"></div>
+
+            </main>
+        </div>
+    </div>
+
+
+    <cookie-banner></cookie-banner>
+    <app-footer></app-footer>
+</div>

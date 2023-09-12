@@ -1,0 +1,92 @@
+<div>
+
+    <div class="c-wrapper ">
+
+      <navbar [hideSignInButton]="true"></navbar>
+
+        <!--<header class="c-header border-1 kbtHeader sticky-top" style="display: unset;">
+            <div>
+&lt;!&ndash;                <kbt-navbar [currentPage]="'Sign In'"></kbt-navbar> &ndash;&gt;
+            </div>
+        </header>-->
+
+
+        <div class="c-body mainContent" style="background-color: '#d1d1d124';">
+
+            <main>
+
+<!--               <kbt-breadcrumb [currentPage]="'signin'"></kbt-breadcrumb> -->
+
+                <div class="container-fluid mt-5 p-5" *ngIf="ready; else notReadyBlock" >
+
+                    <div class="row" *ngIf="!onAuthenticationError">
+                        <div class="col-sm-6 offset-sm-3">
+                            <div class="card p-2 shadow-lg">
+                                <div class="card-body">
+                                    <div class="container ali">
+                                        <div class="row"
+                                        style="display: flex;
+                                        flex-direction: row;
+                                        justify-content: center;
+                                        align-items: center;
+                                        height: 33vh;">
+                                            <div class="col-lg-6 imgStack" *ngFor="let method of supportedAuthMethods | keyvalue ;index as i ">
+                                                <img src="{{getAuthenticationMethodImage(method.key)}}"
+                                                    (click)="!isAuthenticationMethodDisabled(method.key) ? authenticateWithSupportedProvider(method.key) : null" 
+                                                    [ngStyle]="!isAuthenticationMethodDisabled(method.key) ? {'cursor':'pointer'} : {'cursor':'default','opacity':'0.5'} "
+                                                    [width]="hasAuthenticationMethodImageWidth(method.key) ? getAuthenticationMethodImageWidth(method.key) : 200"
+                                                    [height]="hasAuthenticationMethodImageHeight(method.key) ? getAuthenticationMethodImageHeight(method.key) : 120"
+                                                    class="img-fluid center-block"
+                                                    />
+                                            </div>
+
+                                            </div>
+
+
+
+<!--                                            <div class="col-0">
+                                                <img src="getAuthenticationMethodImage()"
+                                                    (click)="authenticate()" style="cursor:pointer;"
+                                                    class="img-responsive center-block" />
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="onAuthenticationError === true">
+                    <!--    <div class="col-sm-6 offset-sm-3">
+                            <div class="card p-2 shadow-lg" *ngIf="errorMessage">
+                                <div class="card-header">
+                                    {{errorMessage['title'] }}
+                                </div>
+
+                                <div class="card-body">
+                                   <span>{{errorMessage['message']}}</span>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+                <ng-template #notReadyBlock>
+                    <div class="row  justify-content-center" *ngIf="!ready">
+                    <div  class="col-6">
+                        <div class="spinner-border" role="status" style="margin-left:45%;margin-top:20%;">
+                        </div>
+                    </div>
+                  </div>
+                  </ng-template>
+            </main>
+        </div>
+
+      <app-footer></app-footer>
+
+    </div>
+</div>
+<!--
+<cookie-banner></cookie-banner>
+<kbt-footer></kbt-footer>
+-->

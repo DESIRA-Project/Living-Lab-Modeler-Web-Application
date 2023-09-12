@@ -1,0 +1,271 @@
+.main {
+  /*background-color: var(--background-color);*/
+  /*padding-top: 3rem;*/
+  /*padding-bottom: 3rem;*/
+  /*padding-inline: 5%;*/
+  font-size: 1rem;
+  min-height: 100vh;
+}
+
+.activity-main-info {
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-inline: 0;
+  line-height: normal;
+  /*height: 80px;*/
+}
+
+.info-field {
+  margin-bottom: 13px;
+  margin-inline: 0;
+  font-size: 1rem;
+  height: 27px;
+}
+
+.info-field-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5%;
+}
+
+.info-field-title {
+  font-weight: 400;
+  padding-inline: 7px;
+  letter-spacing: 1px;
+  width: 35%;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.info-field-text {
+  font-weight: 100;
+  padding-inline: 7px;
+  width: 60%;
+}
+
+.section-title {
+  min-width: 150px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.section-content {
+}
+
+.activity-photo {
+  height: 240px;
+  width: 320px;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+}
+
+.activity-photo-marginless {
+  height: 240px;
+  width: 320px;
+  border-radius: 10px;
+}
+
+.activity-photo-margins {
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+}
+
+.insert-image-here {
+  /*background-color: var(--gray-800);*/
+  /*border-radius: 10px;*/
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--smart-gray);
+}
+
+.insert-image-here:hover {
+  cursor: pointer;
+  background-color: var(--gray-900);
+}
+
+.insert-image-here-text {
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.add-title {
+  width: 100%;
+}
+
+.right-distance {
+  padding-right: 0;
+}
+
+.hold-height {
+  height: 61px;
+  display: flex;
+  align-items: center;
+}
+
+.delete-agenda-icon {
+  color: var(--red-400);
+}
+
+.add-new-photo-button {
+  background-color: transparent;
+  color: var(--smart-gray);
+  border: 1px solid var(--gray);
+}
+
+.add-new-photo-button:hover {
+  cursor: pointer;
+  background-color: var(--gray-900);
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+}
+
+.mat-footer-cell, .mat-header-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+}
+
+td.mat-column-actions {
+  width: 100px;
+}
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  padding-left: 0;
+}
+
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+  padding-right: 0;
+}
+
+
+.mat-form-field, .mat-option, .mat-row, .mat-cell {
+  font-weight: 300;
+}
+
+.blue-line {
+  height: 50%;
+  width: 100%;
+  border-bottom: 1px solid var(--blue-400);
+}
+
+.green-line {
+  height: 50%;
+  width: 100%;
+  border-bottom: 1px solid var(--green-300);
+}
+
+.mat-table {
+  width: 100%;
+  min-width: 0;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+  width: auto !important;
+}
+
+th, td {
+  padding-inline: 1rem !important;
+}
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+
+.mat-dialog-content {
+  max-height: 80vh !important;
+}
+
+.close-button {
+  padding: 5px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+}
+
+.close-button:hover {
+  color: var(--light-gray);
+  cursor: pointer;
+}
+
+:host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: var(--blue-400);
+}
+
+.date {
+  width: 75%;
+}
+
+.time {
+  width: 25%;
+}
+
+@media screen and (max-width: 576px) {
+  .info-field-icon {
+    width: unset;
+  }
+
+  .info-field-title {
+    width: unset;
+  }
+
+  .info-field-text {
+    width: 100%;
+  }
+
+  .activity-photo, .activity-photo-marginless {
+    height: calc(240px * 0.75);
+    width: calc(320px * 0.75);
+  }
+
+  .hold-height {
+    height: unset;
+  }
+
+  .info-field {
+    height: unset;
+    margin-bottom: 1rem;
+  }
+
+}
+
+.save-button {
+  min-width: 180px !important;
+}
+
+
+@media screen and (max-width: 768px) {
+  .date, .time {
+    width: 50%;
+  }
+
+  .save-button {
+    border: none !important;
+    min-width: unset !important;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .insert-image-here {
+    height: 200px !important;
+  }
+}
+
+:host ::ng-deep .mat-tooltip-trigger {
+  display: flex;
+}
+
+:host ::ng-deep .mat-header-cell {
+  min-width: 100px;
+}

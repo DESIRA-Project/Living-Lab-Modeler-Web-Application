@@ -1,0 +1,142 @@
+<h3 mat-dialog-title style="text-align: center" class="mb-1">
+  {{title}}
+</h3>
+
+<mat-dialog-content *ngIf="true" style="text-align: center">
+  <div *ngIf="!onEditMode();else EditBlock">
+    <p>
+      <mat-form-field appearance="standard" style="width: 80%">
+        <mat-label>Name</mat-label>
+        <input matInput [formControl]="stakeholderControl" [matAutocomplete]="auto">
+        <button type="button" mat-button *ngIf="stakeholder.name" matSuffix mat-icon-button aria-label="Clear"
+                (click)="clearName(); $event.stopPropagation()">
+          <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-error *ngIf="showHint">
+        {{hintMessage}}
+      </mat-error>
+
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectStakeholder($event.option.value)">
+        <mat-option *ngFor="let stakeholder of stakeholders" [value]="stakeholder.name">
+          {{stakeholder.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </p>
+
+    <p>
+      <mat-form-field appearance="standard" style="width: 80%">
+        <mat-label>Description</mat-label>
+        <textarea cdkTextareaAutosize matInput [(ngModel)]="stakeholder.description"  (input)="descriptionUpdate($event)"></textarea>
+        <button type="button" mat-button
+                *ngIf="stakeholder && stakeholder.description && stakeholder.description.length > 0" matSuffix
+                mat-icon-button aria-label="Clear" (click)="clearDescription(); $event.stopPropagation()">
+          <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+        </button>
+        <mat-hint *ngIf="useGlobalStakeholderDescription && stakeholder && stakeholder.description && stakeholder.description.length > 0">*The text is filled with the entity's default description, please fill free to adjust..</mat-hint>
+
+      </mat-form-field>
+    </p>
+
+    <!-- Link -->
+    <p>
+      <mat-form-field appearance="standard" style="width: 80%">
+        <mat-label>Link</mat-label>
+        <textarea cdkTextareaAutosize matInput (input)="linkUpdate($event)" [(ngModel)]="stakeholder.link">{{stakeholder.link}}</textarea>
+        <button type="button" mat-button
+                *ngIf="stakeholder && stakeholder.link && stakeholder.link.length > 0" matSuffix
+                mat-icon-button aria-label="Clear" (click)="clearLink(); $event.stopPropagation()">
+          <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+        </button>
+        <mat-hint *ngIf="useGlobalStakeholderLink && stakeholder && stakeholder.link && stakeholder.link.length > 0">*The text is filled with the stakeholder's default link, please fill free to adjust..</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p *ngIf="stakeholderRoles.length > 0">
+      <mat-form-field style="width: 80%">
+        <mat-label>Role</mat-label>
+        <mat-select [(value)]="selectedRole">
+          <mat-option value="{{role.id}}" *ngFor="let role of stakeholderRoles">
+            {{role.name}}
+          </mat-option>
+        </mat-select>
+        <mat-hint *ngIf="roleNotSet">{{noRoleSelectedMessage}}</mat-hint>
+      </mat-form-field>
+    </p>
+
+  </div>
+
+
+  <div class="row justify-content-center">
+    <button mat-button (click)="save()" [ngStyle]="{ 'color' : !canSave() ? 'grey' : 'blue' }"
+            [disabled]="!canSave()">SAVE</button>
+    <button mat-button (click)="close()" style="color: grey">CANCEL</button>
+  </div>
+
+
+</mat-dialog-content>
+
+<ng-template #EditBlock>
+  <p>
+    <mat-form-field appearance="standard" style="width: 80%">
+      <mat-label>Name</mat-label>
+      <input matInput [formControl]="stakeholderControl" [matAutocomplete]="auto">
+      <button type="button" mat-button *ngIf="stakeholder.name" matSuffix mat-icon-button aria-label="Clear"
+              (click)="clearName(); $event.stopPropagation()">
+        <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-error *ngIf="showHint">
+      {{hintMessage}}
+    </mat-error>
+
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectStakeholder($event.option.value)">
+      <mat-option *ngFor="let stakeholder of stakeholders" [value]="stakeholder.name">
+        {{stakeholder.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard" style="width: 80%">
+      <mat-label>Description</mat-label>
+
+      <textarea cdkTextareaAutosize matInput (input)="descriptionUpdate($event)" [ngModel]="stakeholder.description" >{{stakeholder.description}}</textarea>
+      <button type="button" mat-button *ngIf="stakeholder && stakeholder.description && stakeholder.description.length > 0" matSuffix
+              mat-icon-button aria-label="Clear" (click)="clearDescription(); $event.stopPropagation()">
+        <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+      </button>
+      <mat-hint *ngIf="useGlobalStakeholderDescription && stakeholder && stakeholder.description && stakeholder.description.length > 0">*The text is filled with the stakeholder's default description, please fill free to adjust..</mat-hint>
+
+    </mat-form-field>
+
+  </p>
+
+  <!-- Link -->
+  <p>
+    <mat-form-field appearance="standard" style="width: 80%">
+      <mat-label>Link</mat-label>
+      <textarea cdkTextareaAutosize matInput (input)="linkUpdate($event)" [ngModel]="stakeholder.link">{{stakeholder.link}}</textarea>
+      <button type="button" mat-button
+              *ngIf="stakeholder && stakeholder.link && stakeholder.link.length > 0" matSuffix
+              mat-icon-button aria-label="Clear" (click)="clearLink(); $event.stopPropagation()">
+        <mat-icon style="color: rgba(0,0,0,.54);">close</mat-icon>
+      </button>
+      <mat-hint *ngIf="useGlobalStakeholderLink && stakeholder && stakeholder.link && stakeholder.link.length > 0">*The text is filled with the stakeholder's default link, please fill free to adjust..</mat-hint>
+    </mat-form-field>
+  </p>
+
+  <p *ngIf="stakeholderRoles.length > 0">
+    <mat-form-field style="width: 80%">
+      <mat-label>Role</mat-label>
+      <mat-select [(value)]="selectedRole">
+        <mat-option value="{{role.id}}" *ngFor="let role of stakeholderRoles">
+          {{role.name}}
+        </mat-option>
+      </mat-select>
+      <mat-hint *ngIf="roleNotSet">{{noRoleSelectedMessage}}</mat-hint>
+    </mat-form-field>
+  </p>
+</ng-template>

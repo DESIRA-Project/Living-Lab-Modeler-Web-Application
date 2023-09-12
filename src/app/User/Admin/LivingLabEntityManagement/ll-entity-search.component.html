@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between">
+
+  <div>
+  <mat-form-field class="textFont">
+    <mat-label>Search</mat-label>
+    <mat-select [(ngModel)]="searchFieldInitialValue">
+      <mat-option (click)="selectFromList(option, 'searchField')" *ngFor="let option of searchFieldOptions" [value]="option.key">
+        {{option.key}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="textFont">
+    <mat-label>Scope</mat-label>
+    <mat-select [(ngModel)]="contentSearchInitialValue">
+      <mat-option (click)="selectFromList(option, 'needsVerification')" *ngFor="let option of contentSearchOptions" [value]="option.key">
+        {{option.key}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field style="position: relative; bottom: -1px" class="textFont">
+    <mat-label>Type a keyword</mat-label>
+    <input matInput type="text" [(ngModel)]="value">
+    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon (click)="clearValue()">close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  </div>
+
+  <div style="margin-top: 0.625em">
+    <button mat-flat-button class="blue-button buttonLabel" (click)="search()" style="margin-inline: 5px">Search</button>
+    <button mat-flat-button class="blue-button buttonLabel buttonVerticalGap" (click)="clear()" style="margin-inline: 5px">Clear</button>
+  </div>
+
+</div>
+

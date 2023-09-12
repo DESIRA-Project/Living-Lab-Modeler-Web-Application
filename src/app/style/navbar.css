@@ -1,0 +1,77 @@
+img.logoImg{
+/*    width: min(6vw, 60px);
+    height: min(4vw, 40px);
+    */
+    padding-top:5px;
+    width: min(15vw, 60px);
+  /*  height: min(50vw, 100px);*/
+    cursor: pointer;
+}
+
+.navbar {
+  width: 100%;
+  height: var(--navbar-height);
+  padding-inline: 0;
+  filter: drop-shadow(0 0 0.5rem black);
+  background-image: linear-gradient(#0A325A, #0e467e);
+}
+
+.sign-in-button {
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-right: 5px;
+  text-decoration: none;
+}
+
+.sign-in-button-orange {
+  border: 1px solid var(--orange);
+  color: var(--orange);
+}
+
+.sign-in-button-orange:hover {
+  border: 1px solid hsl(22, 85%, 54%);
+  color: hsl(22, 85%, 54%);
+}
+
+.sign-in-button-white {
+  border: 1px solid var(--gray-900);
+  color: var(--gray-900);
+}
+
+.sign-in-button-white:hover {
+  border: 1px solid var(--gray-800);
+  color: var(--gray-800);
+}
+
+
+@media screen and (max-width: 768px) {
+
+.sign-in-button-white {
+  font-size:0.8rem;
+}
+
+.sign-in-button-white:hover {
+  font-size:0.8rem;
+}
+}
+
+img.logo{
+  height: auto;
+  /* (B) RECOMMENDED - LIMIT MAXIMUM WIDTH */
+  max-width: 35vw;
+}
+/*    img.logoImg{
+!*        width: 60px;
+        height: 40px;*!
+        padding-top:5px;
+        width: 70px;
+!*        height: 60px;*!
+      !*  height: min(50vw, 100px);*!
+
+    }
+
+    div.pageTitle{
+        padding-top:1%;
+        font-size: 6vw;
+    }
+}  */

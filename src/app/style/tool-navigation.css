@@ -1,0 +1,36 @@
+.page-item{
+    cursor:pointer;
+}
+
+.page-item.active .page-link {
+    border-color: #007628   !important;
+    background-color: #089C89 !important;
+    background-image: linear-gradient(to right, #089C89 , #07C19A)   !important;
+}
+
+.kbtNavigationMobile{
+    display:None
+}
+
+@media screen and (max-width: 768px) {
+    .kbtNavigationDesktop{
+        display:None
+    }
+
+    .kbtNavigationMobile{
+        display:unset
+    }
+
+    .pageInfo{
+        text-align: center;
+        font-size: 3vw  !important;
+    }
+
+    .pagination-sm .page-link{
+        font-size: 3vw  !important;
+    }
+
+    .spaceBetweenRows{
+        margin-bottom: 5%;
+    }
+}

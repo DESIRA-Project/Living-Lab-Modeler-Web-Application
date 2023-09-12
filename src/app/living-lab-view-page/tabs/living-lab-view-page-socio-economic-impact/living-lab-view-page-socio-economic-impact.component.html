@@ -1,0 +1,41 @@
+<div class="row mx-0">
+  <div class="col-xl-7 pr-0 d-flex flex-column flex-md-row">
+
+    <!-- Graph -->
+    <div #chart *ngIf="ready">
+      <figure class="graph" [id]="figureId"></figure>
+    </div>
+
+    <div *ngIf="!ready" class="d-flex align-items-center justify-content-center" style="width:700px;height:700px;" >
+      <mat-spinner></mat-spinner>
+    </div>
+
+  </div>
+
+  <div class="accompanying-text d-inline-flex flex-column-reverse flex-xl-column col-xl-5 pl-xl-0">
+
+    <!-- Accompanying text -->
+    <div class="mb-3">
+      <span class="text">
+        Based on an extensive analysis of the field literature regarding digital
+        transformation in agriculture, forestry and rural areas, <b>socio-economic impacts</b> linked with the use of
+        digital technologies have been identified.
+
+        By clicking on each digital technology icon, you can observe the impact it has.
+      </span>
+    </div>
+
+    <!-- Digital technologies -->
+    <div class="d-flex flex-wrap justify-content-center justify-content-xl-start mb-3">
+      <div *ngFor="let digitalTechnology of livingLab.digitalTechnologies"
+           [matTooltip]="digitalTechnology.name" [matTooltipPosition]="'below'"
+           (click)="onDigitalTechnologyClick(digitalTechnology.id)"
+           [ngClass]="digitalTechnology.id === selectedDigitalTechnologyId ? 'selected-digital-technology' : ''"
+           class="digital-technology-wrapper">
+        <img class="digital-technology m-0" [src]="digitalTechnology.iconUrl">
+      </div>
+    </div>
+
+  </div>
+
+</div>

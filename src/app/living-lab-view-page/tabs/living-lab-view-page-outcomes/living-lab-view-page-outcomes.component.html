@@ -1,0 +1,147 @@
+<!-- No outcomes message -->
+<div *ngIf="!(outcomes.length > 0 || activityOutcomes.length > 0)">
+  <span *ngIf="showNoOutcomesMessage" class="no-content-found">There are no outcomes yet.</span>
+</div>
+
+
+<!-- Add new outcome button -->
+<div *ngIf="showAddNewButton" class="d-flex justify-content-center">
+  <button mat-fab class="d-flex align-items-center justify-content-center add-new-button"
+          [ngClass]="outcomes.length > 0 ? 'mb-3' : ''"
+          (click)="onClickAddNew()"
+          matTooltip="Add new outcome" matTooltipPosition="right">
+    <span class="material-symbols-sharp">add</span>
+  </button>
+</div>
+
+
+<!-- Outcomes -->
+<mat-accordion class="accordion" *ngIf="outcomes.length > 0">
+
+  <div *ngFor="let outcome of outcomes; let i = index; first as isFirst" class="d-flex align-items-center">
+
+    <!-- Panel -->
+    <mat-expansion-panel [expanded]="isFirst && outcome.description?.length !== 0" (opened)="setOpen(i)" (closed)="openPanelIndex = -1" class="w-100">
+
+      <!-- Header -->
+      <mat-expansion-panel-header>
+
+        <!-- Title -->
+        <mat-panel-title class="col-12 pl-0" [ngClass]="openPanelIndex === i ? 'col-12' : 'col-lg-7'">
+          <div class="title" [ngClass]="openPanelIndex === i ? '' : 'dots-after-2-lines'" [title]="outcome.title">
+            {{outcome.title}}
+          </div>
+        </mat-panel-title>
+
+        <!-- Short description -->
+        <mat-panel-description *ngIf="i !== openPanelIndex" class="d-none d-lg-inline col-lg-5">
+          <div class="description text-truncate" >
+            {{escapeHTML(outcome.description)}}
+          </div>
+        </mat-panel-description>
+
+      </mat-expansion-panel-header>
+
+      <!-- Body -->
+      <div class="d-flex flex-column">
+
+        <!-- Full description -->
+        <div class="full-description" [innerHTML]="outcome.description | safeClickableLinks">
+          <!--{{outcome.description}}-->
+        </div>
+
+        <!-- Photos -->
+        <div class="d-flex flex-wrap" *ngIf="getOutcomePhotos(outcome).length > 0">
+          <!--Photos:-->
+          <div class="photo mt-2 mr-2" *ngFor="let assetResourceDetail of getOutcomePhotos(outcome)">
+            <a [href]="assetResourceDetail.fileWrapper.content" target="_blank">
+              <img *ngIf="assetResourceDetail.assetResourceType?.id == 2"
+                   [src]="assetResourceDetail.fileWrapper.content"
+                   class="outcome-photo">
+            </a>
+          </div>
+        </div>
+
+        <!-- Files -->
+        <div class="files" *ngIf="getOutcomeFiles(outcome).length > 0">
+          <span class="font-weight-normal">Files:</span>
+          <a *ngFor="let assetResourceDetail of getOutcomeFiles(outcome); let i = index"
+             [href]="safeUrl(assetResourceDetail.fileWrapper.content)"
+             [download]="assetResourceDetail.fileWrapper.name"
+             class="ml-1">
+            {{ assetResourceDetail.title + (i === getOutcomeFiles(outcome).length - 1 ? "" : ", ") }}
+          </a>
+        </div>
+
+        <!-- Tags -->
+        <div class="tags" *ngIf="outcome.outcomeTags && outcome.outcomeTags.length > 0">
+          <span class="font-weight-normal">Tags:</span>
+          <span *ngFor="let tag of outcome.outcomeTags; let i = index" class="ml-1 text-secondary">
+            {{tag.name + (i === outcome.outcomeTags.length - 1 ? "" : ", ")}}
+          </span>
+        </div>
+
+      </div>
+
+    </mat-expansion-panel>
+
+    <div class="d-flex flex-column flex-lg-row buttons">
+
+      <button *ngIf="showEditButton"
+              (click)="onClickEdit(i)"
+              mat-button
+              class="edit-button blue-text"
+              matTooltip="Edit">
+        <span class="material-symbols-sharp">edit</span>
+      </button>
+
+      <button *ngIf="showDeleteButton"
+              (click)="onClickDelete(i)"
+              mat-button
+              class="delete-button red-text"
+              matTooltip="Delete">
+        <span class="material-symbols-sharp">delete</span>
+      </button>
+
+    </div>
+
+  </div>
+
+</mat-accordion>
+
+
+
+<!-- Activity Outcomes -->
+<div class="activity-outcomes" *ngIf="activityOutcomes.length > 0">
+
+  <!-- Card -->
+  <mat-card *ngFor="let activityOutcome of activityOutcomes" class="activity-outcome-card">
+
+    <!-- Header -->
+    <div class="activity-outcome-header">
+
+
+      <!--Title -->
+      <div class="activity-outcome-title col-12 col-lg-7 px-0">
+        <div class="d-flex">
+          <span class="text-truncate" [title]="activityOutcome.activityTitle">
+            {{activityOutcome.activityTitle}}
+          </span>
+          <!-- Link icon -->
+        <a [routerLink]="['.', 'activity', activityOutcome.activityId]" target="_blank"
+           style="text-decoration: none"
+           class="d-flex align-items-center">
+          <span class="material-symbols-sharp" style="font-size: 18px; margin-left: 5px">open_in_new</span>
+        </a>
+        </div>
+
+      </div>
+
+      <!-- Badge -->
+      <div class="col-12 col-lg-5 px-0 text-lg-right mt-2 mt-lg-0 activity-outcome-badge">ACTIVITY OUTCOME</div>
+    </div>
+
+    <!-- Description -->
+    <div class="activity-outcome-text  dots-after-4-lines" [title]="activityOutcome.text">{{activityOutcome.text}}</div>
+  </mat-card>
+</div>
